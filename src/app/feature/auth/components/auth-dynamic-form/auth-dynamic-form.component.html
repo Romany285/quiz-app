@@ -1,0 +1,11 @@
+<form [formGroup]="authForm">
+  @for(input of inputs; track input.type){ *ngFor="let input of inputs">
+  <app-shared-input
+    [placeholder]="input.placeholder"
+    [label]="input.label"
+    [type]="input.type"
+    [name]="input.control"
+  ></app-shared-input>
+  }
+  <button type="submit">submit</button>
+</form>
