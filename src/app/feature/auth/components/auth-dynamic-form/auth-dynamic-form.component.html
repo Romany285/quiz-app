@@ -5,11 +5,29 @@
         <div class="logo-container mb-3">
           <img [src]="logoPath" alt="logo" />
         </div>
+
         <div class="form-container">
           <form [formGroup]="authForm">
             <h1 class="form-container__title">{{ formTitle }}</h1>
-
-            @for(input of inputs; track input.type){
+            @if (formType === 'register' || formType === 'login') {
+            <div class="row icons-container column-gap-4">
+              <div [routerLink]="authRoutes.LOGIN" class="col-md-3 auth-icon">
+                <span>
+                  <i class="fa-solid fa-user-tie fa-2xl"></i>
+                </span>
+                <p class="m-0 mt-2">Sign in</p>
+              </div>
+              <div
+                class="col-md-3 auth-icon"
+                [routerLink]="authRoutes.REGISTER"
+              >
+                <span>
+                  <i class="fa-solid fa-user-plus fa-2xl"></i>
+                </span>
+                <p class="m-0 mt-2">Sign up</p>
+              </div>
+            </div>
+            } @for(input of inputs; track input.type){
             <app-shared-input
               [placeholder]="input.placeholder"
               [label]="input.label"

@@ -11,6 +11,27 @@
       color: $auth-hover-color;
       padding: 1rem 0;
     }
+    .icons-container {
+      text-align: center;
+      padding: 0 1.5rem;
+      margin-bottom: 1rem;
+      .auth-icon {
+        color: $auth-text-color;
+        background-color: $light-grey;
+        cursor: pointer;
+        padding: 2rem;
+        border-radius: 0.8rem;
+        box-sizing: border-box;
+        height: 7rem;
+        position: relative;
+        &:hover i {
+          color: $auth-hover-color;
+        }
+        &:hover {
+          border: 2px solid $auth-hover-color;
+        }
+      }
+    }
     &__link {
       text-align: end;
       a {
