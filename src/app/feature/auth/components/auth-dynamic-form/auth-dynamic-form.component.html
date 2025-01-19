@@ -1,11 +1,67 @@
-<form [formGroup]="authForm">
-  @for(input of inputs; track input.type){ *ngFor="let input of inputs">
-  <app-shared-input
-    [placeholder]="input.placeholder"
-    [label]="input.label"
-    [type]="input.type"
-    [name]="input.control"
-  ></app-shared-input>
-  }
-  <button type="submit">submit</button>
-</form>
+<section class="auth-container">
+  <div class="container-fluid h-100 d-flex align-items-center">
+    <div class="row w-100 justify-content-around">
+      <div class="col-md-6 p-5">
+        <div class="logo-container mb-3">
+          <img [src]="logoPath" alt="logo" />
+        </div>
+
+        <div class="form-container">
+          <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+            <h1 class="form-container__title">{{ formTitle }}</h1>
+            @if (formType === 'register' || formType === 'login') {
+            <div class="row icons-container column-gap-4">
+              <div [routerLink]="authRoutes.LOGIN" class="col-md-3 auth-icon">
+                <span>
+                  <i class="fa-solid fa-user-tie fa-2xl"></i>
+                </span>
+                <p class="m-0 mt-2">Sign in</p>
+              </div>
+              <div
+                class="col-md-3 auth-icon"
+                [routerLink]="authRoutes.REGISTER"
+              >
+                <span>
+                  <i class="fa-solid fa-user-plus fa-2xl"></i>
+                </span>
+                <p class="m-0 mt-2">Sign up</p>
+              </div>
+            </div>
+            } @for(input of inputs; track input.type){
+            <app-shared-input
+              [placeholder]="input.placeholder"
+              [label]="input.label"
+              [type]="input.type"
+              [name]="input.control"
+              [icon]="input.icon"
+            ></app-shared-input>
+            }
+            <button
+              class="auth-button"
+              type="submit"
+              [disabled]="authForm.invalid"
+            >
+              {{ buttonName }} <i class="fa-solid fa-circle-check"></i>
+            </button>
+          </form>
+          @switch (formType) { @case ('resetPassword') {
+          <p class="form-container__link">
+            login?
+            <a [routerLink]="authRoutes.LOGIN">click here!</a>
+          </p>
+          } @case ('login') {
+          <p class="form-container__link">
+            forget password?
+            <a [routerLink]="authRoutes.RESET_PASSWORD">click here!</a>
+          </p>
+          } }
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="image-container">
+          <img [src]="imagePath" alt="auth-image" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
