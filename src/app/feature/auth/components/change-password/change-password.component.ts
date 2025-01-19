@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class ChangePasswordComponent {
   constructor(private _AuthService:AuthService,private _toastrService:ToastrService,private _router:Router){}
   formType: string = 'changePassword';
+  formTitle: string = "Change Password";
+  buttonName: string = "Change";
   resMessage = '';
   changePassword(data:any){
     this._AuthService.changePassword(data).subscribe({
