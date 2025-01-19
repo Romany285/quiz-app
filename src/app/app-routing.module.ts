@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: 'auth', loadChildren: () => import('./feature/auth/auth.module').then(m => m.AuthModule) },
+  {path: "",redirectTo:'auth',pathMatch:'full'},
+  {path: 'auth', loadChildren: () => import('./feature/auth/auth.module').then(m => m.AuthModule) },
   {path:'**',component:NotFoundComponent,title:'Not Found Page'}
 ];
 
