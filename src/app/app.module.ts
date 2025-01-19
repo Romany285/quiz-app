@@ -7,6 +7,8 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
@@ -16,6 +18,10 @@ import { AppComponent } from "./app.component";
     BrowserModule,
     AppRoutingModule,
     NgxSpinnerModule,
+    ToastrModule.forRoot(),
+  ],
+  exports: [
+    NgxSpinnerModule
     HttpClientModule,
   ],
   exports: [NgxSpinnerModule],
