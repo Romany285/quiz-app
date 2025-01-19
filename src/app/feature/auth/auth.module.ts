@@ -7,9 +7,9 @@ import { ResetRequestPasswordComponent } from './components/reset-request-passwo
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 @NgModule({
-  declarations: [AuthDynamicFormComponent, ResetRequestPasswordComponent, ResetPasswordComponent, LoginComponent, RegisterComponent],
+  declarations: [AuthDynamicFormComponent, ResetRequestPasswordComponent, ResetPasswordComponent,ChangePasswordComponent, LoginComponent, RegisterComponent],
   imports: [CommonModule, AuthRoutingModule, SharedModule],
 })
 export class AuthModule {}

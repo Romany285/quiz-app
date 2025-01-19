@@ -26,9 +26,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { SharedInputComponent } from './components/shared-input/shared-input.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
-  declarations: [SharedInputComponent],
+  declarations: [SharedInputComponent, NotFoundComponent],
   imports: [
     CommonModule,
     RouterModule,

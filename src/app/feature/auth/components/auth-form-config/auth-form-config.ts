@@ -86,24 +86,17 @@ export const authFormConfig: any = {
   ],
   changePassword: [
     {
-      label: "Old password",
+      label: "Password",
       type: "password",
       control: "password",
-      placeholder: "Enter old password",
+      placeholder: "Enter password",
       icon: "fa fa-lock",
     },
     {
       label: "New password",
       type: "password",
-      control: "newPassword",
+      control: "password_new",
       placeholder: "Enter new password",
-      icon: "fa fa-lock",
-    },
-    {
-      label: "Confirm new password",
-      type: "password",
-      control: "confirmNewPassword",
-      placeholder: "Confirm new password",
       icon: "fa fa-lock",
     },
   ],
