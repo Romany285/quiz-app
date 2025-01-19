@@ -1,0 +1,56 @@
+.auth-container {
+  height: 100%;
+  background-color: $auth-bg;
+  color: $auth-text-color;
+  .form-container {
+    height: 65%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    &__title {
+      color: $auth-hover-color;
+      margin-bottom: 1rem;
+    }
+    .icons-container {
+      text-align: center;
+      padding: 0 1.5rem;
+      margin-bottom: 1rem;
+      .auth-icon {
+        color: $auth-text-color;
+        background-color: $light-grey;
+        cursor: pointer;
+        padding: 2rem;
+        border-radius: 0.8rem;
+        box-sizing: border-box;
+        height: 7rem;
+        position: relative;
+        &:hover i {
+          color: $auth-hover-color;
+        }
+        &:hover {
+          border: 2px solid $auth-hover-color;
+        }
+      }
+    }
+    &__link {
+      text-align: end;
+      a {
+        color: $auth-hover-color;
+        text-decoration: underline;
+      }
+    }
+    form {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+  }
+  .image-container {
+    width: 100%;
+    img {
+      width: 100%;
+      height: 37rem;
+    }
+  }
+}

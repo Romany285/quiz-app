@@ -1,25 +1,31 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+} from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { NgxSpinnerModule } from "ngx-spinner";
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    HttpClientModule,
   ],
-  exports: [
-    NgxSpinnerModule
-  ],
+  exports: [NgxSpinnerModule],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(
+      withFetch()
+      // withInterceptors([globalInterceptor, loadingInterceptor])
+    ),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
