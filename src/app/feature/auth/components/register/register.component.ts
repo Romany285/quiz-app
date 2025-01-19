@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { authRoutes } from '../../routes/auth-routes-enum';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -13,14 +14,19 @@ export class RegisterComponent {
  formType: string = "register";
   formTitle: string = "Continue your learning journey with QuizWiz! ";
   buttonName: string = "Sign Up";
-  constructor(private _AuthService: AuthService, private _Router: Router) {}
+  resMessage = '';
+  constructor(private _AuthService: AuthService, private _Router: Router,private _toastrService:ToastrService) {}
   register(registerForm: FormGroup) {
     this._AuthService.forgetPassword(registerForm).subscribe({
       next: (res) => {
+        this.resMessage = res.message;
         console.log(res);
       },
-      error: (err) => console.log(err),
+      error: (err) => {
+        this._toastrService.error(err.error.message, 'Error!')
+      },
       complete: () => {
+        this._toastrService.success(this.resMessage);
         this._Router.navigate(['']);
       },
     });
