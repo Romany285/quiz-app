@@ -7,7 +7,7 @@
         </div>
 
         <div class="form-container">
-          <form [formGroup]="authForm">
+          <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
             <h1 class="form-container__title">{{ formTitle }}</h1>
             @if (formType === 'register' || formType === 'login') {
             <div class="row icons-container column-gap-4">

@@ -1,4 +1,8 @@
 import { Component } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { Router } from "@angular/router";
+import { authRoutes } from "../../routes/auth-routes-enum";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: "app-reset-request-password",
@@ -9,4 +13,19 @@ export class ResetRequestPasswordComponent {
   formType: string = "resetRequestPassword";
   formTitle: string = "Reset Password";
   buttonName: string = "Reset";
+  constructor(private _AuthService: AuthService, private _Router: Router) {}
+  resetReqPassword(resetForm: FormGroup) {
+    this._AuthService.resetPassword(resetForm).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => console.log(err),
+      complete: () => {
+        this._Router.navigate([authRoutes.LOGIN]);
+      },
+    });
+  }
+  get authRoutes() {
+    return authRoutes;
+  }
 }

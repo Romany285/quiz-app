@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { authRoutes } from "../../routes/auth-routes-enum";
 import { authFormConfig } from "../auth-form-config/auth-form-config";
@@ -9,6 +9,7 @@ import { authFormConfig } from "../auth-form-config/auth-form-config";
   styleUrl: "./auth-dynamic-form.component.scss",
 })
 export class AuthDynamicFormComponent implements OnInit {
+  @Output() formSubmit: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   @Input({ required: true }) formType: string = "";
   @Input({ required: true }) formTitle: string = "";
   @Input({ required: true }) buttonName: string = "";
@@ -28,9 +29,7 @@ export class AuthDynamicFormComponent implements OnInit {
       } else if (input.type === "password") {
         formGroup[input.control] = new FormControl("", [
           Validators.required,
-          Validators.pattern(
-            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
-          ),
+          Validators.minLength(6),
         ]);
       } else {
         formGroup[input.control] = new FormControl("", Validators.required);
@@ -40,5 +39,8 @@ export class AuthDynamicFormComponent implements OnInit {
   }
   get authRoutes() {
     return authRoutes;
+  }
+  onSubmit() {
+    this.formSubmit.emit(this.authForm.value);
   }
 }
