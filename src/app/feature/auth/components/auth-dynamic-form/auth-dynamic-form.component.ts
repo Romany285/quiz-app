@@ -9,6 +9,9 @@ import { authFormConfig } from "../auth-form-config/auth-form-config";
 })
 export class AuthDynamicFormComponent implements OnInit {
   @Input({ required: true }) formType: string = "";
+  @Input({ required: true }) formTitle: string = "";
+  @Input({ required: true }) buttonName: string = "";
+  logoPath: string = "assets/images/svg/logo-white.svg";
   imagePath: string = "assets/images/svg/auth-image.svg";
   inputs: any[] = [];
   authForm: FormGroup = new FormGroup({});
