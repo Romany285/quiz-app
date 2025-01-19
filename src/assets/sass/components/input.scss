@@ -1,7 +1,10 @@
 .input-icon {
   margin-bottom: 1.5rem;
   position: relative;
-  & i {
+  input:focus i {
+    color: black;
+  }
+  i {
     position: absolute;
     left: 0.8rem;
     top: 50%;
@@ -9,13 +12,16 @@
     pointer-events: none;
   }
 
-  & input {
+  input {
     padding: 0.5rem;
     padding-left: 2rem;
-    background-color: $auth-bg;
+    background-color: transparent !important;
     border: 2px solid $auth-text-color;
     border-radius: 0.4rem;
     color: $auth-text-color;
     width: 100%;
+    &:focus {
+      background-color: transparent !important;
+    }
   }
 }
