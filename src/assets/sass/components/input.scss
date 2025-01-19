@@ -1,0 +1,21 @@
+.input-icon {
+  margin-bottom: 1rem;
+  position: relative;
+  & i {
+    position: absolute;
+    left: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  & input {
+    padding: 0.5rem;
+    padding-left: 2rem;
+    background-color: $auth-bg;
+    border: 2px solid $auth-text-color;
+    border-radius: 0.4rem;
+    color: $auth-text-color;
+    width: 100%;
+  }
+}
