@@ -1,7 +1,7 @@
 <section class="auth-container">
   <div class="container-fluid h-100 d-flex align-items-center">
     <div class="row w-100 justify-content-around">
-      <div class="col-md-6">
+      <div class="col-md-6 p-5">
         <div class="logo-container mb-3">
           <img [src]="logoPath" alt="logo" />
         </div>
@@ -26,6 +26,17 @@
               {{ buttonName }} <i class="fa-solid fa-circle-check"></i>
             </button>
           </form>
+          @switch (formType) { @case ('resetPassword') {
+          <p class="form-container__link">
+            login?
+            <a [routerLink]="authRoutes.LOGIN">click here!</a>
+          </p>
+          } @case ('login') {
+          <p class="form-container__link">
+            Register?
+            <a [routerLink]="authRoutes.REGISTER">click here!</a>
+          </p>
+          } }
         </div>
       </div>
       <div class="col-md-6">

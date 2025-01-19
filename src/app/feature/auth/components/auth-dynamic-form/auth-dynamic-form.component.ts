@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { authRoutes } from "../../routes/auth-routes-enum";
 import { authFormConfig } from "../auth-form-config/auth-form-config";
 
 @Component({
@@ -36,5 +37,8 @@ export class AuthDynamicFormComponent implements OnInit {
       }
     });
     this.authForm = new FormGroup(formGroup);
+  }
+  get authRoutes() {
+    return authRoutes;
   }
 }

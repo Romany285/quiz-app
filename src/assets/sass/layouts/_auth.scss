@@ -3,12 +3,20 @@
   background-color: $auth-bg;
   color: $auth-text-color;
   .form-container {
-    height: 85%;
+    height: 65%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     &__title {
       color: $auth-hover-color;
+      padding: 1rem 0;
+    }
+    &__link {
+      text-align: end;
+      a {
+        color: $auth-hover-color;
+        text-decoration: underline;
+      }
     }
     form {
       height: 100%;
@@ -18,9 +26,10 @@
     }
   }
   .image-container {
+    width: 100%;
     img {
       width: 100%;
-      height: 100%;
+      height: 37rem;
     }
   }
 }
