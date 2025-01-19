@@ -13,6 +13,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { globalInterceptor } from "./core/interceptors/global/global.interceptor";
 import { loadingInterceptor } from "./core/interceptors/loading/loading.interceptor";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,8 @@ import { loadingInterceptor } from "./core/interceptors/loading/loading.intercep
     AppRoutingModule,
     NgxSpinnerModule,
     ToastrModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   exports: [NgxSpinnerModule],
   providers: [
