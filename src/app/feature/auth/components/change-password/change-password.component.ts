@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { IChangePassword } from '../../interfaces/IChangePassword';
 
 @Component({
   selector: 'app-change-password',
@@ -14,7 +15,7 @@ export class ChangePasswordComponent {
   formTitle: string = "Change Password";
   buttonName: string = "Change";
   resMessage = '';
-  changePassword(data:any){
+  changePassword(data:IChangePassword){
     this._AuthService.changePassword(data).subscribe({
       next: (res) => {
         this.resMessage = res.message;
