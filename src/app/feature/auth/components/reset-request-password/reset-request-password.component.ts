@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
-import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { authRoutes } from "../../routes/auth-routes-enum";
 import { AuthService } from "../../services/auth.service";
 import { ToastrService } from "ngx-toastr";
+import { IRequestResetPassword } from "../../interfaces/IRequestResetPassword";
 
 @Component({
   selector: "app-reset-request-password",
@@ -16,7 +16,7 @@ export class ResetRequestPasswordComponent {
   buttonName: string = "Reset";
   resMessage = '';
   constructor(private _AuthService: AuthService, private _Router: Router,private _toastrService:ToastrService) {}
-  resetReqPassword(resetForm: FormGroup) {
+  resetReqPassword(resetForm: IRequestResetPassword) {
     this._AuthService.resetPassword(resetForm).subscribe({
       next: (res) => {
         this.resMessage = res.message;

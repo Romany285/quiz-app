@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { FormGroup } from '@angular/forms';
 import { authRoutes } from '../../routes/auth-routes-enum';
 import { ToastrService } from 'ngx-toastr';
+import { ILogin } from '../../interfaces/ILogin';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +15,9 @@ export class LoginComponent {
   formTitle: string = "Create your account and start using QuizWiz!";
   buttonName: string = "Sign In";
   resMessage = '';
-  constructor(private _authService: AuthService, private _Router: Router,private _toastrService:ToastrService) {}
-  login(loginForm: FormGroup) {
-    this._authService.login(loginForm).subscribe({
+  constructor(private _AuthService: AuthService, private _Router: Router,private _toastrService:ToastrService) {}
+  login(loginForm:ILogin) {
+    this._AuthService.login(loginForm).subscribe({
       next: (res) => {
         this.resMessage = res.message;
         localStorage.setItem('token', res.data.accessToken)

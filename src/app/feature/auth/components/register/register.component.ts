@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { FormGroup } from '@angular/forms';
 import { authRoutes } from '../../routes/auth-routes-enum';
 import { ToastrService } from 'ngx-toastr';
+import { IRegister } from '../../interfaces/IRegister';
 
 @Component({
   selector: 'app-register',
