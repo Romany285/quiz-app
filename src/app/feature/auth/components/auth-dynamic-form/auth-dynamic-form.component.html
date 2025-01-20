@@ -1,8 +1,8 @@
 <section class="auth-container">
   <div class="container-fluid h-100 d-flex align-items-center">
     <div class="row w-100 justify-content-around">
-      <div class="col-md-6 pt-5 ps-5">
-        <div class="logo-container mb-3">
+      <div class="col-md-6 pt-3 ps-5">
+        <div class="logo-container mb-2">
           <img [src]="logoPath" alt="logo" />
         </div>
         <div class="form-container">
@@ -10,7 +10,11 @@
             <h1 class="form-container__title">{{ formTitle }}</h1>
             @if (formType === 'register' || formType === 'login') {
             <div class="row icons-container column-gap-4">
-              <div [routerLink]="authRoutes.LOGIN" routerLinkActive="active" class="col-md-3 auth-icon">
+              <div
+                [routerLink]="authRoutes.LOGIN"
+                routerLinkActive="active"
+                class="col-md-3 auth-icon"
+              >
                 <span>
                   <i class="fa-solid fa-user-tie fa-2xl"></i>
                 </span>
@@ -27,51 +31,52 @@
                 <p class="m-0 mt-2">Sign up</p>
               </div>
             </div>
-            } 
+            }
             <div class="row">
-              @for(input of inputs; track input.type){
-                @if(input.control == 'first_name' || input.control == 'last_name'){
-                <div class="col-md-6">
-                      <app-shared-input
-                      [placeholder]="input.placeholder"
-                      [label]="input.label"
-                      [type]="input.type"
-                      [name]="input.control"
-                      [icon]="input.icon"
-                      ></app-shared-input>
-                  </div>
-                } @else {
-                  <div class="col-md-12">
-                    <app-shared-input
-                    [placeholder]="input.placeholder"
-                    [label]="input.label"
-                    [type]="input.type"
-                    [name]="input.control"
-                    [icon]="input.icon"
-                    ></app-shared-input>
-                </div>
-                }
-              }
+              @for(input of inputs; track input.type){ @if(input.control ==
+              'first_name' || input.control == 'last_name'){
+              <div class="col-md-6">
+                <app-shared-input
+                  [placeholder]="input.placeholder"
+                  [label]="input.label"
+                  [type]="input.type"
+                  [name]="input.control"
+                  [icon]="input.icon"
+                ></app-shared-input>
+              </div>
+              } @else {
+              <div class="col-md-12">
+                <app-shared-input
+                  [placeholder]="input.placeholder"
+                  [label]="input.label"
+                  [type]="input.type"
+                  [name]="input.control"
+                  [icon]="input.icon"
+                ></app-shared-input>
+              </div>
+              } }
             </div>
-            <button
-              class="auth-button"
-              type="submit"
-              [disabled]="authForm.invalid"
-            >
-              {{ buttonName }} <i class="fa-solid fa-circle-check"></i>
-            </button>
+            <div class="d-flex justify-content-between align-items-center">
+              <button
+                class="auth-button"
+                type="submit"
+                [disabled]="authForm.invalid"
+              >
+                {{ buttonName }} <i class="fa-solid fa-circle-check"></i>
+              </button>
+              @switch (formType) { @case ('resetPassword') {
+              <p class="form-container__link">
+                login?
+                <a [routerLink]="authRoutes.LOGIN">click here!</a>
+              </p>
+              } @case ('login') {
+              <p class="form-container__link">
+                forget password?
+                <a [routerLink]="authRoutes.RESET_PASSWORD">click here!</a>
+              </p>
+              } }
+            </div>
           </form>
-          @switch (formType) { @case ('resetPassword') {
-          <p class="form-container__link">
-            login?
-            <a [routerLink]="authRoutes.LOGIN">click here!</a>
-          </p>
-          } @case ('login') {
-          <p class="form-container__link">
-            forget password?
-            <a [routerLink]="authRoutes.RESET_PASSWORD">click here!</a>
-          </p>
-          } }
         </div>
       </div>
       <div class="col-md-6">

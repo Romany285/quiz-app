@@ -6,14 +6,15 @@ import {
 } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { NgxSpinnerModule } from "ngx-spinner";
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from "ngx-toastr";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { globalInterceptor } from "./core/interceptors/global/global.interceptor";
 import { loadingInterceptor } from "./core/interceptors/loading/loading.interceptor";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { serverErrorInterceptor } from "./core/interceptors/server-error/server-error.interceptor";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,14 +24,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgxSpinnerModule,
     ToastrModule.forRoot(),
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   exports: [NgxSpinnerModule],
   providers: [
     provideAnimationsAsync(),
     provideHttpClient(
       withFetch(),
-      withInterceptors([globalInterceptor, loadingInterceptor])
+      withInterceptors([
+        globalInterceptor,
+        loadingInterceptor,
+        serverErrorInterceptor,
+      ])
     ),
   ],
   bootstrap: [AppComponent],
