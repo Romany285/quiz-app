@@ -11,7 +11,7 @@ import { AuthService } from "../../services/auth.service";
 })
 export class RegisterComponent {
   formType: string = "register";
-  formTitle: string = "Continue your learning journey with QuizWiz! ";
+  formTitle: string = "Create your account and start using QuizWiz!";
   buttonName: string = "Sign Up";
   constructor(private _AuthService: AuthService, private _Router: Router) {
     localStorage.clear();

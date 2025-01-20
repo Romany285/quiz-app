@@ -11,7 +11,7 @@ import { AuthService } from "../../services/auth.service";
 })
 export class ResetPasswordComponent {
   formType: string = "resetPassword";
-  formTitle: string = "Forget Password";
+  formTitle: string = "Forget password";
   buttonName: string = "Send email";
   constructor(private _AuthService: AuthService, private _Router: Router) {}
   resetPassword(formValue: FormGroup) {

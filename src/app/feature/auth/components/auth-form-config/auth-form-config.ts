@@ -1,7 +1,7 @@
 export const authFormConfig: any = {
   login: [
     {
-      label: "Your email address",
+      label: "Email address",
       type: "email",
       control: "email",
       placeholder: "Enter your email",

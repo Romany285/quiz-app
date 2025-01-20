@@ -11,7 +11,7 @@ import { AuthService } from "../../services/auth.service";
 })
 export class LoginComponent {
   formType: string = "login";
-  formTitle: string = "Create your account and start using QuizWiz!";
+  formTitle: string = "Continue your learning journey with QuizWiz! ";
   buttonName: string = "Sign In";
   constructor(private _AuthService: AuthService, private _Router: Router) {}
   login(formValue: FormGroup) {

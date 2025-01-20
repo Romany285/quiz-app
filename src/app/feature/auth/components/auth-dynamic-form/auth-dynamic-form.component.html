@@ -66,17 +66,12 @@
               >
                 {{ buttonName }} <i class="fa-solid fa-circle-check"></i>
               </button>
-              @switch (formType) { @case ('resetPassword') {
+              @if (formType === 'login') {
               <p class="form-container__link">
-                login?
-                <a [routerLink]="authRoutes.LOGIN">click here!</a>
-              </p>
-              } @case ('login') {
-              <p class="form-container__link">
-                forget password?
+                Forget password?
                 <a [routerLink]="authRoutes.RESET_PASSWORD">click here!</a>
               </p>
-              } }
+              }
             </div>
           </form>
         </div>
