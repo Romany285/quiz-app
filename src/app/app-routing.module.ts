@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { instructorGuard } from "./core/guards/instructor/instructor.guard";
-import { studentGuard } from "./core/guards/student/student.guard";
+import { authGuard } from "./core/guards/auth/auth.guard";
 import { NotFoundComponent } from "./shared/components/not-found/not-found.component";
 
 const routes: Routes = [
@@ -12,19 +11,14 @@ const routes: Routes = [
       import("./feature/auth/auth.module").then((m) => m.AuthModule),
   },
   {
-    path: "instructor",
-    canActivate: [instructorGuard],
+    path: "dashboard",
+    canActivate: [authGuard],
     loadChildren: () =>
-      import("./feature/instructor/instructor.module").then(
-        (m) => m.InstructorModule
+      import("./feature/dashboard/dashboard.module").then(
+        (m) => m.DashboardModule
       ),
   },
-  {
-    path: "student",
-    canActivate: [studentGuard],
-    loadChildren: () =>
-      import("./feature/student/student.module").then((m) => m.StudentModule),
-  },
+
   { path: "**", component: NotFoundComponent, title: "Not Found Page" },
 ];
 
