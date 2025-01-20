@@ -20,7 +20,8 @@ export class LoginComponent {
     this._AuthService.login(loginForm).subscribe({
       next: (res) => {
         this.resMessage = res.message;
-        console.log(res);
+        localStorage.setItem('token', res.data.accessToken)
+        this._authService.getProfile()
       },
       error: (err) => {
         this._toastrService.error(err.error.message, 'Error!')

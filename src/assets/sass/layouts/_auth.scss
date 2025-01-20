@@ -17,6 +17,7 @@
       padding: 0 1.5rem;
       margin-bottom: 1rem;
       .auth-icon {
+        border: 2px solid $light-grey;
         color: $auth-text-color;
         background-color: $light-grey;
         cursor: pointer;
