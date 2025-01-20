@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
 import { authRoutes } from "../../routes/auth-routes-enum";
 import { AuthService } from "../../services/auth.service";
 
@@ -14,21 +13,12 @@ export class RegisterComponent {
   formType: string = "register";
   formTitle: string = "Continue your learning journey with QuizWiz! ";
   buttonName: string = "Sign Up";
-  resMessage = "";
-  constructor(
-    private _AuthService: AuthService,
-    private _Router: Router,
-    private _toastrService: ToastrService
-  ) {
+  constructor(private _AuthService: AuthService, private _Router: Router) {
     localStorage.clear();
   }
   register(formValue: FormGroup) {
     this._AuthService.register(formValue.value).subscribe({
-      next: (res) => {
-        this.resMessage = res.message;
-      },
       complete: () => {
-        this._toastrService.success(this.resMessage);
         this._Router.navigate([""]);
       },
     });

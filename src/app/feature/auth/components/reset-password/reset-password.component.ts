@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
 import { authRoutes } from "../../routes/auth-routes-enum";
 import { AuthService } from "../../services/auth.service";
 
@@ -14,20 +13,13 @@ export class ResetPasswordComponent {
   formType: string = "resetPassword";
   formTitle: string = "Forget Password";
   buttonName: string = "Send email";
-  resMessage = "";
-  constructor(
-    private _AuthService: AuthService,
-    private _Router: Router,
-    private _toastrService: ToastrService
-  ) {}
+  constructor(private _AuthService: AuthService, private _Router: Router) {}
   resetPassword(formValue: FormGroup) {
     this._AuthService.forgetPassword(formValue.value).subscribe({
       next: (res) => {
-        this.resMessage = res.message;
         localStorage.setItem("email", formValue.get("email")?.value);
       },
       complete: () => {
-        this._toastrService.success(this.resMessage);
         this._Router.navigate([authRoutes.RESET_REQUEST_PASSWORD]);
       },
     });
