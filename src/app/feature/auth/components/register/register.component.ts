@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { FormGroup } from '@angular/forms';
 import { authRoutes } from '../../routes/auth-routes-enum';
 import { ToastrService } from 'ngx-toastr';
+import { IRegister } from '../../interfaces/IRegister';
 
 @Component({
   selector: 'app-register',
@@ -16,8 +16,8 @@ export class RegisterComponent {
   buttonName: string = "Sign Up";
   resMessage = '';
   constructor(private _AuthService: AuthService, private _Router: Router,private _toastrService:ToastrService) {}
-  register(registerForm: FormGroup) {
-    this._AuthService.forgetPassword(registerForm).subscribe({
+  register(registerForm: IRegister) {
+    this._AuthService.register(registerForm).subscribe({
       next: (res) => {
         this.resMessage = res.message;
         console.log(res);
