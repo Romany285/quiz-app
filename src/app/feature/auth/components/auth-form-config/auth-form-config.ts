@@ -1,7 +1,7 @@
 export const authFormConfig: any = {
   login: [
     {
-      label: "Your email address",
+      label: "Email address",
       type: "email",
       control: "email",
       placeholder: "Enter your email",
@@ -68,10 +68,10 @@ export const authFormConfig: any = {
       icon: "fa fa-lock",
     },
     {
-      label: "Password",
+      label: "New password",
       type: "password",
       control: "password",
-      placeholder: "Enter your password",
+      placeholder: "Enter your new password",
       icon: " fa fa-lock",
     },
   ],

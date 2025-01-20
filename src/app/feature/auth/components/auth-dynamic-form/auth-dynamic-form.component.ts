@@ -36,11 +36,14 @@ export class AuthDynamicFormComponent implements OnInit {
       }
     });
     this.authForm = new FormGroup(formGroup);
+    if (localStorage.getItem("email")) {
+      this.authForm.patchValue({ email: localStorage.getItem("email") });
+    }
   }
   get authRoutes() {
     return authRoutes;
   }
   onSubmit() {
-    this.formSubmit.emit(this.authForm.value);
+    this.formSubmit.emit(this.authForm);
   }
 }
