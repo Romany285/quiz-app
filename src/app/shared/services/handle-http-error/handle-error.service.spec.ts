@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { HandleErrorService } from './handle-error.service';
+import { HandleErrorService } from "./handle-error.service";
 
-describe('HandleErrorService', () => {
+describe("HandleErrorService", () => {
   let service: HandleErrorService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('HandleErrorService', () => {
     service = TestBed.inject(HandleErrorService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

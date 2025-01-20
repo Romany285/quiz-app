@@ -15,6 +15,7 @@ import { AppComponent } from "./app.component";
 import { globalInterceptor } from "./core/interceptors/global/global.interceptor";
 import { loadingInterceptor } from "./core/interceptors/loading/loading.interceptor";
 import { serverErrorInterceptor } from "./core/interceptors/server-error/server-error.interceptor";
+import { serverResponseInterceptor } from "./core/interceptors/server-response/server-response.interceptor";
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +36,7 @@ import { serverErrorInterceptor } from "./core/interceptors/server-error/server-
         globalInterceptor,
         loadingInterceptor,
         serverErrorInterceptor,
+        serverResponseInterceptor,
       ])
     ),
   ],

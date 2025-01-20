@@ -13,7 +13,7 @@
   }
 
   input {
-    padding: 0.5rem;
+    padding: 0.3rem;
     padding-left: 2rem;
     background-color: $light-grey !important;
     border: 2px solid $auth-text-color;
@@ -37,6 +37,32 @@
       right: 10px;
       top: 50%;
       transform: translateY(-50%);
+    }
+  }
+}
+
+.select-container {
+  position: relative;
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .select-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    i {
+      font-size: 16px;
+      color: #aaa;
     }
   }
 }

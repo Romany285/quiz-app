@@ -1,10 +1,8 @@
 import { Component } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
 import { authRoutes } from "../../routes/auth-routes-enum";
 import { AuthService } from "../../services/auth.service";
-import { ILogin } from '../../interfaces/ILogin';
 
 @Component({
   selector: "app-login",
@@ -13,27 +11,20 @@ import { ILogin } from '../../interfaces/ILogin';
 })
 export class LoginComponent {
   formType: string = "login";
-  formTitle: string = "Create your account and start using QuizWiz!";
+  formTitle: string = "Continue your learning journey with QuizWiz! ";
   buttonName: string = "Sign In";
-  resMessage = "";
-  constructor(
-    private _AuthService: AuthService,
-    private _Router: Router,
-    private _toastrService: ToastrService
-  ) {}
-  login(loginForm: FormGroup) {
-    this._AuthService.login(loginForm).subscribe({
+  constructor(private _AuthService: AuthService, private _Router: Router) {}
+  login(formValue: FormGroup) {
+    this._AuthService.login(formValue.value).subscribe({
       next: (res) => {
-        this.resMessage = res.message;
-        localStorage.setItem('token', res.data.accessToken)
-        this._authService.getProfile()
+        localStorage.setItem("token", res.data.accessToken);
+        localStorage.setItem(
+          "name",
+          res.data.profile.first_name + " " + res.data.profile.last_name
+        );
+        this._AuthService.getProfile();
       },
-      error: (err) => {
-        this._toastrService.error(err.error.message, 'Error!')
-      },
-
       complete: () => {
-        this._toastrService.success(this.resMessage);
         this._Router.navigate(["/dashboard"]);
       },
     });
