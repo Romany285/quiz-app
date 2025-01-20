@@ -15,12 +15,13 @@ export class LoginComponent {
   formTitle: string = "Create your account and start using QuizWiz!";
   buttonName: string = "Sign In";
   resMessage = '';
-  constructor(private _AuthService: AuthService, private _Router: Router,private _toastrService:ToastrService) {}
+  constructor(private _authService: AuthService, private _Router: Router,private _toastrService:ToastrService) {}
   login(loginForm: FormGroup) {
-    this._AuthService.login(loginForm).subscribe({
+    this._authService.login(loginForm).subscribe({
       next: (res) => {
         this.resMessage = res.message;
-        console.log(res);
+        localStorage.setItem('token', res.data.accessToken)
+        this._authService.getProfile()
       },
       error: (err) => {
         this._toastrService.error(err.error.message, 'Error!')

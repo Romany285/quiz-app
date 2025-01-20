@@ -17,10 +17,10 @@ export class RegisterComponent {
   resMessage = '';
   constructor(private _AuthService: AuthService, private _Router: Router,private _toastrService:ToastrService) {}
   register(registerForm: FormGroup) {
-    this._AuthService.forgetPassword(registerForm).subscribe({
+    this._AuthService.register(registerForm).subscribe({
       next: (res) => {
         this.resMessage = res.message;
-        console.log(res);
+        console.log(res)
       },
       error: (err) => {
         this._toastrService.error(err.error.message, 'Error!')

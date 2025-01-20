@@ -15,4 +15,12 @@ export class SharedInputComponent {
   @Input() name: string = "";
   @Input() placeholder: string = "";
   @Input() icon: string = "";
+  showPassword:boolean = false
+  roles:string[] = ['Student', 'Instructor']
+  toggleShowPass(){
+    this.showPassword = !this.showPassword
+  }
+  changeRole(event:any){
+    console.log((event.target.value.slice(3,)))
+  }
 }
