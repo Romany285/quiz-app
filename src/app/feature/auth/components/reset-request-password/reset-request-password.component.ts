@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
-import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { authRoutes } from "../../routes/auth-routes-enum";
 import { AuthService } from "../../services/auth.service";
+import { IRequestResetPassword } from "../../interfaces/IRequestResetPassword";
 
 @Component({
   selector: "app-reset-request-password",

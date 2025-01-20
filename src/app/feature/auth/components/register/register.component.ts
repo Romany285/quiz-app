@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { authRoutes } from "../../routes/auth-routes-enum";
 import { AuthService } from "../../services/auth.service";
+import { IRegister } from '../../interfaces/IRegister';
 
 @Component({
   selector: "app-register",
@@ -21,11 +22,10 @@ export class RegisterComponent {
     private _toastrService: ToastrService
   ) {}
   register(registerForm: FormGroup) {
-    this._AuthService.forgetPassword(registerForm).subscribe({
+    this._AuthService.register(registerForm).subscribe({
       next: (res) => {
         this.resMessage = res.message;
       },
-
       complete: () => {
         this._toastrService.success(this.resMessage);
         this._Router.navigate([""]);

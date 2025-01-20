@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { authRoutes } from "../../routes/auth-routes-enum";
 import { AuthService } from "../../services/auth.service";
+import { ILogin } from '../../interfaces/ILogin';
 
 @Component({
   selector: "app-login",
@@ -24,6 +25,11 @@ export class LoginComponent {
     this._AuthService.login(loginForm).subscribe({
       next: (res) => {
         this.resMessage = res.message;
+        localStorage.setItem('token', res.data.accessToken)
+        this._authService.getProfile()
+      },
+      error: (err) => {
+        this._toastrService.error(err.error.message, 'Error!')
       },
 
       complete: () => {

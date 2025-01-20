@@ -1,7 +1,27 @@
-<div class="d-flex flex-column">
-  <label class="mb-1 fw-bolder fs-6">{{ label }}</label>
-  <div class="input-icon">
-    <i [class]="icon"></i>
-    <input [type]="type" [formControlName]="name" [placeholder]="placeholder" />
+  <div class="d-flex flex-column" >
+    <label class="mb-1 fw-bolder fs-5">{{ label }}</label>
+    <div class="input-icon position-relative">
+      @if(label !== 'Role'){
+        @if(label == 'Password'){
+          <span class="eye-pass" (click)="toggleShowPass()">
+            <i
+            class="fa-solid position-absolute"
+            [class]="!showPassword ? 'fa-eye' : 'fa-eye-slash'"
+            >
+            </i>
+          </span>          
+          <i [class]="icon"></i>
+          <input [type]="showPassword? 'text' : type" [formControlName]="name" [placeholder]="placeholder" />
+        } @else {
+          <i [class]="icon"></i>
+          <input [type]="type" [formControlName]="name" [placeholder]="placeholder" />
+        }
+      } @else {
+        <select class="form-select" (change)="changeRole($event)" [formControlName]="name">
+          <option value="" disabled>Choose your role</option>
+          <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
+        </select>
+      }
+    </div>
   </div>
 </div>
