@@ -12,9 +12,8 @@ export class HandleErrorService {
     if (err.error instanceof ErrorEvent) {
       resMsg = err.error.message;
     } else {
-      resMsg = ` Error Code: ${err.status}\nMessage: ${err.error.message}`;
+      resMsg = `${err.error.message}`;
     }
     this._Toastr.error(resMsg, "Error");
-    console.log(resMsg);
   }
 }
