@@ -12,4 +12,7 @@ export class StudentsService {
   getAllStudents(): Observable<IStudent[]> {
     return this._HttpClient.get<IStudent[]>("student");
   }
+  getAllWithoutGroup(): Observable<IStudent[]> {
+    return this._HttpClient.get<IStudent[]>("student/without-group");
+  }
 }
