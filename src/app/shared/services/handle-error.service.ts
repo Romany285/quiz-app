@@ -9,9 +9,12 @@ export class HandleErrorService {
   constructor(private _Toastr: ToastrService) {}
   public handleError(err: HttpErrorResponse) {
     let resMsg: string = "";
-    err.error instanceof ErrorEvent
-      ? (resMsg = err.error.message)
-      : (resMsg = ` Error Code: ${err.status}\nMessage: ${err.message}`);
+    if (err.error instanceof ErrorEvent) {
+      resMsg = err.error.message;
+    } else {
+      resMsg = ` Error Code: ${err.status}\nMessage: ${err.error.message}`;
+    }
     this._Toastr.error(resMsg, "Error");
+    console.log(resMsg);
   }
 }
