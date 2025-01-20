@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { authRoutes } from "../../routes/auth-routes-enum";
 import { AuthService } from "../../services/auth.service";
-import { ILogin } from '../../interfaces/ILogin';
 
 @Component({
   selector: "app-login",
@@ -21,17 +20,17 @@ export class LoginComponent {
     private _Router: Router,
     private _toastrService: ToastrService
   ) {}
-  login(loginForm: FormGroup) {
-    this._AuthService.login(loginForm).subscribe({
+  login(formValue: FormGroup) {
+    this._AuthService.login(formValue.value).subscribe({
       next: (res) => {
         this.resMessage = res.message;
-        localStorage.setItem('token', res.data.accessToken)
-        this._authService.getProfile()
+        localStorage.setItem("token", res.data.accessToken);
+        localStorage.setItem(
+          "name",
+          res.data.profile.first_name + " " + res.data.profile.last_name
+        );
+        this._AuthService.getProfile();
       },
-      error: (err) => {
-        this._toastrService.error(err.error.message, 'Error!')
-      },
-
       complete: () => {
         this._toastrService.success(this.resMessage);
         this._Router.navigate(["/dashboard"]);

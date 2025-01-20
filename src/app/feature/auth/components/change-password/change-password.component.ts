@@ -1,9 +1,8 @@
 import { Component } from "@angular/core";
+import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { AuthService } from "../../services/auth.service";
-import { IChangePassword } from '../../interfaces/IChangePassword';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: "app-change-password",
@@ -19,17 +18,17 @@ export class ChangePasswordComponent {
   formType: string = "changePassword";
   formTitle: string = "Change Password";
   buttonName: string = "Change";
-  resMessage = '';
-  changePassword(data:IChangePassword){
-    this._AuthService.changePassword(data).subscribe({
+  resMessage = "";
+  changePassword(formValue: FormGroup) {
+    this._AuthService.changePassword(formValue.value).subscribe({
       next: (res) => {
         this.resMessage = res.message;
       },
       complete: () => {
         this._toastrService.success(this.resMessage);
-        this._router.navigate(['/auth'])
-         localStorage.clear()
-      }
-    })
+        this._router.navigate(["/auth"]);
+        localStorage.clear();
+      },
+    });
   }
 }

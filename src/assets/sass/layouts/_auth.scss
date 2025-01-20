@@ -3,20 +3,20 @@
   background-color: $auth-bg;
   color: $auth-text-color;
   .form-container {
-    height: 65%;
+    height: 100%;
     width: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     &__title {
       color: $auth-hover-color;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       font-size: 1.8rem;
     }
     .icons-container {
       text-align: center;
-      padding: 0 1.5rem;
-      margin-bottom: 1rem;
+      padding: 0 1.2rem;
+      margin-bottom: 0.2rem;
       .auth-icon {
         border: 2px solid $light-grey;
         color: $auth-text-color;

@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { authRoutes } from "../../routes/auth-routes-enum";
 import { AuthService } from "../../services/auth.service";
-import { IRegister } from '../../interfaces/IRegister';
 
 @Component({
   selector: "app-register",
@@ -20,9 +19,11 @@ export class RegisterComponent {
     private _AuthService: AuthService,
     private _Router: Router,
     private _toastrService: ToastrService
-  ) {}
-  register(registerForm: FormGroup) {
-    this._AuthService.register(registerForm).subscribe({
+  ) {
+    localStorage.clear();
+  }
+  register(formValue: FormGroup) {
+    this._AuthService.register(formValue.value).subscribe({
       next: (res) => {
         this.resMessage = res.message;
       },

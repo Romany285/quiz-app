@@ -68,10 +68,10 @@ export const authFormConfig: any = {
       icon: "fa fa-lock",
     },
     {
-      label: "Password",
+      label: "New password",
       type: "password",
       control: "password",
-      placeholder: "Enter your password",
+      placeholder: "Enter your new password",
       icon: " fa fa-lock",
     },
   ],
