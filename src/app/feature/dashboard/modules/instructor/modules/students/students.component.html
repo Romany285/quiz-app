@@ -2,7 +2,7 @@
 <app-shared-card
   [title]="student.first_name + ' ' + student.last_name"
   [status]="student.status || ''"
-  [groupName]="student.group?.name || ''"
+  [groupName]="student.group?.name || 'Not added to a group'"
   [actions]="studentActions"
   [data]="student"
   (actionTriggered)="onStudentAction($event)"

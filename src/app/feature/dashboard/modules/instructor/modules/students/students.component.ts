@@ -13,15 +13,23 @@ export class StudentsComponent {
     { label: "View", action: "view" },
     { label: "Update", action: "update" },
     { label: "Delete", action: "delete", isDanger: true },
+    { label: "Add to group", action: "addToGroup " },
+    { label: "Delete from group", action: "deleteFromGroup " },
   ];
 
   constructor(private _StudentsService: StudentsService) {
     this.onGetAllStudents();
+    this.onGetStudentsWithoutGroup();
   }
   onGetAllStudents(): void {
     this._StudentsService.getAllStudents().subscribe((res) => {
       this.students = res;
       console.log(this.students);
+    });
+  }
+  onGetStudentsWithoutGroup() {
+    this._StudentsService.getAllWithoutGroup().subscribe((res) => {
+      console.log(res);
     });
   }
   onStudentAction(event: { action: string; data: IStudent }): void {
@@ -39,6 +47,13 @@ export class StudentsComponent {
           // Call the service to delete the student
         }
         break;
+      case "addToGroup":
+        console.log("Add student to group:", data);
+        break;
+      case "deleteFromGroup":
+        console.log("delete student to group:", data);
+        break;
+
       default:
         console.error("Unknown action:", action);
     }

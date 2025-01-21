@@ -14,11 +14,11 @@
     font-weight: 500;
     font-size: 0.9rem;
     color: $grey-3;
-    .status::after {
+    .group-name::before {
       content: "";
       position: absolute;
       top: 1%;
-      left: 22%;
+      left: 25%;
       width: 1px;
       height: 1.5rem;
       background-color: $grey-2;
