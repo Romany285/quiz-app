@@ -30,12 +30,16 @@ export class StudentsService {
       `student/${studentId}/${groupId}`
     );
   }
-  // updateStudentGroup(
-  //   studentId: string,groupId:string):Observable<IAddStudentToGroup>{
-  //     return this._HttpClient.put<IAddStudentToGroup>(
-  //       `student/${studentId}/${groupId}`
-  //     );
-  //   }
+  updateStudentGroup(
+    studentId: string,
+    groupId: string,
+    newGroupId: string
+  ): Observable<IAddStudentToGroup> {
+    return this._HttpClient.put<IAddStudentToGroup>(
+      `student/${studentId}/${groupId}`,
+      newGroupId
+    );
+  }
   deleteStudent(id: string): Observable<IDeleteStudent> {
     return this._HttpClient.delete<IDeleteStudent>(`student/${id}`);
   }
