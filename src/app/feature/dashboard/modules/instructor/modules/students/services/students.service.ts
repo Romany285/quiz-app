@@ -15,4 +15,7 @@ export class StudentsService {
   getAllWithoutGroup(): Observable<IStudent[]> {
     return this._HttpClient.get<IStudent[]>("student/without-group");
   }
+  getStudentById(id: string): Observable<IStudent> {
+    return this._HttpClient.get<IStudent>(`student/${id}`);
+  }
 }
