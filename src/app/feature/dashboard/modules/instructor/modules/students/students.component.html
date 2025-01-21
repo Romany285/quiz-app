@@ -1,1 +1,10 @@
-<p>students works!</p>
+@for ( student of students; track student._id) {
+<app-shared-card
+  [title]="student.first_name + ' ' + student.last_name"
+  [status]="student.status || ''"
+  [groupName]="student.group?.name || ''"
+  [actions]="studentActions"
+  [data]="student"
+  (actionTriggered)="onStudentAction($event)"
+></app-shared-card>
+}

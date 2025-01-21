@@ -1,0 +1,35 @@
+<div
+  class="col-12 col-md-6 col-lg-4 col-xl-3 card-container d-flex justify-content-between align-items-center border-1 border-black w"
+>
+  <div class="text-side col-md-9 col-6 col-lg-9">
+    <h4 class="card-title m-0">{{ title }}</h4>
+    <div class="ranks">
+      <span class="status">{{ status }} </span>
+      @if (status ) {
+      <span class="ps-4"> {{ groupName }}</span>
+      }
+    </div>
+  </div>
+  <div class="actions-container">
+    <div class="dropdown">
+      <span
+        id="dropdownMenuButton"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-ellipsis-vertical" style="color: #0d1321"></i>
+      </span>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li *ngFor="let action of actions">
+          <a
+            class="dropdown-item"
+            (click)="performAction(action, data)"
+            [ngClass]="{ 'text-danger': action.isDanger }"
+          >
+            {{ action.label }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
