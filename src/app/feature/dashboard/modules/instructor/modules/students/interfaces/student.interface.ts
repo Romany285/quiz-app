@@ -8,8 +8,8 @@ export interface IStudent {
   first_name: string;
   last_name: string;
   email: string;
-  status: string;
-  role: string;
+  status?: string;
+  role?: string;
   group?: IGroup | string;
 }
 
@@ -33,4 +33,17 @@ export interface IGroup {
   updatedAt: string;
   createdAt: string;
   __v: number;
+}
+export interface IAddStudentToGroup {
+  message: string;
+  data: AddToGroup;
+}
+
+export interface AddToGroup {
+  _id: string;
+  name: string;
+  status: string;
+  instructor: string;
+  students: IStudent[];
+  max_students: number;
 }
