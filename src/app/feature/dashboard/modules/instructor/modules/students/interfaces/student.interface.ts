@@ -10,10 +10,20 @@ export interface IStudent {
   email: string;
   status: string;
   role: string;
-  group?: Group | string;
+  group?: IGroup | string;
 }
 
-export interface Group {
+export interface ITopFiveStudents {
+  _id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  status: string;
+  role: string;
+  group: IGroup;
+  avg_score: number;
+}
+export interface IGroup {
   _id: string;
   name: string;
   status: string;
