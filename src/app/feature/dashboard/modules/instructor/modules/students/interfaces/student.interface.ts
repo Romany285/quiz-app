@@ -1,3 +1,8 @@
+export interface IDeleteStudent {
+  data: IStudent;
+  message: string;
+}
+
 export interface IStudent {
   _id: string;
   first_name: string;
@@ -5,7 +10,7 @@ export interface IStudent {
   email: string;
   status: string;
   role: string;
-  group?: Group;
+  group?: Group | string;
 }
 
 export interface Group {
