@@ -1,7 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { IDeleteStudent, IStudent } from "../interfaces/student.interface";
+import {
+  IAddStudentToGroup,
+  IDeleteStudent,
+  IStudent,
+} from "../interfaces/student.interface";
 
 @Injectable({
   providedIn: "root",
@@ -17,6 +21,14 @@ export class StudentsService {
   }
   getStudentById(id: string): Observable<IStudent> {
     return this._HttpClient.get<IStudent>(`student/${id}`);
+  }
+  addStudentToGroup(
+    studentId: string,
+    groupId: string
+  ): Observable<IAddStudentToGroup> {
+    return this._HttpClient.get<IAddStudentToGroup>(
+      `student/${studentId}/${groupId}`
+    );
   }
   deleteStudent(id: string): Observable<IDeleteStudent> {
     return this._HttpClient.delete<IDeleteStudent>(`student/${id}`);
