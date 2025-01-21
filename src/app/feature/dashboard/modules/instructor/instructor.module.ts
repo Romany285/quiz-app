@@ -1,17 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
 
-import { InstructorRoutingModule } from './instructor-routing.module';
-import { InstructorComponent } from './instructor.component';
-
+import { SharedModule } from "../../../../shared/shared.module";
+import { InstructorRoutingModule } from "./instructor-routing.module";
+import { InstructorComponent } from "./instructor.component";
 
 @NgModule({
-  declarations: [
-    InstructorComponent
-  ],
-  imports: [
-    CommonModule,
-    InstructorRoutingModule
-  ]
+  declarations: [InstructorComponent],
+  imports: [CommonModule, InstructorRoutingModule, SharedModule],
 })
-export class InstructorModule { }
+export class InstructorModule {}
