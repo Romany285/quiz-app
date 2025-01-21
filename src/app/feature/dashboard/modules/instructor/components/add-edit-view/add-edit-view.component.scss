@@ -1,0 +1,13 @@
+@import "../../../../../../../assets/sass/abstracts/_variables";
+.bord-inline{
+    border-inline: 1px rgba(0, 0, 0, 0.25) solid;
+}
+.bord-bottm{
+    border-bottom: 1px rgba(0, 0, 0, 0.25) solid;
+}
+.input-group-text{
+    background-color: $auth-text-color;
+}
+.form-control:focus{
+    box-shadow:0 0 0 .25rem rgba(13, 109, 253, 0); 
+};
