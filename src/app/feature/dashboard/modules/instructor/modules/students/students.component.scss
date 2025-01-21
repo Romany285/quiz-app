@@ -1,0 +1,29 @@
+@import "../../../../../../../assets/sass/main.scss";
+.container-fluid {
+  height: 100%;
+  border: 1px solid $grey;
+  border-radius: 1rem;
+  ul {
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1rem;
+    padding: 1rem 2rem;
+    li {
+      cursor: pointer;
+    }
+  }
+  .form-select {
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 0.8rem;
+    color: black;
+    cursor: pointer;
+    &:active,
+    &:focus {
+      background-color: rgba(129, 128, 128, 0.575);
+    }
+  }
+}
