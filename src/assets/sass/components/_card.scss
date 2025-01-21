@@ -1,0 +1,28 @@
+.card-container {
+  border: 1px solid $grey !important;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-family: $dashboard-font;
+  .text-side {
+    .card-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+  }
+  .ranks {
+    position: relative;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: $grey-3;
+    .status::after {
+      content: "";
+      position: absolute;
+      top: 1%;
+      left: 22%;
+      width: 1px;
+      height: 1.5rem;
+      background-color: $grey-2;
+      z-index: 1;
+    }
+  }
+}

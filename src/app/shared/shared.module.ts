@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatChipsModule } from "@angular/material/chips";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 import {
   MatDialogActions,
   MatDialogClose,
@@ -27,9 +27,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { SharedInputComponent } from './components/shared-input/shared-input.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SharedCardComponent } from "./components/shared-card/shared-card.component";
+import { SharedInputComponent } from "./components/shared-input/shared-input.component";
 
 @NgModule({
-  declarations: [SharedInputComponent, NotFoundComponent],
+  declarations: [SharedInputComponent, NotFoundComponent, SharedCardComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -90,6 +92,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     SharedInputComponent,
     MatFormField,
     MatSelect
+    SharedCardComponent,
   ],
 })
 export class SharedModule {}
