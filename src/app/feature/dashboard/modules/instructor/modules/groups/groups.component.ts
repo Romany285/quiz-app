@@ -1,18 +1,28 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { GroupsService } from './services/groups.service';
 import { AddEditViewComponent } from '../../components/add-edit-view/add-edit-view.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Validators } from '@angular/forms';
+import { StudentsService } from '../students/services/students.service';
 
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
   styleUrl: './groups.component.scss'
 })
-export class GroupsComponent {
-  constructor(private _GroupsService:GroupsService,private dialog: MatDialog){}
+export class GroupsComponent implements OnInit{
   groupsData:any;
   usersData:any;
+  groupsActions = [
+    { label: "Update", action: "update" },
+    { label: "Delete", action: "delete", isDanger: true },
+  ];
+    constructor(private _GroupsService:GroupsService,private dialog: MatDialog,private _StudentsService:StudentsService){}
+  ngOnInit(): void {
+    this.getAllGroups()
+  }
+     
   getAllGroups(){
     this._GroupsService.getAllGroups().subscribe({
       next:(res)=>{
@@ -25,7 +35,7 @@ export class GroupsComponent {
     })
   }
   getAllUsers(){
-    this._GroupsService.getAllUsers().subscribe({
+    this._StudentsService.getAllStudents().subscribe({
       next:(res)=>{
         console.log(res);
         this.usersData = res
@@ -51,4 +61,20 @@ export class GroupsComponent {
       }
     });
   }
+  onStudentAction(event: { action: string; data: any }): void {
+      const { action, data } = event;
+      switch (action) {
+        case "update":
+          console.log("Update Student:", data);
+          break;
+        case "delete":
+          if (confirm(`Are you sure you want to delete ${data.first_name}?`)) {
+            console.log("Delete Student:", data);
+            // Call the service to delete the student
+          }
+          break;
+        default:
+          console.error("Unknown action:", action);
+      }
+    }
 }
