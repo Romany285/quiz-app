@@ -10,7 +10,7 @@ export interface IStudent {
   email: string;
   status?: string;
   role?: string;
-  group?: IGroup | string;
+  group?: IGroup;
 }
 
 export interface ITopFiveStudents {
