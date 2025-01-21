@@ -28,7 +28,6 @@ import { RouterModule } from '@angular/router';
 import { SharedInputComponent } from './components/shared-input/shared-input.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SharedCardComponent } from "./components/shared-card/shared-card.component";
-import { SharedInputComponent } from "./components/shared-input/shared-input.component";
 
 @NgModule({
   declarations: [SharedInputComponent, NotFoundComponent, SharedCardComponent],
@@ -91,7 +90,7 @@ import { SharedInputComponent } from "./components/shared-input/shared-input.com
     MatSlideToggleModule,
     SharedInputComponent,
     MatFormField,
-    MatSelect
+    MatSelect,
     SharedCardComponent,
   ],
 })
