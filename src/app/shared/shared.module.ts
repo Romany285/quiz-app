@@ -12,14 +12,14 @@ import {
   MatDialogModule,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -57,6 +57,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatDialogTitle,
     MatDatepickerModule,
     MatSlideToggleModule,
+    MatFormField,
+    MatSelect
   ],
   exports: [
     CommonModule,
@@ -86,6 +88,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatDatepickerModule,
     MatSlideToggleModule,
     SharedInputComponent,
+    MatFormField,
+    MatSelect
   ],
 })
 export class SharedModule {}
