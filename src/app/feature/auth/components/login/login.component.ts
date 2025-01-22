@@ -25,7 +25,9 @@ export class LoginComponent {
         this._AuthService.getProfile();
       },
       complete: () => {
-        this._Router.navigate(["/dashboard"]);
+        this._Router.navigate([
+          "/dashboard/instructor" || "/dashboard/student",
+        ]);
       },
     });
   }
