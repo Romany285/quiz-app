@@ -9,9 +9,6 @@ export class GroupsService {
 
 constructor(private _HttpClient:HttpClient) { }
   getAllGroups():Observable<any>{
-    return this._HttpClient.get('/api/group')
-  }
-  getAllUsers():Observable<any>{
-    return this._HttpClient.get('/api/student')
+    return this._HttpClient.get('group')
   }
 }

@@ -91,7 +91,6 @@ import { SharedInputComponent } from "./components/shared-input/shared-input.com
     SharedInputComponent,
     MatFormField,
     MatSelect,
-    SharedInputComponent,
     SharedCardComponent,
   ],
 })
