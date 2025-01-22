@@ -30,11 +30,11 @@ export interface IGroup {
   instructor: string;
   students: string[];
   max_students: number;
-  updatedAt: string;
-  createdAt: string;
-  __v: number;
+  updatedAt?: string;
+  createdAt?: string;
+  __v?: number;
 }
-export interface IAddStudentToGroup {
+export interface IAddUpdateStudentToGroup {
   message: string;
   data: AddToGroup;
 }
