@@ -10,7 +10,7 @@ export class HandleHttpResponseService {
   public handleResponse(res: HttpResponse<any>) {
     let resMsg: string = "";
     if (res.status === 200) {
-      resMsg = res.body.message || "Request successful.";
+      resMsg = res.body.message;
     } else if (res.status === 201) {
       resMsg = res.body.message || "Resource created successfully.";
     } else if (res.status === 202) {
