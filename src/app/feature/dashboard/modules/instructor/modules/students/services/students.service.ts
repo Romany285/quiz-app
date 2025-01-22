@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import {
-  IAddStudentToGroup,
+  IAddUpdateStudentToGroup,
   IDeleteStudent,
   IStudent,
 } from "../interfaces/student.interface";
@@ -25,8 +25,8 @@ export class StudentsService {
   addStudentToGroup(
     studentId: string,
     groupId: string
-  ): Observable<IAddStudentToGroup> {
-    return this._HttpClient.get<IAddStudentToGroup>(
+  ): Observable<IAddUpdateStudentToGroup> {
+    return this._HttpClient.get<IAddUpdateStudentToGroup>(
       `student/${studentId}/${groupId}`
     );
   }
@@ -34,8 +34,8 @@ export class StudentsService {
     studentId: string,
     groupId: string,
     newGroupId: string
-  ): Observable<IAddStudentToGroup> {
-    return this._HttpClient.put<IAddStudentToGroup>(
+  ): Observable<IAddUpdateStudentToGroup> {
+    return this._HttpClient.put<IAddUpdateStudentToGroup>(
       `student/${studentId}/${groupId}`,
       newGroupId
     );
