@@ -1,3 +1,4 @@
+import { Data } from './../../../../../auth/interfaces/IAuthRes';
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { GroupsService } from './services/groups.service';
@@ -14,6 +15,7 @@ import { StudentsService } from '../students/services/students.service';
 export class GroupsComponent implements OnInit{
   groupsData:any;
   usersData:any;
+  allStudents:any;
   groupsActions = [
     { label: "Update", action: "update" },
     { label: "Delete", action: "delete", isDanger: true },
@@ -21,6 +23,8 @@ export class GroupsComponent implements OnInit{
     constructor(private _GroupsService:GroupsService,private dialog: MatDialog,private _StudentsService:StudentsService){}
   ngOnInit(): void {
     this.getAllGroups()
+    this.getAllStudentWithoutGroup()
+    this.getAllStudent()
   }
      
   getAllGroups(){
@@ -34,8 +38,8 @@ export class GroupsComponent implements OnInit{
       }
     })
   }
-  getAllUsers(){
-    this._StudentsService.getAllStudents().subscribe({
+  getAllStudentWithoutGroup(){
+    this._StudentsService.getAllWithoutGroup().subscribe({
       next:(res)=>{
         console.log(res);
         this.usersData = res
@@ -45,7 +49,18 @@ export class GroupsComponent implements OnInit{
       }
     })
   }
-  openDialog(): void {
+  getAllStudent(){
+    this._StudentsService.getAllStudents().subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.allStudents = res
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
+  }
+  openDialogAddGroup(): void {
     const dialogRef = this.dialog.open(AddEditViewComponent, {
       data: {fields: [
         { type: 'text', label: 'Group Name', name: 'name' , validators: [Validators.required] },
@@ -56,16 +71,59 @@ export class GroupsComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       if (result !== undefined) {
+        this._GroupsService.addGroup(result).subscribe({
+          next:(res)=>{
+            console.log(res);
+          },
+          error:(err)=>{
+            console.log(err);
+          },
+          complete:()=> {
+            this.getAllGroups()
+          },
+        })
         console.log(result);
         ;
       }
     });
   }
+  openDialogUpdateGroup(name?: string, students?: any, readOnly = false) {
+    const dialogRef = this.dialog.open(AddEditViewComponent, {
+      width: '55%',
+      data: {
+        fields: [
+          { type: 'text', label: 'Group Name', name: 'name' ,value: name || '', validators: [Validators.required] },
+          { type: 'select', label: 'List Students', name: 'students', value: this.allStudents, validators: [Validators.required] },
+        ],
+        readOnly
+      }
+    })
+    return dialogRef.afterClosed();
+  }
+  editGroup(group:any,students:any): void {
+    this.openDialogUpdateGroup(group.name,students).subscribe((result) => {
+      if (result) {
+        console.log(group,'ffff');
+        
+        this._GroupsService.updateGroup(group._id, {
+          name: result.name,
+          students: result.students
+        }).subscribe(({
+          next: () => { },
+          error: ( ) => {},
+          complete: () => {
+            this.getAllGroups();
+          }
+        }))
+      }
+    })
+  }
   onStudentAction(event: { action: string; data: any }): void {
       const { action, data } = event;
       switch (action) {
         case "update":
-          console.log("Update Student:", data);
+          console.log(data,'pp');
+          this.editGroup(data,data.students)
           break;
         case "delete":
           if (confirm(`Are you sure you want to delete ${data.first_name}?`)) {
