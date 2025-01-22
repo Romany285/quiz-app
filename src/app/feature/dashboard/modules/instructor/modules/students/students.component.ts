@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { HelperServiceService } from "../../../../../../shared/services/helper service/helper-service.service";
+import { DeleteItemComponent } from "../../components/delete-item/delete-item.component";
 import { IGroup, IStudent } from "./interfaces/student.interface";
 import { StudentsService } from "./services/students.service";
 
@@ -29,7 +31,8 @@ export class StudentsComponent implements OnInit {
   studentActions = this.commonActions;
   constructor(
     private _StudentsService: StudentsService,
-    private _HelperService: HelperServiceService
+    private _HelperService: HelperServiceService,
+    public dialog: MatDialog
   ) {}
   ngOnInit(): void {
     this.fetchAllData();
@@ -87,7 +90,20 @@ export class StudentsComponent implements OnInit {
         break;
 
       case "deleteStudent":
-        console.log("Delete Student:", data);
+        this._StudentsService.deleteStudent(data._id).subscribe({
+          next: (res) => {
+            console.log(res);
+            const dialogRef = this.dialog.open(DeleteItemComponent, {
+              data: {
+                title: "student",
+                description: `Are you sure you want to delete ${data.first_name} ${data.last_name}?`,
+              },
+            });
+            dialogRef.afterClosed().subscribe((result) => {
+              this.fetchAllData();
+            });
+          },
+        });
         break;
       case "addToGroup":
         if (this.selectGroupId === null && this.selectStudentWithoutGroup) {

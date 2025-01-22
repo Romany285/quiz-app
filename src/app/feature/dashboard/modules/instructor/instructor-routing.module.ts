@@ -1,12 +1,11 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { InstructorComponent } from "./instructor.component";
 import { ChildDashboardComponent } from "./components/child-dashboard/child-dashboard.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: ChildDashboardComponent
+    component: ChildDashboardComponent,
   },
   {
     path: "students",
