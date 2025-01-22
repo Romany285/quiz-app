@@ -10,7 +10,7 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
-        path: "instructor",
+        path: "",
         canActivate: [instructorGuard],
         loadChildren: () =>
           import("./modules/instructor/instructor.module").then(

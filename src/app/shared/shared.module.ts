@@ -28,9 +28,17 @@ import { RouterModule } from "@angular/router";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { SharedCardComponent } from "./components/shared-card/shared-card.component";
 import { SharedInputComponent } from "./components/shared-input/shared-input.component";
+import { NavComponent } from './components/nav/nav.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [SharedInputComponent, NotFoundComponent, SharedCardComponent],
+  declarations: [
+    SharedInputComponent, 
+    NotFoundComponent, 
+    SharedCardComponent, 
+    NavComponent, 
+    SidebarComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -92,6 +100,8 @@ import { SharedInputComponent } from "./components/shared-input/shared-input.com
     MatFormField,
     MatSelect,
     SharedCardComponent,
+    NavComponent,
+    SidebarComponent
   ],
 })
 export class SharedModule {}

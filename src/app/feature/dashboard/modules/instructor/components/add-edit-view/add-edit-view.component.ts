@@ -12,12 +12,12 @@ export class AddEditViewComponent {
   form: FormGroup;
   constructor(
     public dialogRef: MatDialogRef<AddEditViewComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,private fb: FormBuilder
+    @Inject(MAT_DIALOG_DATA) public data: any,
+                                    private fb: FormBuilder
   ) {
     this.isViewMode = data.readOnly;
     this.form = this.createForm(data.fields);
   }
-   
 
   private createForm(fields: any[]): FormGroup {
     const group: any = {};
