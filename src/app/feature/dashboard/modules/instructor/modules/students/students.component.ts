@@ -90,19 +90,21 @@ export class StudentsComponent implements OnInit {
         break;
 
       case "deleteStudent":
-        this._StudentsService.deleteStudent(data._id).subscribe({
-          next: (res) => {
-            console.log(res);
-            const dialogRef = this.dialog.open(DeleteItemComponent, {
-              data: {
-                title: "student",
-                description: `Are you sure you want to delete ${data.first_name} ${data.last_name}?`,
+        const dialogRef = this.dialog.open(DeleteItemComponent, {
+          data: {
+            title: "student",
+            description: `Are you sure you want to delete ${data.first_name} ${data.last_name}?`,
+          },
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result) {
+            this._StudentsService.deleteStudent(data._id).subscribe({
+              next: (res) => {
+                this.fetchAllData();
               },
             });
-            dialogRef.afterClosed().subscribe((result) => {
-              this.fetchAllData();
-            });
-          },
+          }
         });
         break;
       case "addToGroup":
@@ -116,10 +118,26 @@ export class StudentsComponent implements OnInit {
         }
         break;
       case "deleteFromGroup":
-        if (this.selectGroupId !== null && !this.selectStudentWithoutGroup)
-          console.log("delete student to group:", data);
+        if (this.selectGroupId !== null && !this.selectStudentWithoutGroup) {
+          const dialogRef = this.dialog.open(DeleteItemComponent, {
+            data: {
+              title: "student",
+              description: `Are you sure you want to delete ${data.first_name} ${data.last_name} from group ${data.group?.name}?`,
+            },
+          });
+          dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+              this._StudentsService
+                .deleteStudentFromGroup(data._id, data.group?._id!)
+                .subscribe({
+                  next: (res) => {
+                    this.fetchAllData();
+                  },
+                });
+            }
+          });
+        }
         break;
-
       default:
         console.error("Unknown action:", action);
     }
