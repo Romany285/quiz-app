@@ -16,6 +16,7 @@ import { globalInterceptor } from "./core/interceptors/global/global.interceptor
 import { loadingInterceptor } from "./core/interceptors/loading/loading.interceptor";
 import { serverErrorInterceptor } from "./core/interceptors/server-error/server-error.interceptor";
 import { serverResponseInterceptor } from "./core/interceptors/server-response/server-response.interceptor";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { serverResponseInterceptor } from "./core/interceptors/server-response/s
     ToastrModule.forRoot(),
     HttpClientModule,
     BrowserAnimationsModule,
+    SharedModule
   ],
   exports: [NgxSpinnerModule],
   providers: [

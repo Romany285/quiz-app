@@ -1,0 +1,54 @@
+@import "../../../../assets/sass/abstracts/variables";
+
+nav {
+  border-bottom: 2px solid $grey;
+  .logo {
+    padding: 24px 55.5px;
+    border-right: 2px solid $grey;
+    i {
+      cursor: pointer;
+      font-size: 36px;
+      margin-right: 15px;
+      transform: translateY(10px);
+      -webkit-transform: translateY(10px);
+      -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+      -o-transform: translateY(10px);
+    }
+  }
+  .title {
+    h2 {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .new-quiz  {
+      button {
+        border: 1px solid #0003;
+        border-radius: 16px;
+        padding: 4px 26px;
+        background: none;
+        transition: 0.3s;
+        -webkit-transition: 0.3s;
+        -moz-transition: 0.3s;
+        -ms-transition: 0.3s;
+        -o-transition: 0.3s;
+        &:hover {
+          background-color: $grey;
+        }
+        img {
+          width: 22px;
+        }
+      }
+    }
+  }
+  .dropdown {
+    border-left: 2px solid $grey;
+    padding: 17px;
+    .name {
+      font-weight: bold;
+    }
+    .role {
+      color: $auth-hover-color;
+    }
+  }
+}

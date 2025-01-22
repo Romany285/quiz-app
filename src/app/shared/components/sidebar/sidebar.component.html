@@ -1,0 +1,13 @@
+<section class="sidebar">
+  <ul class="links list-unstyled">
+    <ng-container *ngFor="let item of menu">
+      <li *ngIf="item.isActive">
+        <a [routerLink]="'/' + item.link" routerLinkActive="active">
+          <img [src]='"../../../../assets/images/svg/" + item.icon + ".svg"' alt="">
+          {{item.text}}
+        </a>
+      </li>
+    </ng-container>
+
+  </ul>
+</section>
