@@ -14,7 +14,7 @@ export const serverResponseInterceptor: HttpInterceptorFn = (req, next) => {
       let resMessage: string = "";
       if (event instanceof HttpResponse) {
         resMessage = event.body.message;
-        handleHttpResponse.handleResponse(event);
+        // handleHttpResponse.handleResponse(event);
       }
     })
   );

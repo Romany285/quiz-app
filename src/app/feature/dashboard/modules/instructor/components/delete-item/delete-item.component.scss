@@ -34,7 +34,8 @@
         left: 0;
         top: 0;
       }
-      a {
+      span {
+        cursor: pointer;
         color: #000;
         padding: 20px 19px;
         display: inline-block;
@@ -49,4 +50,26 @@
       }
     }
   }
+  .fa-trash {
+    font-size: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ee5253;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+  .delete-text {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
 }

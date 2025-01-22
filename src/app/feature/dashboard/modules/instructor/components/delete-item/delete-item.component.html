@@ -2,10 +2,11 @@
   <div class="title d-flex justify-content-between align-items-center">
     <div class="heading ps-3">Delete {{ data.title }}</div>
     <div class="icons">
-      <a routerLink="#"><i class="fa-solid fa-check"></i></a>
-      <a mat-dialog-close=""><i class="fa-solid fa-xmark"></i></a>
+      <span mat-dialog-close><i class="fa-solid fa-check"></i></span>
+      <span mat-dialog-close><i class="fa-solid fa-xmark"></i></span>
     </div>
   </div>
 
-  <p mat-dialog-content>{{ data.description }}</p>
+  <i class="fa-solid fa-trash"></i>
+  <p class="delete-text">Are you sure to delete?</p>
 </section>
