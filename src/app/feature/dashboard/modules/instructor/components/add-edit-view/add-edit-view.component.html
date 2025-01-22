@@ -1,0 +1,46 @@
+<section>
+    <div class="container">
+        <div class="row bord-bottm ">
+            <div class="col-10 py-3"><h4 class="ps-3 pt-2">Update student</h4></div>
+            <div class="col-1 bord-inline py-3" (click)="onSubmit()">
+                <button class="border-0 bg-transparent" [disabled]="form.invalid">
+                    <i class="fa-solid fa-check fs-3 pt-2  "></i>
+                </button>
+            </div>
+            <div class="col-1  py-3" (click)="onNoClick()">
+                <button class="border-0 bg-transparent" >
+                    <i class="fa-solid fa-xmark fs-3 pt-2 ps-1"></i>
+                </button>
+            </div>
+        </div>
+        <div class="m-5 mx-3">
+            <!-- <div class="input-group mb-4">
+                <span class="input-group-text" >name</span>
+                <input type="text" class="form-control"  formControlName="name">
+            </div>
+            <div class="input-group mb-4">
+                <span class="input-group-text" >name</span>
+                <input type="text" class="form-control"  formControlName="name">
+            </div> -->
+            <form [formGroup]="form">
+                <ng-container *ngFor="let field of data.fields">
+                  <div [ngSwitch]="field.type">
+            <mat-form-field *ngSwitchCase="'text'" appearance="outline" class="w-100">
+                <mat-label>{{ field.label }}</mat-label>
+                <input matInput [formControlName]="field.name" />
+                <mat-error>{{field.label}} is required</mat-error>
+              </mat-form-field>
+              <mat-form-field *ngSwitchCase="'select'" appearance="outline" class="w-100">
+                <mat-label>{{ field.label }}</mat-label>
+                <mat-select [formControlName]="field.name" multiple>
+                  @for (option of field.value; track option._id) {
+                <mat-option [value]="option._id">{{option.first_name +" " +option.last_name}}</mat-option>
+              }
+                </mat-select>
+              </mat-form-field>
+            </div>
+        </ng-container>
+      </form>
+        </div>
+    </div>
+</section>

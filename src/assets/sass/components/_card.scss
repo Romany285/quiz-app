@@ -10,19 +10,22 @@
     }
   }
   .ranks {
-    position: relative;
     font-weight: 500;
     font-size: 0.9rem;
     color: $grey-3;
-    .status::after {
-      content: "";
-      position: absolute;
-      top: 1%;
-      left: 22%;
-      width: 1px;
-      height: 1.5rem;
-      background-color: $grey-2;
-      z-index: 1;
+    .group-name {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 1%;
+        left: 0;
+        width: 1px;
+        height: 1.5rem;
+        background-color: $grey-2;
+        z-index: 1;
+      }
     }
   }
 }

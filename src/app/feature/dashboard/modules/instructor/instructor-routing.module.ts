@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { InstructorComponent } from "./instructor.component";
 
 const routes: Routes = [
   {
@@ -8,6 +9,11 @@ const routes: Routes = [
       import("./modules/students/students.module").then(
         (m) => m.StudentsModule
       ),
+  },
+  {
+    path: "groups",
+    loadChildren: () =>
+      import("./modules/groups/groups.module").then((m) => m.GroupsModule),
   },
 ];
 

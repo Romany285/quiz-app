@@ -12,14 +12,14 @@ import {
   MatDialogModule,
   MatDialogTitle,
 } from "@angular/material/dialog";
-import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatSelectModule } from "@angular/material/select";
+import { MatSelect, MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
@@ -66,6 +66,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     MatDialogTitle,
     MatDatepickerModule,
     MatSlideToggleModule,
+    MatFormField,
+    MatSelect,
   ],
   exports: [
     CommonModule,
@@ -95,6 +97,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     MatDatepickerModule,
     MatSlideToggleModule,
     SharedInputComponent,
+    MatFormField,
+    MatSelect,
     SharedCardComponent,
     NavComponent,
     SidebarComponent
