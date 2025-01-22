@@ -2,7 +2,7 @@
 
 .sidebar {
   width: 228px;
-  min-height: 100vh;
+  min-height: calc(100vh - 100px);;
   border-right: 2px solid $grey;
   .links li a {
     display: block;
@@ -39,6 +39,6 @@
   }
   .links li:last-child a {
     border-top: 2px solid $grey;
-    margin-top: 150px;
+    margin-top: 220px;
   }
 }

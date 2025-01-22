@@ -1,0 +1,52 @@
+@import "../../../../../../../assets/sass/abstracts/variables";
+
+.delete-item {
+  width: 447px;
+  height: 349px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 10px 10px #00000040;
+    .text {
+    }
+    .icons {
+      position: relative;
+      &::before {
+        content: "";
+        height: 100%;
+        width: 2px;
+        background-color: $grey;
+        position: absolute;
+        left: 54px;
+        top: 0;
+      }
+      &::after {
+        content: "";
+        height: 100%;
+        width: 2px;
+        background-color: $grey;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      a {
+        color: #000;
+        padding: 20px 19px;
+        display: inline-block;
+        transition: 0.3s;
+        -webkit-transition: 0.3s;
+        -moz-transition: 0.3s;
+        -ms-transition: 0.3s;
+        -o-transition: 0.3s;
+        &:hover {
+          background-color: $grey;
+        }
+      }
+    }
+  }
+}

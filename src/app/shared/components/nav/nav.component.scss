@@ -3,7 +3,7 @@
 nav {
   border-bottom: 2px solid $grey;
   .logo {
-    padding: 24px 55.5px;
+    padding: 15px 55.5px;
     border-right: 2px solid $grey;
     i {
       cursor: pointer;
@@ -43,7 +43,7 @@ nav {
   }
   .dropdown {
     border-left: 2px solid $grey;
-    padding: 17px;
+    padding: 15px 23px 0;
     .name {
       font-weight: bold;
     }
