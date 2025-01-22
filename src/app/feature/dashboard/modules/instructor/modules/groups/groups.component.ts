@@ -6,6 +6,7 @@ import { AddEditViewComponent } from '../../components/add-edit-view/add-edit-vi
 import { MatDialog } from '@angular/material/dialog';
 import { Validators } from '@angular/forms';
 import { StudentsService } from '../students/services/students.service';
+import { DeleteItemComponent } from '../../components/delete-item/delete-item.component';
 
 @Component({
   selector: 'app-groups',
@@ -126,10 +127,20 @@ export class GroupsComponent implements OnInit{
           this.editGroup(data,data.students)
           break;
         case "delete":
-          if (confirm(`Are you sure you want to delete ${data.first_name}?`)) {
-            console.log("Delete Student:", data);
-            // Call the service to delete the student
-          }
+           this._GroupsService.deleteGroup(data._id).subscribe({
+                    next: (res) => {
+                      console.log(res);
+                      const dialogRef = this.dialog.open(DeleteItemComponent, {
+                        data: {
+                          title: "group",
+                          description: `Are you sure you want to delete ${data.name} group?`,
+                        },
+                      });
+                      dialogRef.afterClosed().subscribe((result) => {
+                        this.getAllGroups();
+                      });
+                    },
+                  });
           break;
         default:
           console.error("Unknown action:", action);
