@@ -127,20 +127,22 @@ export class GroupsComponent implements OnInit{
           this.editGroup(data,data.students)
           break;
         case "delete":
-           this._GroupsService.deleteGroup(data._id).subscribe({
-                    next: (res) => {
-                      console.log(res);
-                      const dialogRef = this.dialog.open(DeleteItemComponent, {
-                        data: {
-                          title: "group",
-                          description: `Are you sure you want to delete ${data.name} group?`,
-                        },
-                      });
-                      dialogRef.afterClosed().subscribe((result) => {
-                        this.getAllGroups();
-                      });
-                    },
-                  });
+          const dialogRef = this.dialog.open(DeleteItemComponent, {
+            data: {
+              title: "group",
+              description: `Are you sure you want to delete ${data.name} group?`,
+            },
+          });
+  
+          dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+              this._GroupsService.deleteGroup(data._id).subscribe({
+                next: (res) => {
+                  this.getAllGroups()
+                },
+              });
+            }
+          });
           break;
         default:
           console.error("Unknown action:", action);
