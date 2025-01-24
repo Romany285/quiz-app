@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Validators } from '@angular/forms';
 import { StudentsService } from '../students/services/students.service';
 import { DeleteItemComponent } from '../../components/delete-item/delete-item.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-groups',
@@ -15,17 +16,16 @@ import { DeleteItemComponent } from '../../components/delete-item/delete-item.co
 })
 export class GroupsComponent implements OnInit{
   groupsData:any;
-  usersData:any;
-  allStudents:any;
+  studentsWithoutGroup:any;
+  resMessage:any;
   groupsActions = [
     { label: "Update", action: "update" },
     { label: "Delete", action: "delete", isDanger: true },
   ];
-    constructor(private _GroupsService:GroupsService,private dialog: MatDialog,private _StudentsService:StudentsService){}
+    constructor(private _GroupsService:GroupsService,private dialog: MatDialog,private _StudentsService:StudentsService,private _ToastrService:ToastrService){}
   ngOnInit(): void {
     this.getAllGroups()
     this.getAllStudentWithoutGroup()
-    this.getAllStudent()
   }
      
   getAllGroups(){
@@ -42,19 +42,8 @@ export class GroupsComponent implements OnInit{
   getAllStudentWithoutGroup(){
     this._StudentsService.getAllWithoutGroup().subscribe({
       next:(res)=>{
-        console.log(res);
-        this.usersData = res
-      },
-      error:(err)=>{
-        console.log(err);
-      }
-    })
-  }
-  getAllStudent(){
-    this._StudentsService.getAllStudents().subscribe({
-      next:(res)=>{
-        console.log(res);
-        this.allStudents = res
+        console.log(res,'without');
+        this.studentsWithoutGroup = res
       },
       error:(err)=>{
         console.log(err);
@@ -65,7 +54,7 @@ export class GroupsComponent implements OnInit{
     const dialogRef = this.dialog.open(AddEditViewComponent, {
       data: {fields: [
         { type: 'text', label: 'Group Name', name: 'name' , validators: [Validators.required] },
-        { type: 'select', label: 'List Students', name: 'students', value: this.usersData, validators: [Validators.required] },
+        { type: 'select', label: 'List Students', name: 'students', value: this.studentsWithoutGroup, validators: [Validators.required] },
       ],},
       width:'50%'
     });
@@ -94,7 +83,7 @@ export class GroupsComponent implements OnInit{
       data: {
         fields: [
           { type: 'text', label: 'Group Name', name: 'name' ,value: name || '', validators: [Validators.required] },
-          { type: 'select', label: 'List Students', name: 'students', value: this.allStudents, validators: [Validators.required] },
+          { type: 'select', label: 'List Students', name: 'students', value: students, validators: [Validators.required] },
         ],
         readOnly
       }
@@ -110,9 +99,14 @@ export class GroupsComponent implements OnInit{
           name: result.name,
           students: result.students
         }).subscribe(({
-          next: () => { },
-          error: ( ) => {},
+          next: (res) => {
+            this.resMessage = res.message
+           },
+          error: (err) => {
+            this._ToastrService.error(err.error.message)
+          },
           complete: () => {
+            this._ToastrService.success()
             this.getAllGroups();
           }
         }))
@@ -124,7 +118,10 @@ export class GroupsComponent implements OnInit{
       switch (action) {
         case "update":
           console.log(data,'pp');
-          this.editGroup(data,data.students)
+          // let updateStudents = this.studentsWithoutGroup.concat(data.students)
+          // console.log(updateStudents,'update');
+          
+          this.editGroup(data,this.studentsWithoutGroup)
           break;
         case "delete":
           const dialogRef = this.dialog.open(DeleteItemComponent, {
@@ -138,8 +135,11 @@ export class GroupsComponent implements OnInit{
             if (result) {
               this._GroupsService.deleteGroup(data._id).subscribe({
                 next: (res) => {
-                  this.getAllGroups()
+                  console.log(res)
                 },
+                complete:()=>{
+                  this.getAllGroups()
+                }
               });
             }
           });
