@@ -16,14 +16,19 @@
     }
   }
   .form-select {
-    padding: 0.5rem;
-    border: 1px solid black;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid $grey;
     border-radius: 0.8rem;
     color: black;
     cursor: pointer;
+    font-weight: bolder;
+
     &:active,
     &:focus {
       background-color: rgba(129, 128, 128, 0.575);
+    }
+    option {
+      font-weight: bolder;
     }
   }
 }

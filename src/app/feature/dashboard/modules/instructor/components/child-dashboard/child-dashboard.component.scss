@@ -1,6 +1,7 @@
 @import "../../../../../../../assets/sass/abstracts/variables";
 
-.Upcoming-quizzes, .top-students {
+.Upcoming-quizzes,
+.top-students {
   border: 1px solid $grey;
   padding: 15px 15px 0;
   margin-top: 15px;
@@ -9,25 +10,7 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
-  .heading {
-    p {
-      font-size: 18px;
-      font-weight: bold;
-    }
-    a {
-      color: #000;
-      span {
-        font-size: 18px;
-        color: #c5d86d;
-        display: inline-block;
-        transform: translateY(2px);
-        -webkit-transform: translateY(2px);
-        -moz-transform: translateY(2px);
-        -ms-transform: translateY(2px);
-        -o-transform: translateY(2px);
-        }
-    }
-  }
+
   .card {
     img {
       background-color: $auth-text-color;
@@ -39,7 +22,7 @@
       -moz-border-radius: 10px;
       -ms-border-radius: 10px;
       -o-border-radius: 10px;
-      }
+    }
     .card-body {
       padding: 20px;
       padding-bottom: 3px;
@@ -83,7 +66,7 @@
       height: 90px;
       transform: translateX(-10px);
     }
-    .card-body{
+    .card-body {
       padding: 20px 30px 2px 0;
       .card-text {
         .score {
