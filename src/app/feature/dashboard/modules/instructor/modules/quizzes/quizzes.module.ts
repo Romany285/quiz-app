@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
 
 import { QuizzesRoutingModule } from './quizzes-routing.module';
 import { QuizzesComponent } from './quizzes.component';
@@ -17,4 +17,4 @@ import { SharedModule } from '../../../../../../shared/shared.module';
     QuizzesRoutingModule,SharedModule
   ]
 })
-export class QuizzesModule { }
+export class QuizzesModule {}

@@ -8,9 +8,12 @@
 }
 .black-btn {
   padding: 0.5rem;
-  border: 1px solid black;
+  border: 1px solid $grey;
   border-radius: 0.8rem;
   color: black;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+  font-weight: bolder;
   &:hover,
   &:active,
   &.active,
