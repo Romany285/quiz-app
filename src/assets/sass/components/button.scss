@@ -19,3 +19,21 @@
     color: white;
   }
 }
+.save-btn{
+  transition: all 0.4s;
+  &:hover{
+    background-color: rgb(0, 184, 0);
+    i{
+      color: white;
+    }
+  }
+}
+.close-btn{
+  transition: all 0.4s;
+  &:hover{
+    background-color: rgb(224, 0, 0);
+    i{
+      color: white;
+    }
+  }
+}

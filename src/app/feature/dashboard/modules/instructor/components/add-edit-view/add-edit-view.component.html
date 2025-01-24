@@ -3,11 +3,11 @@
     <div class="row bord-bottm">
       <div class="col-10 py-3"><h4 class="ps-3 pt-2">Update group</h4></div>
       <div class="col-1 bord-inline py-3" (click)="onSubmit()">
-        <button class="border-0 bg-transparent" [disabled]="form.invalid">
+        <button class="border-0 bg-transparent save-btn" [disabled]="form.invalid">
           <i class="fa-solid fa-check fs-3 pt-2"></i>
         </button>
       </div>
-      <div class="col-1 py-3" (click)="onNoClick()">
+      <div class="col-1 py-3 close-btn" (click)="onNoClick()">
         <button class="border-0 bg-transparent">
           <i class="fa-solid fa-xmark fs-3 pt-2 ps-1"></i>
         </button>
