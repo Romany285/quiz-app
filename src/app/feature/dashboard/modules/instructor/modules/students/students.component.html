@@ -1,96 +1,102 @@
 <div class="container-fluid px-4 py-5">
-  <h1>Students list</h1>
-  <div class="row">
-    <ul>
-      <li>
-        <a
-          class="black-btn"
-          [ngClass]="{
-            active:
-              selectGroupId === null && selectStudentWithoutGroup === false
-          }"
-          (click)="onGetAllStudents()"
-          >All students</a
-        >
-      </li>
-      <li>
-        <a
-          class="black-btn"
-          [ngClass]="{
-            active: selectStudentWithoutGroup && selectGroupId === null
-          }"
-          (click)="onGetStudentsWithoutGroup()"
-          >Students without group</a
-        >
-      </li>
+  <div class="row mb-4 justify-content-between align-items-center">
+    <div class="col-md-4 mb-4">
+      <app-breadcrumbs [currentRouterLink]="'Students'" />
+    </div>
+    <div class="row">
+      <ul>
+        <li>
+          <a
+            class="black-btn"
+            [ngClass]="{
+              active:
+                selectGroupId === null && selectStudentWithoutGroup === false
+            }"
+            (click)="onGetAllStudents()"
+            >All students</a
+          >
+        </li>
+        <li>
+          <a
+            class="black-btn"
+            [ngClass]="{
+              active: selectStudentWithoutGroup && selectGroupId === null
+            }"
+            (click)="onGetStudentsWithoutGroup()"
+            >Students without group</a
+          >
+        </li>
 
-      <div class="col-md-2">
-        <select
-          class="form-select"
-          [(ngModel)]="selectGroupId"
-          (ngModelChange)="getStudentsByGroup(selectGroupId ?? '')"
-        >
-          <option [ngValue]="null" disabled hidden selected>
-            Choose a group
-          </option>
-          @for(group of groups;track group._id){
-          <option class="p-3" [value]="group._id">
-            {{ group.name }}
-          </option>
-          }
-        </select>
+        <div class="col-md-2">
+          <select
+            class="form-select"
+            [(ngModel)]="selectGroupId"
+            (ngModelChange)="getStudentsByGroup(selectGroupId ?? '')"
+          >
+            <option [ngValue]="null" disabled hidden selected>
+              Choose a group
+            </option>
+            @for(group of groups;track group._id){
+            <option class="p-3" [value]="group._id">
+              {{ group.name }}
+            </option>
+            }
+          </select>
+        </div>
+      </ul>
+    </div>
+    <h1>Students list</h1>
+
+    <div>
+      <div class="row row-gap-3">
+        @if(selectGroupId === null && !selectStudentWithoutGroup ) { @for (
+        student of students ; track student._id) {
+        <app-shared-card
+          class="col-md-6"
+          [title]="student.first_name + ' ' + student.last_name"
+          [status]="student.status || ''"
+          [groupName]="
+            'Group name : ' + student.group?.name === null
+              ? 'Not added to a group'
+              : student.group?.name || 'Not added to a group'
+          "
+          [actions]="studentActions"
+          [data]="student"
+          (actionTriggered)="onStudentAction($event)"
+        ></app-shared-card>
+        } } @if (selectGroupId === null && selectStudentWithoutGroup) { @for (
+        student of studentsWithoutGroup ; track student._id) {
+        <app-shared-card
+          class="col-md-6"
+          [title]="student.first_name + ' ' + student.last_name"
+          [status]="student.status || ''"
+          [groupName]="
+            'Group name : ' + student.group?.name === null
+              ? 'Not added to a group'
+              : student.group?.name || 'Not added to a group'
+          "
+          [actions]="studentActions"
+          [data]="student"
+          (actionTriggered)="onStudentAction($event)"
+        ></app-shared-card>
+        } } @if (selectGroupId!==null && !selectStudentWithoutGroup ) { @for (
+        student of studentByGroup[selectGroupId] ; track student._id) {
+
+        <app-shared-card
+          class="col-md-6"
+          [title]="student.first_name + ' ' + student.last_name"
+          [status]="student.status || ''"
+          [groupName]="
+            'Group name : ' + student.group?.name === null
+              ? 'Not added to a group'
+              : student.group?.name || 'Not added to a group'
+          "
+          [actions]="studentActions"
+          [data]="student"
+          (actionTriggered)="onStudentAction($event)"
+        ></app-shared-card>
+        } }
       </div>
-    </ul>
-  </div>
-  <div>
-    <div class="row row-gap-3">
-      @if(selectGroupId === null && !selectStudentWithoutGroup ) { @for (
-      student of students ; track student._id) {
-      <app-shared-card
-        class="col-md-6"
-        [title]="student.first_name + ' ' + student.last_name"
-        [status]="student.status || ''"
-        [groupName]="
-          'Group name : ' + student.group?.name === null
-            ? 'Not added to a group'
-            : student.group?.name || 'Not added to a group'
-        "
-        [actions]="studentActions"
-        [data]="student"
-        (actionTriggered)="onStudentAction($event)"
-      ></app-shared-card>
-      } } @if (selectGroupId === null && selectStudentWithoutGroup) { @for (
-      student of studentsWithoutGroup ; track student._id) {
-      <app-shared-card
-        class="col-md-6"
-        [title]="student.first_name + ' ' + student.last_name"
-        [status]="student.status || ''"
-        [groupName]="
-          'Group name : ' + student.group?.name === null
-            ? 'Not added to a group'
-            : student.group?.name || 'Not added to a group'
-        "
-        [actions]="studentActions"
-        [data]="student"
-        (actionTriggered)="onStudentAction($event)"
-      ></app-shared-card>
-      } } @if (selectGroupId!==null && !selectStudentWithoutGroup ) { @for (
-      student of studentByGroup[selectGroupId] ; track student._id) {
-
-      <app-shared-card
-        class="col-md-6"
-        [title]="student.first_name + ' ' + student.last_name"
-        [status]="student.status || ''"
-        [groupName]="
-          'Group name : ' + student.group?.name === null
-            ? 'Not added to a group'
-            : student.group?.name || 'Not added to a group'
-        "
-        [actions]="studentActions"
-        [data]="student"
-        (actionTriggered)="onStudentAction($event)"
-      ></app-shared-card>
-      } }
     </div>
   </div>
 </div>

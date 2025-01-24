@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
+import { Subject, takeUntil } from "rxjs";
 import { HelperServiceService } from "../../../../../../shared/services/helper service/helper-service.service";
 import { AddEditViewComponent } from "../../components/add-edit-view/add-edit-view.component";
 import { DeleteItemComponent } from "../../components/delete-item/delete-item.component";
@@ -12,13 +13,14 @@ import { StudentsService } from "./services/students.service";
   templateUrl: "./students.component.html",
   styleUrl: "./students.component.scss",
 })
-export class StudentsComponent implements OnInit {
+export class StudentsComponent implements OnInit, OnDestroy {
   students: IStudent[] = [];
   studentsWithoutGroup: IStudent[] = [];
   groups: IGroup[] = [];
   selectStudentWithoutGroup: boolean = false;
   studentByGroup: { [key: string]: IStudent[] } = {};
   selectGroupId: string | null = null;
+  destroy$ = new Subject<void>();
   commonActions = [
     { label: "View student", action: "viewStudent" },
     { label: "Delete student", action: "deleteStudent", isDanger: true },
@@ -39,36 +41,49 @@ export class StudentsComponent implements OnInit {
   ngOnInit(): void {
     this.fetchAllData();
   }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
   fetchAllData(): void {
     this.onGetAllStudents();
     this.getAllGroups();
     this.onGetStudentsWithoutGroup();
   }
   onGetAllStudents(): void {
-    this._StudentsService.getAllStudents().subscribe((res) => {
-      this.students = res;
-      this.selectGroupId = null;
-      this.selectStudentWithoutGroup = false;
-      this.studentActions = [...this.commonActions];
-    });
+    this._StudentsService
+      .getAllStudents()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res) => {
+        this.students = res;
+        this.selectGroupId = null;
+        this.selectStudentWithoutGroup = false;
+        this.studentActions = [...this.commonActions];
+      });
   }
   onGetStudentsWithoutGroup() {
-    this._StudentsService.getAllWithoutGroup().subscribe((res) => {
-      this.studentsWithoutGroup = res;
-      this.selectGroupId = null;
-      this.selectStudentWithoutGroup = true;
-      this.studentActions = [
-        ...this.commonActions,
-        ...this.studentWithoutGroupsActions,
-      ];
-    });
+    this._StudentsService
+      .getAllWithoutGroup()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res) => {
+        this.studentsWithoutGroup = res;
+        this.selectGroupId = null;
+        this.selectStudentWithoutGroup = true;
+        this.studentActions = [
+          ...this.commonActions,
+          ...this.studentWithoutGroupsActions,
+        ];
+      });
   }
   getAllGroups() {
-    this._HelperService.getAllGroups().subscribe({
-      next: (res) => {
-        this.groups = res;
-      },
-    });
+    this._HelperService
+      .getAllGroups()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (res) => {
+          this.groups = res;
+        },
+      });
   }
   getStudentsByGroup(groupId: string): void {
     this.studentByGroup = {};
@@ -79,9 +94,12 @@ export class StudentsComponent implements OnInit {
     this.groups
       .find((group) => group._id === groupId)
       ?.students.forEach((studentId: string) => {
-        this._StudentsService.getStudentById(studentId).subscribe((res) => {
-          this.studentByGroup[groupId].push(res);
-        });
+        this._StudentsService
+          .getStudentById(studentId)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((res) => {
+            this.studentByGroup[groupId].push(res);
+          });
       });
   }
   onStudentAction(event: { action: string; data: IStudent }): void {
@@ -131,15 +149,21 @@ export class StudentsComponent implements OnInit {
           },
         });
 
-        dialogRef.afterClosed().subscribe((result) => {
-          if (result !== null) {
-            this._StudentsService.deleteStudent(data._id).subscribe({
-              complete: () => {
-                this.fetchAllData();
-              },
-            });
-          }
-        });
+        dialogRef
+          .afterClosed()
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((result) => {
+            if (result !== null) {
+              this._StudentsService
+                .deleteStudent(data._id)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe({
+                  complete: () => {
+                    this.fetchAllData();
+                  },
+                });
+            }
+          });
         break;
       case "addToGroup":
         if (this.selectGroupId === null && this.selectStudentWithoutGroup) {
@@ -158,20 +182,24 @@ export class StudentsComponent implements OnInit {
             },
             width: "50%",
           });
-          dialogRef.afterClosed().subscribe((result) => {
-            if (result !== undefined) {
-              this._StudentsService
-                .addStudentToGroup(data._id, result.groups)
-                .subscribe({
-                  error: (err) => {
-                    console.log(err);
-                  },
-                  complete: () => {
-                    this.fetchAllData();
-                  },
-                });
-            }
-          });
+          dialogRef
+            .afterClosed()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((result) => {
+              if (result !== undefined) {
+                this._StudentsService
+                  .addStudentToGroup(data._id, result.groups)
+                  .pipe(takeUntil(this.destroy$))
+                  .subscribe({
+                    error: (err) => {
+                      console.log(err);
+                    },
+                    complete: () => {
+                      this.fetchAllData();
+                    },
+                  });
+              }
+            });
         }
         break;
       case "updateGroup":
@@ -193,20 +221,24 @@ export class StudentsComponent implements OnInit {
             },
             width: "50%",
           });
-          dialogRef.afterClosed().subscribe((result) => {
-            if (result !== undefined) {
-              this._StudentsService
-                .updateStudentGroup(data._id, result.groups, data.group?._id!)
-                .subscribe({
-                  error: (err) => {
-                    console.log(err);
-                  },
-                  complete: () => {
-                    this.fetchAllData();
-                  },
-                });
-            }
-          });
+          dialogRef
+            .afterClosed()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((result) => {
+              if (result !== undefined) {
+                this._StudentsService
+                  .updateStudentGroup(data._id, result.groups, data.group?._id!)
+                  .pipe(takeUntil(this.destroy$))
+                  .subscribe({
+                    error: (err) => {
+                      console.log(err);
+                    },
+                    complete: () => {
+                      this.fetchAllData();
+                    },
+                  });
+              }
+            });
         }
         break;
       case "deleteFromGroup":
@@ -217,17 +249,21 @@ export class StudentsComponent implements OnInit {
               description: `Are you sure you want to delete ${data.first_name} ${data.last_name} from group ${data.group?.name}?`,
             },
           });
-          dialogRef.afterClosed().subscribe((result) => {
-            if (result !== undefined) {
-              this._StudentsService
-                .deleteStudentFromGroup(data._id, data.group?._id!)
-                .subscribe({
-                  complete: () => {
-                    this.fetchAllData();
-                  },
-                });
-            }
-          });
+          dialogRef
+            .afterClosed()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((result) => {
+              if (result !== undefined) {
+                this._StudentsService
+                  .deleteStudentFromGroup(data._id, data.group?._id!)
+                  .pipe(takeUntil(this.destroy$))
+                  .subscribe({
+                    complete: () => {
+                      this.fetchAllData();
+                    },
+                  });
+              }
+            });
         }
         break;
       default:
