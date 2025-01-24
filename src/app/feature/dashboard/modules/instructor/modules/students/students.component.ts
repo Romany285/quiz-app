@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { HelperServiceService } from "../../../../../../shared/services/helper service/helper-service.service";
+import { AddEditViewComponent } from "../../components/add-edit-view/add-edit-view.component";
 import { DeleteItemComponent } from "../../components/delete-item/delete-item.component";
 import { IGroup, IStudent } from "./interfaces/student.interface";
 import { StudentsService } from "./services/students.service";
@@ -86,9 +88,41 @@ export class StudentsComponent implements OnInit {
     const { action, data } = event;
     switch (action) {
       case "viewStudent":
-        console.log("View Student:", data);
+        this.dialog.open(AddEditViewComponent, {
+          data: {
+            title: "View student",
+            readOnly: true,
+            fields: [
+              {
+                type: "text",
+                label: "Group",
+                name: "groups",
+                value: data.group?.name,
+              },
+              {
+                type: "text",
+                label: "First name",
+                name: "first-name",
+                value: data.first_name,
+              },
+              {
+                type: "text",
+                label: "Last name",
+                name: "last-name",
+                value: data.last_name,
+                readOnly: true,
+              },
+              {
+                type: "text",
+                label: "Email",
+                name: "email",
+                value: data.email,
+              },
+            ],
+          },
+          width: "50%",
+        });
         break;
-
       case "deleteStudent":
         const dialogRef = this.dialog.open(DeleteItemComponent, {
           data: {
@@ -98,9 +132,9 @@ export class StudentsComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result) => {
-          if (result) {
+          if (result !== null) {
             this._StudentsService.deleteStudent(data._id).subscribe({
-              next: (res) => {
+              complete: () => {
                 this.fetchAllData();
               },
             });
@@ -109,12 +143,70 @@ export class StudentsComponent implements OnInit {
         break;
       case "addToGroup":
         if (this.selectGroupId === null && this.selectStudentWithoutGroup) {
-          console.log("Add student to group:", data);
+          const dialogRef = this.dialog.open(AddEditViewComponent, {
+            data: {
+              title: "Add student to a group",
+              fields: [
+                {
+                  type: "select",
+                  label: "Choose group",
+                  name: "groups",
+                  value: this.groups,
+                  validators: [Validators.required],
+                },
+              ],
+            },
+            width: "50%",
+          });
+          dialogRef.afterClosed().subscribe((result) => {
+            if (result !== undefined) {
+              this._StudentsService
+                .addStudentToGroup(data._id, result.groups)
+                .subscribe({
+                  error: (err) => {
+                    console.log(err);
+                  },
+                  complete: () => {
+                    this.fetchAllData();
+                  },
+                });
+            }
+          });
         }
         break;
       case "updateGroup":
         if (this.selectGroupId !== null && !this.selectStudentWithoutGroup) {
-          console.log("Update Student:", data);
+          const dialogRef = this.dialog.open(AddEditViewComponent, {
+            data: {
+              title: "Add student to a group",
+              fields: [
+                {
+                  type: "select",
+                  label: "Choose group",
+                  name: "groups",
+                  value: this.groups.filter(
+                    (group) => group._id !== data.group?._id
+                  ),
+                  validators: [Validators.required],
+                },
+              ],
+            },
+            width: "50%",
+          });
+          dialogRef.afterClosed().subscribe((result) => {
+            if (result !== undefined) {
+              this._StudentsService
+                .updateStudentGroup(data._id, result.groups, data.group?._id!)
+                .subscribe({
+                  error: (err) => {
+                    console.log(err);
+                  },
+                  complete: () => {
+                    this.fetchAllData();
+                  },
+                });
+            }
+          });
         }
         break;
       case "deleteFromGroup":
@@ -126,11 +218,11 @@ export class StudentsComponent implements OnInit {
             },
           });
           dialogRef.afterClosed().subscribe((result) => {
-            if (result) {
+            if (result !== undefined) {
               this._StudentsService
                 .deleteStudentFromGroup(data._id, data.group?._id!)
                 .subscribe({
-                  next: (res) => {
+                  complete: () => {
                     this.fetchAllData();
                   },
                 });

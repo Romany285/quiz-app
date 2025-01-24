@@ -43,7 +43,7 @@
     </ul>
   </div>
   <div>
-    <div class="row">
+    <div class="row row-gap-3">
       @if(selectGroupId === null && !selectStudentWithoutGroup ) { @for (
       student of students ; track student._id) {
       <app-shared-card
@@ -51,7 +51,9 @@
         [title]="student.first_name + ' ' + student.last_name"
         [status]="student.status || ''"
         [groupName]="
-          'Group name : ' + student.group?.name || 'Not added to a group'
+          'Group name : ' + student.group?.name === null
+            ? 'Not added to a group'
+            : student.group?.name || 'Not added to a group'
         "
         [actions]="studentActions"
         [data]="student"
@@ -64,7 +66,9 @@
         [title]="student.first_name + ' ' + student.last_name"
         [status]="student.status || ''"
         [groupName]="
-          'Group name : ' + student.group?.name || 'Not added to a group'
+          'Group name : ' + student.group?.name === null
+            ? 'Not added to a group'
+            : student.group?.name || 'Not added to a group'
         "
         [actions]="studentActions"
         [data]="student"
@@ -72,12 +76,15 @@
       ></app-shared-card>
       } } @if (selectGroupId!==null && !selectStudentWithoutGroup ) { @for (
       student of studentByGroup[selectGroupId] ; track student._id) {
+
       <app-shared-card
         class="col-md-6"
         [title]="student.first_name + ' ' + student.last_name"
         [status]="student.status || ''"
         [groupName]="
-          'Group name : ' + student.group?.name || 'Not added to a group'
+          'Group name : ' + student.group?.name === null
+            ? 'Not added to a group'
+            : student.group?.name || 'Not added to a group'
         "
         [actions]="studentActions"
         [data]="student"
