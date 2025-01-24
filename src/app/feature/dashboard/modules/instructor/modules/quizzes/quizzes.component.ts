@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+ 
 import { Component, OnInit } from '@angular/core';
 import { AddEditQuizComponent } from './components/add-edit-quiz/add-edit-quiz.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,11 +11,12 @@ import { GroupsService } from '../groups/services/groups.service';
   templateUrl: "./quizzes.component.html",
   styleUrl: "./quizzes.component.scss",
 })
-export class QuizzesComponent {
+ 
+ 
+export class QuizzesComponent implements OnInit{
   upcomingQuizzes: any[] = [];
   completedQuizzes: any[] = [];
   headers: string[] = ["Title", "Date", "Time", "Number of Students", "Action"];
-export class QuizzesComponent implements OnInit{
   allGroups:any
   constructor(private dialog: MatDialog,private _quizzesService:QuizzesService,private _groupsService:GroupsService){}
   ngOnInit(): void {
