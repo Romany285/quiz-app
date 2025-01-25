@@ -1,5 +1,5 @@
 <div class="row m-0">
-  <div class="col-md-5">
+  <div class="col-md-6">
     <div class="Upcoming-quizzes">
       <div class="heading d-flex align-content-center justify-content-between">
         <p>Upcoming 5 quizzes</p>
@@ -28,7 +28,7 @@
       }
     </div>
   </div>
-  <div class="col-md-5 offset-1">
+  <div class="col-md-6">
     <div class="top-students">
       <div class="heading d-flex align-content-center justify-content-between">
         <p>Top 5 Students</p>
@@ -38,7 +38,9 @@
         <div class="card mb-3">
           <div class="row g-0">
             <div class="col-md-2">
-              <img [src]="'assets/images/svg/user_0' + $index + '.svg'" class="img-fluid rounded-start" alt="...">
+              <div class="image">
+                <img [src]="'assets/images/svg/user_0' + $index + '.svg'" class="img-fluid rounded-start" alt="...">
+              </div>
             </div>
             <div class="col-md-10">
               <div class="card-body">
