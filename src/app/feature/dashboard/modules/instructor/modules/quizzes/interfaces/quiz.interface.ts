@@ -12,6 +12,8 @@ export interface IQuiz {
   updatedAt?: string;
   createdAt?: string;
   __v?: number;
+  closed_at?: string,
+  participants?: number
   type: string;
   title: string;
   description: string;
