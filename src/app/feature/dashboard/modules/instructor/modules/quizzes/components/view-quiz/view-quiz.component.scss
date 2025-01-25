@@ -1,0 +1,23 @@
+@import "../../../../../../../../../assets/sass/abstracts/variables";
+.view-quiz{
+  border: 1px rgba(0, 0, 0, 0.25) solid;
+  border-radius: 15px;
+  padding: 15px;
+}
+.quiz-value{
+  border: 1px rgba(0, 0, 0, 0.25) solid;
+  padding: 15px;
+  border-radius: 15px;
+  width: 100%;
+}
+.input-group-text{
+  background-color: $auth-text-color;
+  font-weight: 600;
+  font-size: 18px;
+  border-right: 0px;
+}
+
+.form-control,.form-select{
+border-left: 0px;
+border-color:#dee2e6;
+};

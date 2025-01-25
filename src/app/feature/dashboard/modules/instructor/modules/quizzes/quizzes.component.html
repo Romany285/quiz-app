@@ -3,7 +3,7 @@
     <div class="col-md-4">
       <app-breadcrumbs [currentRouterLink]="'Quizzes'" />
     </div>
-    <div class="col-md-3 text-end">
+    <div class="col-md-3 text-end" (click)="openAddQuizDialog()">
       <button class="black-btn">
         <i class="fa-regular fa-clock"></i> Set up a new quiz
       </button>

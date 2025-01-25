@@ -31,4 +31,7 @@ export class QuizzesService {
   getAllQuizzes(): Observable<IQuiz[]> {
     return this._httpClient.get<IQuiz[]>("quiz");
   }
+  getQuizById(code:any): Observable<any> {
+    return this._httpClient.get(`/api/quiz`,code);
+  }
 }
