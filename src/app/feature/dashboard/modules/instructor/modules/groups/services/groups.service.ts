@@ -13,7 +13,13 @@ export class GroupsService {
   addGroup(data: any): Observable<any> {
     return this._HttpClient.post("group", data);
   }
-  updateGroup(id: string, data: any): Observable<any> {
+  updateGroup(
+    id: string,
+    data: {
+      name: string;
+      students: string[];
+    }
+  ): Observable<any> {
     return this._HttpClient.put(`group/${id}`, data);
   }
   deleteGroup(id: string): Observable<any> {
