@@ -62,26 +62,26 @@ export class QuizzesComponent implements OnInit{
       },
     })
        
-    });
+    };
+    getUpcomingQuizzes() {
+      this._quizzesService.getUpcomingQuizzes().subscribe({
+        next: (res) => {
+          this.upcomingQuizzes = res;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+    getCompletedQuizzes() {
+      this._quizzesService.getCompletedQuizzes().subscribe({
+        next: (res) => {
+          this.completedQuizzes = res;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
-  getUpcomingQuizzes() {
-    this._quizzesService.getUpcomingQuizzes().subscribe({
-      next: (res) => {
-        this.upcomingQuizzes = res;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-  getCompletedQuizzes() {
-    this._quizzesService.getCompletedQuizzes().subscribe({
-      next: (res) => {
-        this.completedQuizzes = res;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-}
+ 
