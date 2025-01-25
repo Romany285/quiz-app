@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this._dashboardService.getTopFiveQuizzes().subscribe({
       next: (res) => {
-        console.log(res)
+        // console.log(res)
       }
     })
   }

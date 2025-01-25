@@ -1,0 +1,91 @@
+<section>
+  <div class="container">
+    <div class="row bord-bottm">
+      <div class="col-10 py-3"><h4 class="ps-3 pt-2 fw-bold">Set up a new question</h4></div>
+      <div class="col-1 bord-inline py-3 save-btn text-center" (click)="onSubmit()">
+        <button class="border-0 bg-transparent ">
+          <i class="fa-solid fa-check fs-3 pt-2"></i>
+        </button>
+      </div>
+      <div class="col-1 py-3 close-btn text-center" (click)="onNoClick()">
+        <button class="border-0 bg-transparent ">
+          <i class="fa-solid fa-xmark fs-3 pt-2 ps-1"></i>
+        </button>
+      </div>
+    </div>
+    <div class="m-5 mx-3">
+      <h4>Details</h4>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-12">
+            <div class="input-group mb-4">
+              <span class="input-group-text pe-4">Title</span>
+              <input type="text" class="form-control" formControlName="title">
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="input-group mb-4">
+              <span class="input-group-text pe-4">Description</span>
+              <input type="text" class="form-control" formControlName="description">
+            </div>
+          </div>
+          <!-- Options Section -->
+          <div class="col-12" formGroupName="options">
+            <div class="row">
+
+              <div class="col-6">
+                <div class="input-group mb-4">
+                <span class="input-group-text pe-4">A</span>
+                <input type="text" class="form-control" formControlName="A">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="input-group mb-4">
+                <span class="input-group-text pe-4">B</span>
+                <input type="text" class="form-control" formControlName="B">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="input-group mb-4">
+                <span class="input-group-text pe-4">C</span>
+                <input type="text" class="form-control" formControlName="C">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="input-group mb-4">
+                <span class="input-group-text pe-4">D</span>
+                <input type="text" class="form-control" formControlName="D">
+              </div>
+            </div>
+          </div>
+          </div>
+          <div class="col-4">
+            <div class="input-group mb-4">
+              <span class="input-group-text pe-4">Right Answer</span>
+              <input type="text" class="form-control" formControlName="answer">
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="input-group mb-4">
+              <span class="input-group-text">type</span>
+              <select class="form-select" aria-label="Small select example" formControlName="type">
+                <option value="FE" selected>FE</option>
+                <option value="BE">BE</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="input-group mb-4">
+              <span class="input-group-text">difficulty</span>
+              <select class="form-select" aria-label="Small select example" formControlName="difficulty">
+                <option value="easy" selected>Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
