@@ -206,7 +206,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
         if (this.selectGroupId !== null && !this.selectStudentWithoutGroup) {
           const dialogRef = this.dialog.open(AddEditViewComponent, {
             data: {
-              title: "Add student to a group",
+              title: "Update student's group",
               fields: [
                 {
                   type: "select",

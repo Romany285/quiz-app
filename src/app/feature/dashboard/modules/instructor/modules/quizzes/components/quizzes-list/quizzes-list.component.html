@@ -1,0 +1,19 @@
+<table class="black-table table">
+  <thead>
+    <tr>
+      @for (head of headers; track head) {
+      <th scope="col">{{ head }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (quiz of upcomingQuizzes; track quiz) {
+    <tr>
+      <td>{{ quiz.title }}</td>
+      <td>{{ quiz.date }}</td>
+      <td>{{ quiz.time }}</td>
+      <td>{{ quiz.numberOfStudents }}</td>
+    </tr>
+    }
+  </tbody>
+</table>

@@ -55,11 +55,7 @@
           class="col-md-6"
           [title]="student.first_name + ' ' + student.last_name"
           [status]="student.status || ''"
-          [groupName]="
-            'Group name : ' + student.group?.name === null
-              ? 'Not added to a group'
-              : student.group?.name || 'Not added to a group'
-          "
+          [groupName]="student.group?.name || 'Not added to a group'"
           [actions]="studentActions"
           [data]="student"
           (actionTriggered)="onStudentAction($event)"
@@ -70,11 +66,7 @@
           class="col-md-6"
           [title]="student.first_name + ' ' + student.last_name"
           [status]="student.status || ''"
-          [groupName]="
-            'Group name : ' + student.group?.name === null
-              ? 'Not added to a group'
-              : student.group?.name || 'Not added to a group'
-          "
+          [groupName]="student.group?.name || 'Not added to a group'"
           [actions]="studentActions"
           [data]="student"
           (actionTriggered)="onStudentAction($event)"
@@ -86,11 +78,7 @@
           class="col-md-6"
           [title]="student.first_name + ' ' + student.last_name"
           [status]="student.status || ''"
-          [groupName]="
-            'Group name : ' + student.group?.name === null
-              ? 'Not added to a group'
-              : student.group?.name || 'Not added to a group'
-          "
+          [groupName]="student.group?.name || 'Not added to a group'"
           [actions]="studentActions"
           [data]="student"
           (actionTriggered)="onStudentAction($event)"
