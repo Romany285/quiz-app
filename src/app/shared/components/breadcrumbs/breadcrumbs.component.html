@@ -1,0 +1,11 @@
+<!-- Breadcrumbs -->
+<nav aria-label="breadcrumb" class="ps-5">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a [routerLink]="['/dashboard']">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      {{ currentRouterLink }}
+    </li>
+  </ol>
+</nav>

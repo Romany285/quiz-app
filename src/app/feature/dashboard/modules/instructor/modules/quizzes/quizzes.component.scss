@@ -1,0 +1,24 @@
+@import "../../../../../../../assets/sass/main.scss";
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  button {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.upcoming,
+.complete {
+  padding: 1rem;
+  border-radius: 0.7rem;
+  border: 1px solid $grey;
+}
+
+h3 {
+  span {
+    color: $auth-hover-color;
+    font-weight: bolder;
+  }
+}
