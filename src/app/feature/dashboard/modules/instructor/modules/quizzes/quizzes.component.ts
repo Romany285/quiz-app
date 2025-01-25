@@ -1,60 +1,78 @@
- 
-import { Component, OnInit } from '@angular/core';
-import { AddEditQuizComponent } from './components/add-edit-quiz/add-edit-quiz.component';
-import { MatDialog } from '@angular/material/dialog';
-import { QuizzesService } from './services/quizzes.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GroupsService } from '../groups/services/groups.service';
+import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { GroupsService } from "../groups/services/groups.service";
+import { AddEditQuizComponent } from "./components/add-edit-quiz/add-edit-quiz.component";
+import { IUpcomingCompleteQuizApiResponse } from "./interfaces/upcoming-completed-quiz.interface";
+import { QuizzesService } from "./services/quizzes.service";
 
 @Component({
   selector: "app-quizzes",
   templateUrl: "./quizzes.component.html",
   styleUrl: "./quizzes.component.scss",
 })
- 
- 
-export class QuizzesComponent implements OnInit{
-  upcomingQuizzes: any[] = [];
-  completedQuizzes: any[] = [];
-  headers: string[] = ["Title", "Date", "Time", "Number of Students", "Action"];
-  allGroups:any
-  constructor(private dialog: MatDialog,private _quizzesService:QuizzesService,private _groupsService:GroupsService){}
+export class QuizzesComponent implements OnInit {
+  upcomingQuizzes: IUpcomingCompleteQuizApiResponse[] = [];
+  completedQuizzes: IUpcomingCompleteQuizApiResponse[] = [];
+  headers: string[] = [
+    "Title",
+    "Status",
+    "Close at",
+    "Description",
+    "Type",
+    "Question no.",
+    "Difficulty",
+    "Duration",
+  ];
+  constructor(
+    private dialog: MatDialog,
+    private _quizzesService: QuizzesService,
+    private _groupsService: GroupsService
+  ) {}
   ngOnInit(): void {
-    this.getAllGroups()
+    this.getUpcomingQuizzes();
+    this.getCompletedQuizzes();
   }
   openAddQuizDialog(): void {
     const dialogRef = this.dialog.open(AddEditQuizComponent, {
-      data: {groups:this.allGroups},
-      width:'55%'
+      // data: { groups: this.allGroups },
+      width: "55%",
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        delete result.groups
-        this.addNewQuiz(result)
-        console.log(result,'res');
-        
+        delete result.groups;
+        this.addNewQuiz(result);
+        console.log(result, "res");
       }
     });
   }
-  addNewQuiz(data:any){
+  addNewQuiz(data: any) {
     this._quizzesService.addQuiz(data).subscribe({
-      next:(res)=>{
+      next: (res) => {
         console.log(res);
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err);
-      }
-    })
+      },
+    });
   }
-  getAllGroups(){
-    this._groupsService.getAllGroups().subscribe({
-      next:(res)=>{
-        console.log(res);
-        this.allGroups = res
-      },error:(err)=>{
+  getUpcomingQuizzes() {
+    this._quizzesService.getUpcomingQuizzes().subscribe({
+      next: (res) => {
+        this.upcomingQuizzes = res;
+      },
+      error: (err) => {
         console.log(err);
-        
-      }
-    })
+      },
+    });
+  }
+  getCompletedQuizzes() {
+    this._quizzesService.getCompletedQuizzes().subscribe({
+      next: (res) => {
+        this.completedQuizzes = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

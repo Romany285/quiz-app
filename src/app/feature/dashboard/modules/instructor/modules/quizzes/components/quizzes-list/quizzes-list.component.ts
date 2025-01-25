@@ -12,6 +12,7 @@ export class QuizzesListComponent implements OnInit {
   headers: string[] = [
     "Title",
     "Code",
+    "Status",
     "Description",
     "Type",
     "Question no.",
