@@ -15,17 +15,7 @@
   border-radius: 0.7rem;
   border: 1px solid $grey;
 }
-table {
-  tr {
-    display: flex;
-    justify-content: space-between;
-    th {
-      min-width: 18%;
-      background-color: $black-color;
-      color: $light-white;
-    }
-  }
-}
+
 h3 {
   span {
     color: $auth-hover-color;

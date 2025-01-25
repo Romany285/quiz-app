@@ -8,7 +8,7 @@ import { SharedModule } from '../../../../../../shared/shared.module';
 import { ViewQuizComponent } from './components/view-quiz/view-quiz.component';
 import { CodeQuizComponent } from './components/code-quiz/code-quiz.component';
 
-
+import { QuizzesListComponent } from "./components/quizzes-list/quizzes-list.component";
 @NgModule({
   declarations: [
     QuizzesComponent,
@@ -20,5 +20,8 @@ import { CodeQuizComponent } from './components/code-quiz/code-quiz.component';
     CommonModule,
     QuizzesRoutingModule,SharedModule
   ]
+
+
+
 })
 export class QuizzesModule {}
