@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { QuizzesService } from './services/quizzes.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GroupsService } from '../groups/services/groups.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: "app-quizzes",
@@ -14,11 +15,12 @@ import { GroupsService } from '../groups/services/groups.service';
  
  
 export class QuizzesComponent implements OnInit{
+  resMessage:string = '';
   upcomingQuizzes: any[] = [];
   completedQuizzes: any[] = [];
   headers: string[] = ["Title", "Date", "Time", "Number of Students", "Action"];
   allGroups:any
-  constructor(private dialog: MatDialog,private _quizzesService:QuizzesService,private _groupsService:GroupsService){}
+  constructor(private dialog: MatDialog,private _quizzesService:QuizzesService,private _groupsService:GroupsService,private _toastrService:ToastrService){}
   ngOnInit(): void {
     this.getAllGroups()
   }
@@ -39,11 +41,15 @@ export class QuizzesComponent implements OnInit{
   addNewQuiz(data:any){
     this._quizzesService.addQuiz(data).subscribe({
       next:(res)=>{
+        this.resMessage = res.message
         console.log(res);
       },
       error:(err)=>{
+        this._toastrService.error(err.error.message)
         console.log(err);
-      }
+      },complete:() =>{
+        this._toastrService.success(this.resMessage)
+      },
     })
   }
   getAllGroups(){

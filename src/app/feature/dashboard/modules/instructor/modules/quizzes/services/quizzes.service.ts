@@ -23,4 +23,7 @@ constructor(private _httpClient:HttpClient) { }
   getCompletedQuizzes(): Observable<any> {
     return this._httpClient.get("quiz/completed");
   }
+  getQuizById(code:any): Observable<any> {
+    return this._httpClient.get(`/api/quiz`,code);
+  }
 }
