@@ -16,13 +16,14 @@ export class QuizzesComponent implements OnInit {
   headers: string[] = [
     "Title",
     "Status",
-    "Close at",
     "Description",
     "Type",
     "Question no.",
     "Difficulty",
     "Duration",
   ];
+  upcomingHeaders = this.headers;
+  completedHeaders = this.headers.concat(["Closed at"]);
   constructor(
     private dialog: MatDialog,
     private _quizzesService: QuizzesService,
