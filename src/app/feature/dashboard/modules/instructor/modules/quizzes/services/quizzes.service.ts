@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { IQuiz, IQuizApiInterface } from "../interfaces/quiz.interface";
+import { IUpcomingCompleteQuizApiResponse } from "../interfaces/upcoming-completed-quiz.interface";
 
 @Injectable({
   providedIn: "root",
@@ -17,11 +18,15 @@ export class QuizzesService {
   deleteQuiz(id: string): Observable<any> {
     return this._httpClient.delete(`quiz/${id}`);
   }
-  getUpcomingQuizzes(): Observable<any> {
-    return this._httpClient.get("quiz/incomming");
+  getUpcomingQuizzes(): Observable<IUpcomingCompleteQuizApiResponse[]> {
+    return this._httpClient.get<IUpcomingCompleteQuizApiResponse[]>(
+      "quiz/incomming"
+    );
   }
-  getCompletedQuizzes(): Observable<any> {
-    return this._httpClient.get("quiz/completed");
+  getCompletedQuizzes(): Observable<IUpcomingCompleteQuizApiResponse[]> {
+    return this._httpClient.get<IUpcomingCompleteQuizApiResponse[]>(
+      "quiz/completed"
+    );
   }
   getAllQuizzes(): Observable<IQuiz[]> {
     return this._httpClient.get<IQuiz[]>("quiz");
