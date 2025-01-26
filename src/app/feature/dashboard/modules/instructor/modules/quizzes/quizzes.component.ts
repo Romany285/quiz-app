@@ -34,11 +34,23 @@ export class QuizzesComponent implements OnInit{
   ngOnInit(): void {
     this.getUpcomingQuizzes();
     this.getCompletedQuizzes();
+    this.getAllGroups()
+  }
+  getAllGroups(){
+    this._groupsService.getAllGroups().subscribe({
+      next:(res)=>{
+        this.allGroups=res
+        console.log(res,'oooo');
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
   }
   openAddQuizDialog(): void {
     const dialogRef = this.dialog.open(AddEditQuizComponent, {
-      // data: { groups: this.allGroups },
-      width: "55%",
+      data: { groups: this.allGroups },
+      width: "60%",
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -62,26 +74,26 @@ export class QuizzesComponent implements OnInit{
       },
     })
        
-    });
+    };
+    getUpcomingQuizzes() {
+      this._quizzesService.getUpcomingQuizzes().subscribe({
+        next: (res) => {
+          this.upcomingQuizzes = res;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+    getCompletedQuizzes() {
+      this._quizzesService.getCompletedQuizzes().subscribe({
+        next: (res) => {
+          this.completedQuizzes = res;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
-  getUpcomingQuizzes() {
-    this._quizzesService.getUpcomingQuizzes().subscribe({
-      next: (res) => {
-        this.upcomingQuizzes = res;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-  getCompletedQuizzes() {
-    this._quizzesService.getCompletedQuizzes().subscribe({
-      next: (res) => {
-        this.completedQuizzes = res;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-}
+ 

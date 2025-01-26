@@ -14,13 +14,13 @@ export interface IQuiz {
   __v?: number;
   closed_at?: string,
   participants?: number
-  type: string;
+  type?: string;
   title: string;
-  description: string;
+  description?: string;
   group: string;
-  questions_number: number;
-  difficulty: string;
-  schadule: string;
-  duration: number;
-  score_per_question: number;
+  questions_number?: number;
+  difficulty?: string;
+  schadule?: string;
+  duration?: number;
+  score_per_question?: number;
 }
