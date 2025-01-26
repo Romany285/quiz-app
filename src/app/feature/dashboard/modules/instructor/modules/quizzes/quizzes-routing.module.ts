@@ -4,7 +4,7 @@ import { ViewQuizComponent } from './components/view-quiz/view-quiz.component';
 import { QuizzesListComponent } from "./components/quizzes-list/quizzes-list.component";
 import { NgModule } from '@angular/core';
 const routes: Routes = [{ path: '', component: QuizzesComponent }, 
-  {path:'view',component:ViewQuizComponent},
+  {path:'view/:id',component:ViewQuizComponent},
   { path: 'questions', loadChildren: () => import('./modules/questions/questions.module').then(m => m.QuestionsModule) },
   { path: "quizzes-list", component: QuizzesListComponent },
   ];
