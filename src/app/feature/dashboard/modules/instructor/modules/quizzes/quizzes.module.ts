@@ -18,7 +18,8 @@ import { QuizzesListComponent } from "./components/quizzes-list/quizzes-list.com
   ],
   imports: [
     CommonModule,
-    QuizzesRoutingModule,SharedModule
+    QuizzesRoutingModule,
+    SharedModule
   ]
 
 

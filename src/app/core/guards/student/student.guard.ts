@@ -9,5 +9,5 @@ export const studentGuard: CanActivateFn = (route, state) => {
     return true;
   }
   router.navigate(['/student']);
-   return false
+    return false
 };

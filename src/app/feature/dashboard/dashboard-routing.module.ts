@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { instructorGuard } from "../../core/guards/instructor/instructor.guard";
 import { studentGuard } from "../../core/guards/student/student.guard";
 import { DashboardComponent } from "./dashboard.component";
+import { UpdateProfileComponent } from "../../shared/components/update-profile/update-profile.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
           import("./modules/instructor/instructor.module").then(
             (m) => m.InstructorModule
           ),
+      },
+      {
+        path: 'updateProfile',
+        component: UpdateProfileComponent
       },
       {
         path: "",

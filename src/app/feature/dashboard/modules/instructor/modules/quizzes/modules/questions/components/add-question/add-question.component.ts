@@ -49,8 +49,10 @@ export class AddQuestionComponent {
           error:(err)=>{
             this._toastrService.error(err.error.message)
             console.log(err);
-          },complete:() =>{
+          },
+          complete:() =>{
             this._toastrService.success(this.resMessage)
+            this.onNoClick()
         },
       })
     }

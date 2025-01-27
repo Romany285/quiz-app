@@ -1,5 +1,6 @@
 import { Time } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
+import { HelperServiceService } from './../../services/helper service/helper-service.service';
 
 @Component({
   selector: "app-nav",
@@ -12,6 +13,11 @@ export class NavComponent implements OnInit {
   currentTime: string = '';
   private timerInterval: any;
 
+  constructor(private _helperService:HelperServiceService) {}
+
+  toggleSidebar() {
+    this._helperService.toggleSidebar();
+  }
   ngOnInit(): void {
     this.updateTime(); 
     this.timerInterval = setInterval(() => this.updateTime(), 1000); 
@@ -23,8 +29,14 @@ export class NavComponent implements OnInit {
     }
   }
 
-  private updateTime(): void {
+  updateTime(): void {
     const now = new Date();
     this.currentTime = now.toLocaleTimeString(); 
+  }
+  logout(){
+    localStorage.removeItem('email')
+    localStorage.removeItem('name')
+    localStorage.removeItem('role')
+    localStorage.removeItem('token')
   }
 }

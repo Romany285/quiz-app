@@ -19,7 +19,16 @@ const routes: Routes = [
     loadChildren: () =>
       import("./modules/groups/groups.module").then((m) => m.GroupsModule),
   },
-  { path: 'quizzes', loadChildren: () => import('./modules/quizzes/quizzes.module').then(m => m.QuizzesModule) },
+  {
+    path: "quizzes",
+    loadChildren: () =>
+      import("./modules/quizzes/quizzes.module").then((m) => m.QuizzesModule),
+  },
+  {
+    path: "results",
+    loadChildren: () =>
+      import("./modules/results/results.module").then((m) => m.ResultsModule),
+  },
 ];
 
 @NgModule({
