@@ -22,6 +22,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSelect, MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatSortModule } from "@angular/material/sort";
+import { MatStepperModule } from "@angular/material/stepper";
 import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { RouterModule } from "@angular/router";
@@ -70,6 +71,7 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
     MatSlideToggleModule,
     MatFormField,
     MatSelect,
+    MatStepperModule,
   ],
   exports: [
     CommonModule,
@@ -105,6 +107,7 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
     NavComponent,
     SidebarComponent,
     BreadcrumbsComponent,
+    MatStepperModule,
   ],
 })
 export class SharedModule {}
