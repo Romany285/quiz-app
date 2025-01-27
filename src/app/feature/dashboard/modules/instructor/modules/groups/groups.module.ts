@@ -12,7 +12,8 @@ import { SharedModule } from '../../../../../../shared/shared.module';
   ],
   imports: [
     CommonModule,
-    GroupsRoutingModule,SharedModule
+    GroupsRoutingModule,
+    SharedModule
   ]
 })
 export class GroupsModule { }

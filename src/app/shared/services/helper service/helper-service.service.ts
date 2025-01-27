@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import {
   IGroup,
   ITopFiveStudents,
@@ -10,6 +10,12 @@ import {
   providedIn: "root",
 })
 export class HelperServiceService {
+  private sidebarState = new BehaviorSubject<boolean>(false); // false = collapsed
+  isExpanded$ = this.sidebarState.asObservable();
+
+  toggleSidebar() {
+    this.sidebarState.next(!this.sidebarState.value);
+  }
   constructor(private _httpClient: HttpClient) {}
   getTopFiveStudents(): Observable<ITopFiveStudents> {
     return this._httpClient.get<ITopFiveStudents>("student/top-five");

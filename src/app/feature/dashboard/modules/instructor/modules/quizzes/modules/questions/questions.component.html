@@ -1,1 +1,39 @@
-<p>questions works!</p>
+<section class="questions mt-5">
+  <div class="heading d-flex justify-content-between align-items-center mb-4 p-4 ">
+    <div>
+      <h3>Bank Of Questions</h3>
+    </div>
+    <div>
+      <button class="add-question me-auto" (click)="openDialogAddQuestions()">
+        <i class="fa-solid fa-circle-plus px-2 fs-5 mt-1"></i>
+        Add Question
+      </button>
+    </div>
+  </div>
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Question Title</th>
+        <th scope="col">Question Desc</th>
+        <th scope="col">Question difficulty level</th>
+        <th scope="col">Date</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (question of allQuestions; track $index) {
+        <tr>
+          <td>{{question.title}}</td>
+          <td>{{question.description}}</td>
+          <td>{{question.difficulty}}</td>
+          <td>12 / 02 / 2023</td>
+          <td class="text-center">
+            <i class="fa-solid fa-eye"></i>
+            <i class="fa-solid fa-pen-to-square" (click)="openDialogUpdateQuestion(question)"></i>
+            <i class="fa-solid fa-trash-can" (click)="openDialogDeleteQuestion(question)"></i>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

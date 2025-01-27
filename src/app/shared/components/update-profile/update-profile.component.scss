@@ -1,0 +1,37 @@
+@import "../../../../assets/sass/abstracts/variables";
+
+h2 {
+  text-align: center;
+  margin: 50px 0;
+}
+
+form {
+  width: 50%;
+  margin: 10px auto;
+  .input-group {
+    --bs-border-radius:10px;
+  .input-group-text {
+    background-color: $auth-text-color;
+    font-weight: 600;
+    font-size: 18px;
+    border-right: 0px;
+    .form-control,.form-select:focus {
+      box-shadow:0 0 0 .25rem rgba(13, 109, 253, 0); 
+      border-color:rgba(255, 237, 223, 1) ;
+    };
+    .form-control,.form-select {
+      border-left: 0px;
+      border-color:#dee2e6;
+    };
+  }
+  }
+  .save {
+    font-weight: bold;
+    background-color: #ffeddf;
+    border: #ffeddf;
+    color: #333;
+    &:hover {
+      background-color: #f1e1d4;
+    }
+  }
+}

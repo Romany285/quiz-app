@@ -34,6 +34,8 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { SharedCardComponent } from "./components/shared-card/shared-card.component";
 import { SharedInputComponent } from "./components/shared-input/shared-input.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
+
 @NgModule({
   declarations: [
     SharedInputComponent,
@@ -42,6 +44,7 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
     NavComponent,
     SidebarComponent,
     BreadcrumbsComponent,
+    UpdateProfileComponent,
   ],
   imports: [
     CommonModule,

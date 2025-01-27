@@ -12,8 +12,8 @@ export class QuizzesService {
   addQuiz(data: IQuiz): Observable<IQuizApiInterface> {
     return this._httpClient.post<IQuizApiInterface>("quiz", data);
   }
-  updateQuiz(data: any): Observable<any> {
-    return this._httpClient.put("quiz", data);
+  updateQuiz(id:string,data: any): Observable<any> {
+    return this._httpClient.put(`quiz${id}`, data);
   }
   deleteQuiz(id: string): Observable<any> {
     return this._httpClient.delete(`quiz/${id}`);
@@ -30,5 +30,8 @@ export class QuizzesService {
   }
   getAllQuizzes(): Observable<IQuiz[]> {
     return this._httpClient.get<IQuiz[]>("quiz");
+  }
+  getQuizById(id:string): Observable<any> {
+    return this._httpClient.get(`quiz/${id}`);
   }
 }

@@ -1,0 +1,48 @@
+@import "../../../../../../../../../../../assets/sass/abstracts/variables";
+.bord-inline {
+    border-inline: 1px rgba(0, 0, 0, 0.25) solid;
+}
+.bord-bottm {
+    border-bottom: 1px rgba(0, 0, 0, 0.25) solid;
+}
+.input-group {
+  --bs-border-radius:10px;
+  .input-group-text {
+    background-color: $auth-text-color;
+    font-weight: 600;
+    font-size: 18px;
+    border-right: 0px;
+    .form-control,.form-select:focus {
+      box-shadow:0 0 0 .25rem rgba(13, 109, 253, 0); 
+      border-color:rgba(255, 237, 223, 1) ;
+    };
+    .form-control,.form-select {
+      border-left: 0px;
+      border-color:#dee2e6;
+    };
+  }
+}
+.col-1 {
+  cursor: pointer;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  button {
+    border: none;
+    outline: none;
+  }
+  &.save-btn:hover {
+    background-color: #10ac84;
+    button {
+      color: #fff !important;
+    }
+  }
+  &.close-btn:hover {
+    background-color: #ee5253;
+    button {
+      color: #fff !important;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { Component, inject } from "@angular/core";
 import { AuthService } from "../../../feature/auth/services/auth.service";
+import { HelperServiceService } from "../../services/helper service/helper-service.service";
 
 interface IMenu {
   link: string;
@@ -15,6 +16,14 @@ interface IMenu {
 })
 export class SidebarComponent {
   private _authService = inject(AuthService);
+  private _helperService = inject(HelperServiceService);
+  isExpanded = false;
+  ngOnInit() {
+    this._helperService.isExpanded$.subscribe(
+      (expanded) => (this.isExpanded = expanded)
+    );
+  }
+
   isInstructor(): boolean {
     return this._authService.role == "Instructor";
   }
@@ -51,12 +60,6 @@ export class SidebarComponent {
       icon: "Results-icon",
       text: "Results",
       isActive: this.isInstructor() || this.isStudent(),
-    },
-    {
-      link: "dashboard/help",
-      icon: "Help-icon",
-      text: "Help",
-      isActive: this.isInstructor() || this.isStudent(),
-    },
+    }
   ];
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { instructorGuard } from "../../core/guards/instructor/instructor.guard";
 import { studentGuard } from "../../core/guards/student/student.guard";
 import { DashboardComponent } from "./dashboard.component";
+import { UpdateProfileComponent } from "../../shared/components/update-profile/update-profile.component";
 
 const routes: Routes = [
   {
@@ -18,8 +19,11 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'updateProfile',
+        component: UpdateProfileComponent
+      },
+      {
         path: "student",
-        canActivate: [studentGuard],
         loadChildren: () =>
           import("./modules/student/student.module").then(
             (m) => m.StudentModule
