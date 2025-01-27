@@ -1,0 +1,42 @@
+.auth-button {
+  width: fit-content;
+  padding: 0.6rem;
+  background-color: $auth-text-color;
+  border: 0;
+  border-radius: 0.8rem;
+  background-color: $light-white;
+}
+.black-btn {
+  padding: 0.5rem;
+  border: 1px solid $grey;
+  border-radius: 0.8rem;
+  color: black;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+  font-weight: bolder;
+  &:hover,
+  &:active,
+  &.active,
+  &:focus {
+    background-color: black;
+    color: white;
+  }
+}
+.save-btn{
+  transition: all 0.4s;
+  &:hover{
+    background-color: rgb(0, 184, 0);
+    i{
+      color: white;
+    }
+  }
+}
+.close-btn{
+  transition: all 0.4s;
+  &:hover{
+    background-color: rgb(224, 0, 0);
+    i{
+      color: white;
+    }
+  }
+}

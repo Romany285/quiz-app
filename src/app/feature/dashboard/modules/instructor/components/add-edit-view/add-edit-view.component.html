@@ -1,13 +1,18 @@
 <section>
   <div class="container">
     <div class="row bord-bottm">
-      <div class="col-10 py-3"><h4 class="ps-3 pt-2">Update group</h4></div>
+      <div class="col-10 py-3">
+        <h4 class="ps-3 pt-2">{{ data.title }}</h4>
+      </div>
       <div class="col-1 bord-inline py-3" (click)="onSubmit()">
-        <button class="border-0 bg-transparent" [disabled]="form.invalid">
+        <button
+          class="border-0 bg-transparent save-btn"
+          [disabled]="form.invalid"
+        >
           <i class="fa-solid fa-check fs-3 pt-2"></i>
         </button>
       </div>
-      <div class="col-1 py-3" (click)="onNoClick()">
+      <div class="col-1 py-3 close-btn" (click)="onNoClick()">
         <button class="border-0 bg-transparent">
           <i class="fa-solid fa-xmark fs-3 pt-2 ps-1"></i>
         </button>
@@ -40,12 +45,21 @@
               class="w-100"
             >
               <mat-label>{{ field.label }}</mat-label>
-              <mat-select [formControlName]="field.name" multiple>
-                @for (option of field.value; track option._id) {
+              <mat-select
+                [formControlName]="field.name"
+                [multiple]="field.name !== 'groups'"
+              >
+                @for (option of field.value; track option._id) { @if
+                (field.name==='groups' ) {
+                <mat-option [value]="option._id">{{ option.name }}</mat-option>
+                }@if (field.name==='students' ) {
+                <mat-option [value]="option._id">{{ option }}</mat-option>
+
+                } @else {
                 <mat-option [value]="option._id">{{
                   option.first_name + " " + option.last_name
                 }}</mat-option>
-                }
+                } }
               </mat-select>
             </mat-form-field>
           </div>

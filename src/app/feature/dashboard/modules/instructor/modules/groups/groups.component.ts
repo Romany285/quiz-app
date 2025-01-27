@@ -1,151 +1,182 @@
-import { Data } from './../../../../../auth/interfaces/IAuthRes';
-import { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
-import { GroupsService } from './services/groups.service';
-import { AddEditViewComponent } from '../../components/add-edit-view/add-edit-view.component';
-import { MatDialog } from '@angular/material/dialog';
-import { Validators } from '@angular/forms';
-import { StudentsService } from '../students/services/students.service';
-import { DeleteItemComponent } from '../../components/delete-item/delete-item.component';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit } from "@angular/core";
+import { Validators } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
+import { ToastrService } from "ngx-toastr";
+import { AddEditViewComponent } from "../../components/add-edit-view/add-edit-view.component";
+import { DeleteItemComponent } from "../../components/delete-item/delete-item.component";
+import { StudentsService } from "../students/services/students.service";
+import { GroupsService } from "./services/groups.service";
 
 @Component({
-  selector: 'app-groups',
-  templateUrl: './groups.component.html',
-  styleUrl: './groups.component.scss'
+  selector: "app-groups",
+  templateUrl: "./groups.component.html",
+  styleUrl: "./groups.component.scss",
 })
-export class GroupsComponent implements OnInit{
-  groupsData:any;
-  studentsWithoutGroup:any;
-  resMessage:any;
+export class GroupsComponent implements OnInit {
+  groupsData: any;
+  studentsWithoutGroup: any;
+  resMessage: any;
   groupsActions = [
     { label: "Update", action: "update" },
     { label: "Delete", action: "delete", isDanger: true },
   ];
-    constructor(private _GroupsService:GroupsService,private dialog: MatDialog,private _StudentsService:StudentsService,private _ToastrService:ToastrService){}
+  constructor(
+    private _GroupsService: GroupsService,
+    private dialog: MatDialog,
+    private _StudentsService: StudentsService,
+    private _ToastrService: ToastrService
+  ) {}
   ngOnInit(): void {
-    this.getAllGroups()
-    this.getAllStudentWithoutGroup()
+    this.getAllGroups();
+    this.getAllStudentWithoutGroup();
   }
-     
-  getAllGroups(){
+
+  getAllGroups() {
     this._GroupsService.getAllGroups().subscribe({
-      next:(res)=>{
-        console.log(res);
-        this.groupsData = res
+      next: (res) => {
+        this.groupsData = res;
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err);
-      }
-    })
+      },
+    });
   }
-  getAllStudentWithoutGroup(){
+  getAllStudentWithoutGroup() {
     this._StudentsService.getAllWithoutGroup().subscribe({
-      next:(res)=>{
-        console.log(res,'without');
-        this.studentsWithoutGroup = res
+      next: (res) => {
+        this.studentsWithoutGroup = res;
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err);
-      }
-    })
+      },
+    });
   }
   openDialogAddGroup(): void {
     const dialogRef = this.dialog.open(AddEditViewComponent, {
-      data: {fields: [
-        { type: 'text', label: 'Group Name', name: 'name' , validators: [Validators.required] },
-        { type: 'select', label: 'List Students', name: 'students', value: this.studentsWithoutGroup, validators: [Validators.required] },
-      ],},
-      width:'50%'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-        this._GroupsService.addGroup(result).subscribe({
-          next:(res)=>{
-            console.log(res);
-          },
-          error:(err)=>{
-            console.log(err);
-          },
-          complete:()=> {
-            this.getAllGroups()
-          },
-        })
-        console.log(result);
-        ;
-      }
-    });
-  }
-  openDialogUpdateGroup(name?: string, students?: any, readOnly = false) {
-    const dialogRef = this.dialog.open(AddEditViewComponent, {
-      width: '55%',
       data: {
         fields: [
-          { type: 'text', label: 'Group Name', name: 'name' ,value: name || '', validators: [Validators.required] },
-          { type: 'select', label: 'List Students', name: 'students', value: students, validators: [Validators.required] },
+          {
+            type: "text",
+            label: "Group Name",
+            name: "name",
+            validators: [Validators.required],
+          },
+          {
+            type: "select",
+            label: "List Students",
+            name: "students",
+            value: this.studentsWithoutGroup,
+            validators: [Validators.required],
+          },
         ],
-        readOnly
-      }
-    })
-    return dialogRef.afterClosed();
-  }
-  editGroup(group:any,students:any): void {
-    this.openDialogUpdateGroup(group.name,students).subscribe((result) => {
-      if (result) {
-        console.log(group,'ffff');
-        
-        this._GroupsService.updateGroup(group._id, {
-          name: result.name,
-          students: result.students
-        }).subscribe(({
+      },
+      width: "50%",
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log("The dialog was closed");
+      if (result !== undefined) {
+        this._GroupsService.addGroup(result).subscribe({
           next: (res) => {
-            this.resMessage = res.message
-           },
+            console.log(res);
+          },
           error: (err) => {
-            this._ToastrService.error(err.error.message)
+            console.log(err);
           },
           complete: () => {
-            this._ToastrService.success()
             this.getAllGroups();
-          }
-        }))
+          },
+        });
+        console.log(result);
       }
-    })
+    });
   }
   onStudentAction(event: { action: string; data: any }): void {
-      const { action, data } = event;
-      switch (action) {
-        case "update":
-          console.log(data,'pp');
-          // let updateStudents = this.studentsWithoutGroup.concat(data.students)
-          // console.log(updateStudents,'update');
-          
-          this.editGroup(data,this.studentsWithoutGroup)
-          break;
-        case "delete":
-          const dialogRef = this.dialog.open(DeleteItemComponent, {
+    const { action, data } = event;
+    let dialogRef;
+    switch (action) {
+      case "update":
+        let students = this.studentsWithoutGroup.map(
+          (student: any) => `${student.first_name} ${student.last_name}`
+        );
+        this.getStudentNames(data.students).then((studentNames) => {
+          const dialogRef = this.dialog.open(AddEditViewComponent, {
             data: {
-              title: "group",
-              description: `Are you sure you want to delete ${data.name} group?`,
-            },
-          });
-  
-          dialogRef.afterClosed().subscribe((result) => {
-            if (result) {
-              this._GroupsService.deleteGroup(data._id).subscribe({
-                next: (res) => {
-                  console.log(res)
+              title: "Update group's students",
+              fields: [
+                {
+                  type: "text",
+                  label: "Group Name",
+                  name: "name",
+                  value: data.name || "",
+                  validators: [Validators.required],
                 },
-                complete:()=>{
-                  this.getAllGroups()
-                }
-              });
+                {
+                  type: "select",
+                  label: "Students list",
+                  name: "students",
+                  value: [...studentNames, ...students],
+                  validators: [Validators.required],
+                },
+              ],
+            },
+            width: "50%",
+          });
+          dialogRef.afterClosed().subscribe((result) => {
+            if (result !== undefined) {
+              this._GroupsService
+                .updateGroup(data._id, {
+                  name: result.name,
+                  students: result.students.map((student: any) => student._id),
+                })
+                .subscribe({
+                  error: (err) => {
+                    console.log(err);
+                  },
+                  complete: () => {
+                    this.getAllGroups(); // Assuming you want to refresh the groups
+                  },
+                });
             }
           });
-          break;
-        default:
-          console.error("Unknown action:", action);
+        });
+        break;
+      case "delete":
+        dialogRef = this.dialog.open(DeleteItemComponent, {
+          data: {
+            title: "group",
+            description: `Are you sure you want to delete ${data.name} group?`,
+          },
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result) {
+            this._GroupsService.deleteGroup(data._id).subscribe({
+              next: (res) => {
+                console.log(res);
+              },
+              complete: () => {
+                this.getAllGroups();
+              },
+            });
+          }
+        });
+        break;
+      default:
+        console.error("Unknown action:", action);
+    }
+  }
+  async getStudentNames(studentIds: string[]): Promise<string[]> {
+    const studentNames: string[] = [];
+    for (const studentId of studentIds) {
+      const student = await this._StudentsService
+        .getStudentById(studentId)
+        .toPromise();
+      if (student) {
+        studentNames.push(`${student.first_name} ${student.last_name}`);
+      } else {
+        studentNames.push("Unknown Student");
       }
     }
+    return studentNames;
+  }
 }

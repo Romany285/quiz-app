@@ -1,30 +1,43 @@
 <div class="row m-0">
   <div class="col-md-6">
     <div class="Upcoming-quizzes">
-      <div class="heading d-flex align-content-center justify-content-between">
+      <div class="heading">
         <p>Upcoming 5 quizzes</p>
-        <a routerLink="#">Quiz directory <span><i class="fa-solid fa-right-long"></i></span></a>
+        <a routerLink="#" class="green-arrow"
+          >Quiz directory <span><i class="fa-solid fa-right-long"></i></span
+        ></a>
       </div>
       @for (quiz of upcomingQuizzes; track $index) {
-        <div class="card mb-3">
-          <div class="row g-0">
-            <div class="col-md-2">
-              <img [src]="'assets/images/svg/' + quiz.img + '.svg'" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-10">
-              <div class="card-body">
-                <h5 class="card-title fw-bold">{{quiz.title}}</h5>
-                <p class="date">{{quiz.date}} <span class="dash">|</span> {{quiz.time}}</p>
-                <div class="num-students d-flex justify-content-between mt-3">
-                  <span>No. of student’s enrolled: {{quiz.numberOfStudents}}</span>
-                  <span>
-                    <a routerLink="#">Open <span><i class="fa-solid fa-circle-arrow-right"></i></span></a>
-                  </span>
-                </div>
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-2">
+            <img
+              [src]="'assets/images/svg/' + quiz.img + '.svg'"
+              class="img-fluid rounded-start"
+              alt="..."
+            />
+          </div>
+          <div class="col-md-10">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">{{ quiz.title }}</h5>
+              <p class="date">
+                {{ quiz.date }} <span class="dash">|</span> {{ quiz.time }}
+              </p>
+              <div class="num-students d-flex justify-content-between mt-3">
+                <span
+                  >No. of student’s enrolled: {{ quiz.numberOfStudents }}</span
+                >
+                <span>
+                  <a routerLink="#"
+                    >Open
+                    <span><i class="fa-solid fa-circle-arrow-right"></i></span
+                  ></a>
+                </span>
               </div>
             </div>
           </div>
         </div>
+      </div>
       }
     </div>
   </div>
@@ -32,29 +45,39 @@
     <div class="top-students">
       <div class="heading d-flex align-content-center justify-content-between">
         <p>Top 5 Students</p>
-        <a routerLink="#">All Students <span><i class="fa-solid fa-right-long"></i></span></a>
+        <a routerLink="#"
+          >All Students <span><i class="fa-solid fa-right-long"></i></span
+        ></a>
       </div>
       @for (student of topStudents; track $index) {
-        <div class="card mb-3">
-          <div class="row g-0">
-            <div class="col-md-2">
-              <div class="image">
-                <img [src]="'assets/images/svg/user_0' + $index + '.svg'" class="img-fluid rounded-start" alt="...">
-              </div>
-            </div>
-            <div class="col-md-10">
-              <div class="card-body">
-                <h5 class="card-title fw-bold">{{student.first_name}} {{student.last_name}}</h5>
-                <div class="card-text d-flex justify-content-between">
-                  <p class="score">
-                    Class rank 2nd <span class="dash">|</span> Average score: {{student.avg_score | number:'1.2-2'}}%
-                  </p>
-                  <a routerLink="/dashboard" (click)="openFacilityDialog()"><i class="fa-solid fa-circle-arrow-right"></i></a>
-                </div>
+         
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-2">
+            <img
+              [src]="'assets/images/svg/user_0' + $index + '.svg'"
+              class="img-fluid rounded-start"
+              alt="..."
+            />
+          </div>
+          <div class="col-md-10">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">
+                {{ student.first_name }} {{ student.last_name }}
+              </h5>
+              <div class="card-text d-flex justify-content-between">
+                <p class="score">
+                  Class rank 2nd <span class="dash">|</span> Average score:
+                  {{ student.avg_score | number : "1.2-2" }}%
+                </p>
+                <a routerLink="/dashboard" (click)="openFacilityDialog()"
+                  ><i class="fa-solid fa-circle-arrow-right"></i
+                ></a>
               </div>
             </div>
           </div>
         </div>
+      </div>
       }
     </div>
   </div>

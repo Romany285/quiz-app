@@ -25,19 +25,21 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { RouterModule } from "@angular/router";
+import { BreadcrumbsComponent } from "./components/breadcrumbs/breadcrumbs.component";
+import { NavComponent } from "./components/nav/nav.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { SharedCardComponent } from "./components/shared-card/shared-card.component";
 import { SharedInputComponent } from "./components/shared-input/shared-input.component";
-import { NavComponent } from './components/nav/nav.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { SidebarComponent } from "./components/sidebar/sidebar.component";
 
 @NgModule({
   declarations: [
-    SharedInputComponent, 
-    NotFoundComponent, 
-    SharedCardComponent, 
-    NavComponent, 
-    SidebarComponent
+    SharedInputComponent,
+    NotFoundComponent,
+    SharedCardComponent,
+    NavComponent,
+    SidebarComponent,
+    BreadcrumbsComponent,
   ],
   imports: [
     CommonModule,
@@ -101,7 +103,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     MatSelect,
     SharedCardComponent,
     NavComponent,
-    SidebarComponent
+    SidebarComponent,
+    BreadcrumbsComponent,
   ],
 })
 export class SharedModule {}

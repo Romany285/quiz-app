@@ -1,0 +1,99 @@
+<section>
+  <div class="container">
+    <div class="row bord-bottm" >
+      <div class="col-10 py-3"><h4 class="ps-3 pt-2 fw-bold">Set up a new quiz</h4></div>
+      <div class="col-1 bord-inline py-3 save-btn"  mat-button [mat-dialog-close]="data"  >
+        <button class="border-0 bg-transparent ">
+          <i class="fa-solid fa-check fs-3 pt-2"></i>
+        </button>
+      </div>
+      <div class="col-1 py-3 close-btn" (click)="onNoClick()">
+        <button class="border-0 bg-transparent ">
+          <i class="fa-solid fa-xmark fs-3 pt-2 ps-1"></i>
+        </button>
+      </div>
+    </div>
+    <div class="m-5 mx-3">
+      <h4>Details</h4>
+        <div class="row">
+          <div class="col-12">
+            <div class="input-group mb-4">
+              <span class="input-group-text pe-4">Title</span>
+              <input type="text" class="form-control" [(ngModel)]="data.title">
+          </div>
+          </div>
+          <div class="col-4">
+            <div class="input-group mb-4">
+              <span class="input-group-text">Duration (in minutes)</span>
+              <select class="form-select" aria-label="Small select example" [(ngModel)]="data.duration">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+          </div>
+          </div>
+          <div class="col-4">
+            <div class="input-group mb-4">
+              <span class="input-group-text">No. of questions</span>
+              <select class="form-select" aria-label="Small select example" [(ngModel)]="data.questions_number" >
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+          </div>
+          </div>
+          <div class="col-4">
+            <div class="input-group mb-4">
+              <span class="input-group-text">Score per question</span>
+              <select class="form-select" aria-label="Small select example" [(ngModel)]="data.score_per_question">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+          </div>
+          </div>
+          <div class="col-12">
+            <div class="input-group mb-4">
+              <span class="input-group-text pe-4">Description</span>
+              <textarea name="" id="" class="form-control" [(ngModel)]="data.description"></textarea>
+          </div>
+          </div>
+          <div class="col-7">
+            <div class="input-group mb-4">
+              <span class="input-group-text">Schedule</span>
+              <input type="date" class="form-control" [(ngModel)]="data.schadule">
+          </div>
+          </div>
+          <div class="col-5"></div>
+          <div class="col-4">
+            <div class="input-group mb-4">
+              <span class="input-group-text">Difficulty level</span>
+              <select class="form-select" aria-label="Small select example" [(ngModel)]="data.difficulty">
+                <option value="easy" selected>Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Medium</option>
+              </select>
+          </div>
+          </div>
+          <div class="col-4">
+            <div class="input-group mb-4">
+              <span class="input-group-text">Category type</span>
+              <select class="form-select" aria-label="Small select example" [(ngModel)]="data.type">
+                <option value="FE" selected>FE</option>
+                <option value="BE">BE</option>
+                <option value="DO">DO</option>
+              </select>
+          </div>
+          </div>
+          <div class="col-4">
+            <div class="input-group mb-4" >
+              <span class="input-group-text">Group name</span>
+              <select class="form-select" aria-label="Small select example" [(ngModel)]="data.group">
+                <option  *ngFor="let group of data.groups" [value]="group._id">{{group.name}}</option>
+              </select>
+          </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
