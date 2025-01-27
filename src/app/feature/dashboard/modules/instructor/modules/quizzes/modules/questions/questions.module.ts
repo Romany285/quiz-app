@@ -12,6 +12,7 @@ import { AddEditViewComponent } from './components/add-edit-view/add-edit-view.c
 import { AddQuestionComponent } from './components/add-question/add-question.component';
 import { EditQuestionComponent } from './components/edit-question/edit-question.component';
 import { DeleteQuestionComponent } from './components/delete-question/delete-question.component';
+import { ViewQuestionComponent } from './components/view-question/view-question.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { DeleteQuestionComponent } from './components/delete-question/delete-que
     AddEditViewComponent,
     AddQuestionComponent,
     EditQuestionComponent,
-    DeleteQuestionComponent
+    DeleteQuestionComponent,
+    ViewQuestionComponent
   ],
   imports: [
     CommonModule,
