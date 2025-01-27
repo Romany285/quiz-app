@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { IUpcomingCompleteQuizApiResponse } from "../../../../../../../shared/interfaces/upcoming-completed-quiz.interface";
 import { IQuiz, IQuizApiInterface } from "../interfaces/quiz.interface";
-import { IUpcomingCompleteQuizApiResponse } from "../interfaces/upcoming-completed-quiz.interface";
 
 @Injectable({
   providedIn: "root",

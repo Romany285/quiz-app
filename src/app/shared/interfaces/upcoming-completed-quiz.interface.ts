@@ -17,13 +17,14 @@ export interface IUpcomingCompleteQuizApiResponse {
   createdAt: string;
   __v: number;
   closed_at?: string;
-  participants: number;
+  participants?: number;
 }
 
 export interface Question {
   _id: string;
   title: string;
   options: Options;
+  answer?: string;
 }
 
 export interface Options {

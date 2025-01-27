@@ -18,10 +18,13 @@ import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatRadioModule } from "@angular/material/radio";
 import { MatSelect, MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatSortModule } from "@angular/material/sort";
+import { MatStepperModule } from "@angular/material/stepper";
 import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { RouterModule } from "@angular/router";
@@ -72,6 +75,9 @@ import { UpdateProfileComponent } from './components/update-profile/update-profi
     MatSlideToggleModule,
     MatFormField,
     MatSelect,
+    MatStepperModule,
+    MatRadioModule,
+    MatProgressBarModule,
   ],
   exports: [
     CommonModule,
@@ -107,6 +113,9 @@ import { UpdateProfileComponent } from './components/update-profile/update-profi
     NavComponent,
     SidebarComponent,
     BreadcrumbsComponent,
+    MatStepperModule,
+    MatRadioModule,
+    MatProgressBarModule,
   ],
 })
 export class SharedModule {}

@@ -23,8 +23,7 @@ const routes: Routes = [
         component: UpdateProfileComponent
       },
       {
-        path: "",
-        canActivate: [studentGuard],
+        path: "student",
         loadChildren: () =>
           import("./modules/student/student.module").then(
             (m) => m.StudentModule

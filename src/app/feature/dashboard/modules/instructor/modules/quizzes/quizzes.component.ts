@@ -1,4 +1,3 @@
- 
 import { Component, OnInit } from '@angular/core';
 import { AddEditQuizComponent } from './components/add-edit-quiz/add-edit-quiz.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,13 +21,14 @@ export class QuizzesComponent implements OnInit{
  headers: string[] = [
     "Title",
     "Status",
-    "Close at",
     "Description",
     "Type",
     "Question no.",
     "Difficulty",
     "Duration",
   ];
+  upcomingHeaders = this.headers;
+  completedHeaders = this.headers.concat(["Closed at"]);
   allGroups:any
   constructor(private dialog: MatDialog,private _quizzesService:QuizzesService,private _groupsService:GroupsService,private _toastrService:ToastrService){}
   ngOnInit(): void {
