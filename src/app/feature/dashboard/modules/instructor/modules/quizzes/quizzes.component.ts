@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { IUpcomingCompleteQuizApiResponse } from "../../../../../../shared/interfaces/upcoming-completed-quiz.interface";
 import { GroupsService } from "../groups/services/groups.service";
 import { AddEditQuizComponent } from "./components/add-edit-quiz/add-edit-quiz.component";
-import { IUpcomingCompleteQuizApiResponse } from "./interfaces/upcoming-completed-quiz.interface";
 import { QuizzesService } from "./services/quizzes.service";
 
 @Component({

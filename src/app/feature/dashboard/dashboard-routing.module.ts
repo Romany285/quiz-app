@@ -18,7 +18,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: "",
+        path: "student",
         canActivate: [studentGuard],
         loadChildren: () =>
           import("./modules/student/student.module").then(
