@@ -1,39 +1,37 @@
+<div class="timer">
+  <h3>Time Remaining: {{ countdown$ | async }}</h3>
+</div>
+
 <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input
-          matInput
-          placeholder="Last name, First name"
-          formControlName="firstCtrl"
+  <ng-container *ngIf="quizData?.data?.questions">
+    <mat-step
+      *ngFor="let quiz of quizData?.data?.questions; let i = index"
+      [stepControl]="quizForm.controls['question_{{ i }}']!"
+    >
+      <form [formGroup]="quizForm" (ngSubmit)="onSubmit()">
+        <ng-template matStepLabel>Question {{ i + 1 }}</ng-template>
+        <h5>{{ quiz.title }}?</h5>
+
+        <mat-radio-group
+          formControlName="question_{{ i }}"
+          (change)="onChoiceSelected(i)"
           required
-        />
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input
-          matInput
-          formControlName="secondCtrl"
-          placeholder="Ex. 1 Main St, New York, NY"
-          required
-        />
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
+        >
+          <mat-radio-button
+            *ngFor="let option of getOptions(quiz.options)"
+            [value]="option.key"
+          >
+            {{ option.key }}: {{ option.value }}
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+  </ng-container>
+
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>
@@ -41,5 +39,7 @@
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button (click)="stepper.reset()">Reset</button>
     </div>
+    <button mat-button type="submit">Submit</button>
   </mat-step>
 </mat-stepper>
+<mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>

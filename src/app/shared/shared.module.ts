@@ -18,7 +18,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from "@angular/material/list";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatRadioModule } from "@angular/material/radio";
 import { MatSelect, MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatSortModule } from "@angular/material/sort";
@@ -32,7 +34,6 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { SharedCardComponent } from "./components/shared-card/shared-card.component";
 import { SharedInputComponent } from "./components/shared-input/shared-input.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
-
 @NgModule({
   declarations: [
     SharedInputComponent,
@@ -72,6 +73,8 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
     MatFormField,
     MatSelect,
     MatStepperModule,
+    MatRadioModule,
+    MatProgressBarModule,
   ],
   exports: [
     CommonModule,
@@ -108,6 +111,8 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
     SidebarComponent,
     BreadcrumbsComponent,
     MatStepperModule,
+    MatRadioModule,
+    MatProgressBarModule,
   ],
 })
 export class SharedModule {}
