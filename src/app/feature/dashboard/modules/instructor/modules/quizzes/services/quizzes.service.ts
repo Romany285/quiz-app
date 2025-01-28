@@ -9,11 +9,11 @@ import { IUpcomingCompleteQuizApiResponse } from "../interfaces/upcoming-complet
 })
 export class QuizzesService {
   constructor(private _httpClient: HttpClient) {}
-  addQuiz(data: IQuiz): Observable<IQuizApiInterface> {
-    return this._httpClient.post<IQuizApiInterface>("quiz", data);
+  addQuiz(data: IQuiz): Observable<any> {
+    return this._httpClient.post("quiz", data);
   }
   updateQuiz(id:string,data: any): Observable<any> {
-    return this._httpClient.put(`quiz${id}`, data);
+    return this._httpClient.put(`quiz/${id}`, data);
   }
   deleteQuiz(id: string): Observable<any> {
     return this._httpClient.delete(`quiz/${id}`);
