@@ -32,7 +32,7 @@ export class SidebarComponent {
   }
   menu: IMenu[] = [
     {
-      link: "dashboard",
+      link: this.isInstructor() ? "dashboard" : "dashboard/student",
       icon: "Dashboard-icon",
       text: "Dashboard",
       isActive: this.isInstructor() || this.isStudent(),
@@ -50,16 +50,20 @@ export class SidebarComponent {
       isActive: this.isInstructor(),
     },
     {
-      link: "dashboard/quizzes",
+      link: this.isInstructor()
+        ? "dashboard/quizzes"
+        : "dashboard/student/exams",
       icon: "Quizzes-icon",
       text: "Quizzes",
       isActive: this.isInstructor() || this.isStudent(),
     },
     {
-      link: "dashboard/results",
+      link: this.isInstructor()
+        ? "dashboard/results"
+        : "dashboard/student/results",
       icon: "Results-icon",
       text: "Results",
       isActive: this.isInstructor() || this.isStudent(),
-    }
+    },
   ];
 }

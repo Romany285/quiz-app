@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { interval, Observable, Subscription } from "rxjs";
 import { map, take } from "rxjs/operators";
@@ -7,8 +8,12 @@ import {
   IUpcomingCompleteQuizApiResponse,
   Options,
 } from "../../../../../../shared/interfaces/upcoming-completed-quiz.interface";
+import { SubmitDialogComponent } from "./components/submit-dialog/submit-dialog.component";
 import { IAnswer } from "./interfaces/answer.interface";
-import { ISubmitAnswerApiResponse } from "./interfaces/submit-answer-response.interface";
+import {
+  ISubmitAnswer,
+  ISubmitAnswerApiResponse,
+} from "./interfaces/submit-answer-response.interface";
 import { ExamService } from "./services/exam.service";
 
 @Component({
@@ -23,15 +28,16 @@ export class ExamsComponent implements OnInit {
   isLinear = false;
   progress: number = 0;
   answers: IAnswer[] = [];
-  duration: number = 60; // Default duration in minutes
+  duration: number = 60;
   countdown$: Observable<string> = new Observable<string>();
   countdownSubscription: Subscription = new Subscription();
-
+  submitionData: ISubmitAnswer | null = null;
   constructor(
     private _formBuilder: FormBuilder,
     private _ExamsService: ExamService,
     private _Route: ActivatedRoute,
-    private _Router: Router
+    private _Router: Router,
+    public dialog: MatDialog
   ) {
     this.id = this._Route.snapshot.params["id"];
     this.quizForm = this._formBuilder.group({});
@@ -88,7 +94,8 @@ export class ExamsComponent implements OnInit {
         .subscribe({
           next: (res: ISubmitAnswerApiResponse) => {
             console.log("Form submitted successfully", res);
-            this.showSubmissionPopup(res.data.score);
+            this.submitionData = res.data;
+            this.openDialog();
           },
           error: (err) => {
             console.log("Error submitting form", err);
@@ -159,7 +166,9 @@ export class ExamsComponent implements OnInit {
       .subscribe({
         next: (res: ISubmitAnswerApiResponse) => {
           console.log("Time's up! Form submitted successfully", res);
-          this.showSubmissionPopup(res.data.score);
+          this.submitionData = res.data;
+
+          this.openDialog();
         },
         error: (err) => {
           console.log("Error submitting form", err);
@@ -167,12 +176,18 @@ export class ExamsComponent implements OnInit {
       });
   }
 
-  // Show submission popup
-  showSubmissionPopup(score: number) {
-    alert(
-      `You have already submitted the quiz. Your score is ${score} out of ${
-        this.quizData?.data?.questions_number! * score
-      }.`
-    );
+  openDialog(): void {
+    const dialogRef = this.dialog.open(SubmitDialogComponent, {
+      width: "400px",
+      data: { data: this.submitionData, quizData: this.quizData },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== null) {
+        this._Router.navigate(["/dashboard/student/exams"]);
+        localStorage.removeItem("quizStartTime");
+        console.log("The dialog was closed", result);
+      }
+    });
   }
 }
