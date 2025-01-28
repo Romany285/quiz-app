@@ -6,6 +6,8 @@ import { AddEditViewComponent } from "../../components/add-edit-view/add-edit-vi
 import { DeleteItemComponent } from "../../components/delete-item/delete-item.component";
 import { StudentsService } from "../students/services/students.service";
 import { GroupsService } from "./services/groups.service";
+import { IStudent } from "../students/interfaces/student.interface";
+import { IGroup } from "./interfaces/IGroup";
 
 @Component({
   selector: "app-groups",
@@ -13,9 +15,9 @@ import { GroupsService } from "./services/groups.service";
   styleUrl: "./groups.component.scss",
 })
 export class GroupsComponent implements OnInit {
-  groupsData: any;
-  studentsWithoutGroup: any;
-  resMessage: any;
+  groupsData: IGroup[]=[];
+  studentsWithoutGroup: IStudent[]=[];
+  resMessage: string='';
   groupsActions = [
     { label: "Update", action: "update" },
     { label: "Delete", action: "delete", isDanger: true },
