@@ -5,7 +5,7 @@ import { StudentComponent } from "./student.component";
 const routes: Routes = [
   { path: "", component: StudentComponent },
   {
-    path: "exam",
+    path: "exams",
     loadChildren: () =>
       import("./modules/exams/exams.module").then((m) => m.ExamsModule),
   },
