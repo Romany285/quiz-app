@@ -19,6 +19,14 @@
         <td>{{ quiz.questions_number }}</td>
         <td>{{ quiz.difficulty }}</td>
         <td>{{ quiz.duration }} min</td>
+        <td>
+          <a [routerLink]="'/quizzes/view/' + quiz._id">
+            <i
+              class="fa-solid fa-eye"
+              style="cursor: pointer; color: orange"
+            ></i
+          ></a>
+        </td>
       </tr>
       }
     </tbody>

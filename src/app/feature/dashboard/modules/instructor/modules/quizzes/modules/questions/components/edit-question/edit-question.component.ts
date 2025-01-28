@@ -58,6 +58,7 @@ export class EditQuestionComponent {
           },
           complete:() => {
             this._toastrService.success(this.resMessage)
+            this.onNoClick()
         },
       })
     }

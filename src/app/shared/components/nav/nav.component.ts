@@ -6,6 +6,7 @@ import { GroupsService } from "../../../feature/dashboard/modules/instructor/mod
 import { MatDialog } from "@angular/material/dialog";
 import { ToastrService } from "ngx-toastr";
 import { CodeQuizComponent } from "../../../feature/dashboard/modules/instructor/modules/quizzes/components/code-quiz/code-quiz.component";
+import { HelperServiceService } from './../../services/helper service/helper-service.service';
 
 @Component({
   selector: "app-nav",
@@ -20,7 +21,13 @@ export class NavComponent implements OnInit {
   allGroups:any;
   resMessage:string = '';
   code:string = ''
-  constructor(private dialog: MatDialog,private _toastrService:ToastrService,private _quizzesService:QuizzesService,private _groupsService:GroupsService){}
+  constructor(private _helperService:HelperServiceService,private dialog: MatDialog,private _toastrService:ToastrService,private _quizzesService:QuizzesService,private _groupsService:GroupsService){}
+
+  
+
+  toggleSidebar() {
+    this._helperService.toggleSidebar();
+  }
   ngOnInit(): void {
     this.updateTime(); 
     this.getAllGroups();
@@ -33,7 +40,7 @@ export class NavComponent implements OnInit {
     }
   }
 
-  private updateTime(): void {
+  updateTime(): void {
     const now = new Date();
     this.currentTime = now.toLocaleTimeString(); 
   }
@@ -90,4 +97,11 @@ export class NavComponent implements OnInit {
         }
       });
     }
+}
+  logout(){
+    localStorage.removeItem('email')
+    localStorage.removeItem('name')
+    localStorage.removeItem('role')
+    localStorage.removeItem('token')
+  }
 }

@@ -22,33 +22,39 @@ export class QuizzesComponent implements OnInit{
   code:string = ''
  upcomingQuizzes: IUpcomingCompleteQuizApiResponse[] = [];
   completedQuizzes: IUpcomingCompleteQuizApiResponse[] = [];
- headers: string[] = [
+  headers: string[] = [
     "Title",
     "Status",
-    "Close at",
     "Description",
     "Type",
     "Question no.",
     "Difficulty",
     "Duration",
   ];
-  allGroups:any
-  constructor(private dialog: MatDialog,private _quizzesService:QuizzesService,private _groupsService:GroupsService,private _toastrService:ToastrService){}
+  upcomingHeaders = this.headers;
+  completedHeaders = this.headers.concat(["Closed at"]);
+  allGroups: any;
+  constructor(
+    private dialog: MatDialog,
+    private _quizzesService: QuizzesService,
+    private _groupsService: GroupsService,
+    private _toastrService: ToastrService
+  ) {}
   ngOnInit(): void {
     this.getUpcomingQuizzes();
     this.getCompletedQuizzes();
-    this.getAllGroups()
+    this.getAllGroups();
   }
-  getAllGroups(){
+  getAllGroups() {
     this._groupsService.getAllGroups().subscribe({
-      next:(res)=>{
-        this.allGroups=res
-        console.log(res,'oooo');
+      next: (res) => {
+        this.allGroups = res;
+        console.log(res, "oooo");
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err);
-      }
-    })
+      },
+    });
   }
   openAddQuizDialog(): void {
     const dialogRef = this.dialog.open(AddEditQuizComponent, {
@@ -69,9 +75,10 @@ export class QuizzesComponent implements OnInit{
         this.resMessage = res.message
         this.code = res.data.code
         console.log( res.data.code,'code');
+      
       },
-      error:(err)=>{
-        this._toastrService.error(err.error.message)
+      error: (err) => {
+        this._toastrService.error(err.error.message);
         console.log(err);
       },complete:() =>{
         this._toastrService.success(this.resMessage)
@@ -113,3 +120,8 @@ export class QuizzesComponent implements OnInit{
     });
   }
   }
+      },
+      
+  
+  
+}

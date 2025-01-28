@@ -1,0 +1,45 @@
+<div class="timer">
+  <h3>Time Remaining: {{ countdown$ | async }}</h3>
+</div>
+
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+  <ng-container *ngIf="quizData?.data?.questions">
+    <mat-step
+      *ngFor="let quiz of quizData?.data?.questions; let i = index"
+      [stepControl]="quizForm.controls['question_{{ i }}']!"
+    >
+      <form [formGroup]="quizForm" (ngSubmit)="onSubmit()">
+        <ng-template matStepLabel>Question {{ i + 1 }}</ng-template>
+        <h5>{{ quiz.title }}?</h5>
+
+        <mat-radio-group
+          formControlName="question_{{ i }}"
+          (change)="onChoiceSelected(i)"
+          required
+        >
+          <mat-radio-button
+            *ngFor="let option of getOptions(quiz.options)"
+            [value]="option.key"
+          >
+            {{ option.key }}: {{ option.value }}
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+  </ng-container>
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+    <button mat-button type="submit">Submit</button>
+  </mat-step>
+</mat-stepper>
+<mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>

@@ -46,6 +46,17 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+:root {
+  --mat-stepper-header-selected-state-icon-background-color: pink;
+  --mat-stepper-header-selected-state-icon-foreground-color: black;
+  --mat-stepper-header-edit-state-icon-background-color: black;
+  --mdc-linear-progress-active-indicator-height: 1rem;
+  --mdc-linear-progress-track-height: 1rem;
+}
+.mdc-linear-progress__bar-inner {
+  border-color: black !important;
+}
 @import "assets/sass/main.scss";
 
 input[type="number"] {
