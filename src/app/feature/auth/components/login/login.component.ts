@@ -25,7 +25,11 @@ export class LoginComponent {
         this._AuthService.getProfile();
       },
       complete: () => {
-        this._Router.navigate(["/dashboard"]);
+        if (localStorage.getItem("role") === "Instructor") {
+          this._Router.navigate(["/dashboard"]);
+        } else {
+          this._Router.navigate(["/dashboard/student"]);
+        }
       },
     });
   }

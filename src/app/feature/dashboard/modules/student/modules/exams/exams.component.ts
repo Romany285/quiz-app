@@ -174,6 +174,10 @@ export class ExamsComponent implements OnInit {
 
   // Show submission popup
   showSubmissionPopup(score: number) {
-    alert(`You have already submitted the quiz. Your score is ${score}.`);
+    alert(
+      `You have already submitted the quiz. Your score is ${score} out of ${
+        this.quizData?.data?.questions_number! * score
+      }.`
+    );
   }
 }
