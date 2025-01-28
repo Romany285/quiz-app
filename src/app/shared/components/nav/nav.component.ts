@@ -97,11 +97,12 @@ export class NavComponent implements OnInit {
         }
       });
     }
+    logout(){
+      localStorage.removeItem('email')
+      localStorage.removeItem('name')
+      localStorage.removeItem('role')
+      localStorage.removeItem('token')
+    }
 }
-  logout(){
-    localStorage.removeItem('email')
-    localStorage.removeItem('name')
-    localStorage.removeItem('role')
-    localStorage.removeItem('token')
-  }
-}
+  
+

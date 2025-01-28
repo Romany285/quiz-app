@@ -6,9 +6,10 @@ import { QuizzesService } from './services/quizzes.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GroupsService } from '../groups/services/groups.service';
 import { ToastrService } from 'ngx-toastr';
-import { IUpcomingCompleteQuizApiResponse } from "./interfaces/upcoming-completed-quiz.interface";
+ 
 import { CodeQuizComponent } from './components/code-quiz/code-quiz.component';
 import { IQuiz } from './interfaces/quiz.interface';
+import { IUpcomingCompleteQuizApiResponse } from '../../../../../../shared/interfaces/upcoming-completed-quiz.interface';
 
 @Component({
   selector: "app-quizzes",
@@ -120,8 +121,3 @@ export class QuizzesComponent implements OnInit{
     });
   }
   }
-      },
-      
-  
-  
-}
