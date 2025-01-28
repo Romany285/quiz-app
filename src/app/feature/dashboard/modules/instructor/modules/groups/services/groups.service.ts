@@ -1,16 +1,18 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { IGroup } from "../interfaces/IGroup";
+import { IAddEdit } from "../interfaces/IAddEdit";
 
 @Injectable({
   providedIn: "root",
 })
 export class GroupsService {
   constructor(private _HttpClient: HttpClient) {}
-  getAllGroups(): Observable<any> {
-    return this._HttpClient.get("group");
+  getAllGroups(): Observable<IGroup[]> {
+    return this._HttpClient.get<IGroup[]>("group");
   }
-  addGroup(data: any): Observable<any> {
+  addGroup(data: IAddEdit): Observable<any> {
     return this._HttpClient.post("group", data);
   }
   updateGroup(
