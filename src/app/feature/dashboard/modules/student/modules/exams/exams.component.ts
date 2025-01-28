@@ -45,10 +45,10 @@ export class ExamsComponent implements OnInit {
     this._ExamsService.getQuestionWithNoAnswer(quizId).subscribe({
       next: (res) => {
         this.quizData = { data: res.data };
-        this.duration = this.quizData?.data?.duration || 60; // Default to 60 if duration is not provided
+        this.duration = this.quizData?.data?.duration || 60;
         this.initializeForm();
-        this.updateProgress({ selectedIndex: 0 }); // Update progress on load
-        this.initializeTimer(); // Initialize the timer after setting the duration
+        this.updateProgress({ selectedIndex: 0 });
+        this.initializeTimer();
       },
     });
   }
@@ -99,7 +99,6 @@ export class ExamsComponent implements OnInit {
     }
   }
 
-  // Initialize the timer
   initializeTimer() {
     const savedStartTime = localStorage.getItem("quizStartTime");
     const currentTime = new Date().getTime();
@@ -123,9 +122,9 @@ export class ExamsComponent implements OnInit {
     this.countdown$ = interval(1000).pipe(
       take(totalSeconds),
       map((elapsed) => {
-        const remaining = Math.max(totalSeconds - elapsed, 0); // Ensure no negative values
+        const remaining = Math.max(totalSeconds - elapsed, 0);
         const minutes = Math.floor(remaining / 60);
-        const seconds = Math.floor(remaining % 60); // Round to nearest whole number
+        const seconds = Math.floor(remaining % 60);
         if (remaining === 0) {
           this.timeUp();
         }
@@ -135,7 +134,6 @@ export class ExamsComponent implements OnInit {
     this.countdownSubscription = this.countdown$.subscribe();
   }
 
-  // Update the progress bar based on the current step and user choice
   onChoiceSelected(index: number) {
     const totalSteps = this.quizData?.data?.questions.length || 1;
     const completedSteps = Object.keys(this.quizForm.controls).filter(
@@ -149,16 +147,13 @@ export class ExamsComponent implements OnInit {
     this.progress = ((event.selectedIndex + 1) / totalSteps) * 100;
   }
 
-  // Pad numbers with leading zeros if necessary
   pad(num: number): string {
     return num < 10 ? "0" + num : num.toString();
   }
 
-  // Handle time up scenario
   timeUp() {
     this.countdownSubscription.unsubscribe();
-    this._Router.navigate(["/quiz"]);
-    // Optionally, you can show the score directly
+    this._Router.navigate(["/dashboard/student/exams"]);
     this._ExamsService
       .submitAnswers(this.id, { answers: this.prepareSubmissionData() })
       .subscribe({
