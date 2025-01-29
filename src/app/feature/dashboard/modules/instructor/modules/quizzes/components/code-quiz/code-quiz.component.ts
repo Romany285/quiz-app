@@ -14,4 +14,11 @@ constructor(
   onNoClick(): void {
     this.dialogRef.close();
   }
+  copyInputMessage(inputElement:HTMLInputElement){
+    inputElement.disabled = false
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+    inputElement.disabled = true
+  }
 }

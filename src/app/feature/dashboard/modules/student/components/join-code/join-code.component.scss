@@ -1,14 +1,6 @@
-@import "../../../../../../../../../assets/sass/abstracts/variables";
-i{
-  color: white;
-  background-color: black;
-  border-radius: 50% 50%;
-  padding: 15px;
-  font-size: 45px;
-   
-}
+@import "../../../../../../../assets/sass/abstracts/variables";
 .input-group{
-  --bs-border-radius:20px;
+  --bs-border-radius:15px;
 }
 .input-group-text{
   background-color: $auth-text-color;
@@ -29,11 +21,10 @@ i{
   padding: 5px;
   background-color: white;
   color: black;
-  cursor: pointer;
 }
-.close-button{
-  background-color: rgba(197, 216, 109, 1);
-  padding-inline:20px ;
-  border-radius: 20px;
+.bord-inline{
+  border-inline: 1px rgba(0, 0, 0, 0.25) solid;
 }
- 
+.bord-bottm{
+  border-bottom: 1px rgba(0, 0, 0, 0.25) solid;
+}
