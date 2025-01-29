@@ -57,8 +57,41 @@
                 ></app-shared-input>
               </div>
               } }
-            </div>
-            <div class="d-flex justify-content-between align-items-center">
+              <!-- <div class="alert alert-danger" *ngIf="authForm.invalid"> -->
+                @if (authForm.get('email')?.hasError('required')) {
+                  <p class="error">email is required</p>
+                }
+                @if (authForm.get('email')?.hasError('email')) {
+                  <p class="error">email is not valid</p>
+                }
+                @if (authForm.get('password')?.hasError('required')) {
+                  <p class="error">password is required</p>
+                }
+                @if (authForm.get('password')?.hasError('minlength')) {
+                  <p class="error">Password must be at least 6 characters long</p>
+                }
+                @if (authForm.get('newPassword')?.hasError('required')) {
+                  <p class="error">new password is required</p>
+                }
+                @if (authForm.get('otp')?.hasError('required')) {
+                  <p class="error">otp is required</p>
+                }
+                @if (authForm.get('resetRequestPassword')?.hasError('required')) {
+                  <p class="error">new password is required</p>
+                }
+                @if (authForm.get('first_name')?.hasError('required')) {
+                  <p class="error">first name is required</p>
+                }
+                @if (authForm.get('last_name')?.hasError('required')) {
+                  <p class="error">last name is required</p>
+                }
+                @if (authForm.get('role')?.hasError('required')) {
+                  <p class="error">role is required</p>
+                }
+
+              </div>
+            <!-- </div> -->
+              <div class="d-flex justify-content-between align-items-center">
               <button
                 class="auth-button"
                 type="submit"
