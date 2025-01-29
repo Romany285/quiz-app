@@ -4,11 +4,8 @@
       <div class="col-10 py-3">
         <h4 class="ps-3 pt-2">{{ data.title }}</h4>
       </div>
-      <div class="col-1 bord-inline py-3" (click)="onSubmit()">
-        <button
-          class="border-0 bg-transparent save-btn"
-          [disabled]="form.invalid"
-        >
+      <div class="col-1 bord-inline py-3 save-btn" (click)="onSubmit()">
+        <button class="border-0 bg-transparent" [disabled]="form.invalid">
           <i class="fa-solid fa-check fs-3 pt-2"></i>
         </button>
       </div>
@@ -55,7 +52,7 @@
                 }@if (field.name==='students' ) {
                 <mat-option [value]="option._id">{{ option }}</mat-option>
 
-                } @else {
+                } @if (field.name !== 'groups' && field.name !== 'students' ) {
                 <mat-option [value]="option._id">{{
                   option.first_name + " " + option.last_name
                 }}</mat-option>

@@ -18,6 +18,7 @@ export class QuizzesListComponent implements OnInit {
     "Question no.",
     "Difficulty",
     "Duration",
+    "Action",
   ];
   constructor(private _QuizzesService: QuizzesService) {}
   ngOnInit(): void {

@@ -1,9 +1,10 @@
 <section>
   <div class="container-fluid">
-    <div class="row pt-5">
-      <div class="col-6">
+    <div class="row p-3">
+      <div class="col-5">
         <div class="view-quiz">
-          <h3>Data Structures Quiz One</h3>
+          <h3 class="mb-0">Data Structures Quiz One</h3>
+          <p>{{quizData?.schadule | date : "dd/MM/yyyy HH:mm a" }}</p>
           <p></p>
           <div>
             <div class="input-group mb-4">
@@ -33,7 +34,7 @@
           </div>
           <div class="d-flex justify-content-between">
             <button class="black-btn bg-black text-white px-4" (click)="openUpdateQuizDialog(quizData)">Edit</button>
-            <button class="black-btn bg-danger text-white px-4">Delete</button>
+            <button class="black-btn bg-danger text-white px-4" (click)=" openDeleteDialog(quizData)">Delete</button>
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@ nav {
       font-size: 20px;
       font-weight: bold;
     }
-    .new-quiz  {
+    .new-quiz {
       button {
         border: 1px solid #0003;
         border-radius: 16px;
@@ -55,10 +55,10 @@ nav {
       border: none;
       outline: none;
       &::after {
-        content: "\f107"; 
-        font-family: "Font Awesome 6 Free"; 
+        content: "\f107";
+        font-family: "Font Awesome 6 Free";
         font-weight: 900;
-        margin-left: 8px; 
+        margin-left: 8px;
         border: none;
         color: #0003;
       }
@@ -79,6 +79,7 @@ nav {
         margin-bottom: 7px;
         &:hover {
           padding-left: 23px;
+          background-color: $auth-hover-color;
         }
       }
     }

@@ -1,0 +1,35 @@
+@import "../../../../../../../assets/sass/abstracts/variables";
+.join-icon{
+  border: 1px rgba(0, 0, 0, 0.25) solid;
+    border-radius: 15px;
+    padding: 25px 40px;
+    i{
+      font-size: 70px;
+    }
+    width: fit-content;
+    text-align: center;
+    cursor:pointer
+}
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  button {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.upcoming,
+.complete {
+  padding: 1rem;
+  border-radius: 0.7rem;
+  border: 1px solid $grey;
+}
+
+h3 {
+  span {
+    color: $auth-hover-color;
+    font-weight: bolder;
+  }
+}

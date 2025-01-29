@@ -6,7 +6,10 @@ import { QuizzesService } from './services/quizzes.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GroupsService } from '../groups/services/groups.service';
 import { ToastrService } from 'ngx-toastr';
-import { IUpcomingCompleteQuizApiResponse } from "./interfaces/upcoming-completed-quiz.interface";
+ 
+import { CodeQuizComponent } from './components/code-quiz/code-quiz.component';
+import { IQuiz } from './interfaces/quiz.interface';
+import { IUpcomingCompleteQuizApiResponse } from '../../../../../../shared/interfaces/upcoming-completed-quiz.interface';
 
 @Component({
   selector: "app-quizzes",
@@ -17,35 +20,42 @@ import { IUpcomingCompleteQuizApiResponse } from "./interfaces/upcoming-complete
  
 export class QuizzesComponent implements OnInit{
   resMessage:string = '';
+  code:string = ''
  upcomingQuizzes: IUpcomingCompleteQuizApiResponse[] = [];
   completedQuizzes: IUpcomingCompleteQuizApiResponse[] = [];
- headers: string[] = [
+  headers: string[] = [
     "Title",
     "Status",
-    "Close at",
     "Description",
     "Type",
     "Question no.",
     "Difficulty",
     "Duration",
   ];
-  allGroups:any
-  constructor(private dialog: MatDialog,private _quizzesService:QuizzesService,private _groupsService:GroupsService,private _toastrService:ToastrService){}
+  upcomingHeaders = this.headers;
+  completedHeaders = this.headers.concat(["Closed at"]);
+  allGroups: any;
+  constructor(
+    private dialog: MatDialog,
+    private _quizzesService: QuizzesService,
+    private _groupsService: GroupsService,
+    private _toastrService: ToastrService
+  ) {}
   ngOnInit(): void {
     this.getUpcomingQuizzes();
     this.getCompletedQuizzes();
-    this.getAllGroups()
+    this.getAllGroups();
   }
-  getAllGroups(){
+  getAllGroups() {
     this._groupsService.getAllGroups().subscribe({
-      next:(res)=>{
-        this.allGroups=res
-        console.log(res,'oooo');
+      next: (res) => {
+        this.allGroups = res;
+        console.log(res, "oooo");
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err);
-      }
-    })
+      },
+    });
   }
   openAddQuizDialog(): void {
     const dialogRef = this.dialog.open(AddEditQuizComponent, {
@@ -60,22 +70,25 @@ export class QuizzesComponent implements OnInit{
       }
     });
   }
-  addNewQuiz(data: any) {
+  addNewQuiz(data: IQuiz) {
     this._quizzesService.addQuiz(data).subscribe({
       next:(res)=>{
         this.resMessage = res.message
-        console.log(res);
+        this.code = res.data.code
+        console.log( res.data.code,'code');
+      
       },
-      error:(err)=>{
-        this._toastrService.error(err.error.message)
+      error: (err) => {
+        this._toastrService.error(err.error.message);
         console.log(err);
       },complete:() =>{
         this._toastrService.success(this.resMessage)
+        this.openCodeDialog(this.code)
       },
     })
        
-    };
-    getUpcomingQuizzes() {
+  };
+  getUpcomingQuizzes() {
       this._quizzesService.getUpcomingQuizzes().subscribe({
         next: (res) => {
           this.upcomingQuizzes = res;
@@ -84,8 +97,8 @@ export class QuizzesComponent implements OnInit{
           console.log(err);
         },
       });
-    }
-    getCompletedQuizzes() {
+  }
+  getCompletedQuizzes() {
       this._quizzesService.getCompletedQuizzes().subscribe({
         next: (res) => {
           this.completedQuizzes = res;
@@ -94,6 +107,17 @@ export class QuizzesComponent implements OnInit{
           console.log(err);
         },
       });
-    }
   }
- 
+  openCodeDialog(code:string):void{
+    const dialogRef = this.dialog.open(CodeQuizComponent, {
+      data: {code:code },
+      width: "30%",
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+         
+        console.log(result, "res");
+      }
+    });
+  }
+  }
