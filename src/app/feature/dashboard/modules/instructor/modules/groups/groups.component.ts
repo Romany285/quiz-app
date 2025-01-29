@@ -4,10 +4,10 @@ import { MatDialog } from "@angular/material/dialog";
 import { ToastrService } from "ngx-toastr";
 import { AddEditViewComponent } from "../../components/add-edit-view/add-edit-view.component";
 import { DeleteItemComponent } from "../../components/delete-item/delete-item.component";
-import { StudentsService } from "../students/services/students.service";
-import { GroupsService } from "./services/groups.service";
 import { IStudent } from "../students/interfaces/student.interface";
+import { StudentsService } from "../students/services/students.service";
 import { IGroup } from "./interfaces/IGroup";
+import { GroupsService } from "./services/groups.service";
 
 @Component({
   selector: "app-groups",
@@ -15,9 +15,9 @@ import { IGroup } from "./interfaces/IGroup";
   styleUrl: "./groups.component.scss",
 })
 export class GroupsComponent implements OnInit {
-  groupsData: IGroup[]=[];
-  studentsWithoutGroup: IStudent[]=[];
-  resMessage: string='';
+  groupsData: IGroup[] = [];
+  studentsWithoutGroup: IStudent[] = [];
+  resMessage: string = "";
   groupsActions = [
     { label: "Update", action: "update" },
     { label: "Delete", action: "delete", isDanger: true },
@@ -56,6 +56,7 @@ export class GroupsComponent implements OnInit {
   openDialogAddGroup(): void {
     const dialogRef = this.dialog.open(AddEditViewComponent, {
       data: {
+        title: "Add Group",
         fields: [
           {
             type: "text",
@@ -67,7 +68,9 @@ export class GroupsComponent implements OnInit {
             type: "select",
             label: "List Students",
             name: "students",
-            value: this.studentsWithoutGroup,
+            value: this.studentsWithoutGroup.map(
+              (student: any) => `${student.first_name} ${student.last_name}`
+            ),
             validators: [Validators.required],
           },
         ],

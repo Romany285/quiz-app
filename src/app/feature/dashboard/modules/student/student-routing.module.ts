@@ -3,10 +3,15 @@ import { RouterModule, Routes } from "@angular/router";
 import { StudentComponent } from "./student.component";
 import { ResultsComponent } from "./components/results/results.component";
 import { QuizzesComponent } from "./components/quizzes/quizzes.component";
+import { ChildDashboardComponent } from "../instructor/components/child-dashboard/child-dashboard.component";
 
 const routes: Routes = [
   {
-    path: "exam",
+    path: "",
+    component: ChildDashboardComponent,
+  },
+  {
+    path: "exams",
     loadChildren: () =>
       import("./modules/exams/exams.module").then((m) => m.ExamsModule),
   },

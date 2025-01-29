@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { interval, Observable, Subscription } from "rxjs";
 import { map, take } from "rxjs/operators";
@@ -7,8 +8,12 @@ import {
   IUpcomingCompleteQuizApiResponse,
   Options,
 } from "../../../../../../shared/interfaces/upcoming-completed-quiz.interface";
+import { SubmitDialogComponent } from "./components/submit-dialog/submit-dialog.component";
 import { IAnswer } from "./interfaces/answer.interface";
-import { ISubmitAnswerApiResponse } from "./interfaces/submit-answer-response.interface";
+import {
+  ISubmitAnswer,
+  ISubmitAnswerApiResponse,
+} from "./interfaces/submit-answer-response.interface";
 import { ExamService } from "./services/exam.service";
 
 @Component({
@@ -23,15 +28,16 @@ export class ExamsComponent implements OnInit {
   isLinear = false;
   progress: number = 0;
   answers: IAnswer[] = [];
-  duration: number = 60; // Default duration in minutes
+  duration: number = 60;
   countdown$: Observable<string> = new Observable<string>();
   countdownSubscription: Subscription = new Subscription();
-
+  submitionData: ISubmitAnswer | null = null;
   constructor(
     private _formBuilder: FormBuilder,
     private _ExamsService: ExamService,
     private _Route: ActivatedRoute,
-    private _Router: Router
+    private _Router: Router,
+    public dialog: MatDialog
   ) {
     this.id = this._Route.snapshot.params["id"];
     this.quizForm = this._formBuilder.group({});
@@ -45,10 +51,10 @@ export class ExamsComponent implements OnInit {
     this._ExamsService.getQuestionWithNoAnswer(quizId).subscribe({
       next: (res) => {
         this.quizData = { data: res.data };
-        this.duration = this.quizData?.data?.duration || 60; // Default to 60 if duration is not provided
+        this.duration = this.quizData?.data?.duration || 60;
         this.initializeForm();
-        this.updateProgress({ selectedIndex: 0 }); // Update progress on load
-        this.initializeTimer(); // Initialize the timer after setting the duration
+        this.updateProgress({ selectedIndex: 0 });
+        this.initializeTimer();
       },
     });
   }
@@ -88,7 +94,8 @@ export class ExamsComponent implements OnInit {
         .subscribe({
           next: (res: ISubmitAnswerApiResponse) => {
             console.log("Form submitted successfully", res);
-            this.showSubmissionPopup(res.data.score);
+            this.submitionData = res.data;
+            this.openDialog();
           },
           error: (err) => {
             console.log("Error submitting form", err);
@@ -99,7 +106,6 @@ export class ExamsComponent implements OnInit {
     }
   }
 
-  // Initialize the timer
   initializeTimer() {
     const savedStartTime = localStorage.getItem("quizStartTime");
     const currentTime = new Date().getTime();
@@ -123,9 +129,9 @@ export class ExamsComponent implements OnInit {
     this.countdown$ = interval(1000).pipe(
       take(totalSeconds),
       map((elapsed) => {
-        const remaining = Math.max(totalSeconds - elapsed, 0); // Ensure no negative values
+        const remaining = Math.max(totalSeconds - elapsed, 0);
         const minutes = Math.floor(remaining / 60);
-        const seconds = Math.floor(remaining % 60); // Round to nearest whole number
+        const seconds = Math.floor(remaining % 60);
         if (remaining === 0) {
           this.timeUp();
         }
@@ -135,7 +141,6 @@ export class ExamsComponent implements OnInit {
     this.countdownSubscription = this.countdown$.subscribe();
   }
 
-  // Update the progress bar based on the current step and user choice
   onChoiceSelected(index: number) {
     const totalSteps = this.quizData?.data?.questions.length || 1;
     const completedSteps = Object.keys(this.quizForm.controls).filter(
@@ -149,22 +154,21 @@ export class ExamsComponent implements OnInit {
     this.progress = ((event.selectedIndex + 1) / totalSteps) * 100;
   }
 
-  // Pad numbers with leading zeros if necessary
   pad(num: number): string {
     return num < 10 ? "0" + num : num.toString();
   }
 
-  // Handle time up scenario
   timeUp() {
     this.countdownSubscription.unsubscribe();
-    this._Router.navigate(["/quiz"]);
-    // Optionally, you can show the score directly
+    this._Router.navigate(["/dashboard/student/exams"]);
     this._ExamsService
       .submitAnswers(this.id, { answers: this.prepareSubmissionData() })
       .subscribe({
         next: (res: ISubmitAnswerApiResponse) => {
           console.log("Time's up! Form submitted successfully", res);
-          this.showSubmissionPopup(res.data.score);
+          this.submitionData = res.data;
+
+          this.openDialog();
         },
         error: (err) => {
           console.log("Error submitting form", err);
@@ -172,12 +176,18 @@ export class ExamsComponent implements OnInit {
       });
   }
 
-  // Show submission popup
-  showSubmissionPopup(score: number) {
-    alert(
-      `You have already submitted the quiz. Your score is ${score} out of ${
-        this.quizData?.data?.questions_number! * score
-      }.`
-    );
+  openDialog(): void {
+    const dialogRef = this.dialog.open(SubmitDialogComponent, {
+      width: "400px",
+      data: { data: this.submitionData, quizData: this.quizData },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== null) {
+        this._Router.navigate(["/dashboard/student/exams"]);
+        localStorage.removeItem("quizStartTime");
+        console.log("The dialog was closed", result);
+      }
+    });
   }
 }
