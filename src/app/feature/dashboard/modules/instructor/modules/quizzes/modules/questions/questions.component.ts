@@ -6,6 +6,7 @@ import { AddQuestionComponent } from './components/add-question/add-question.com
 import { IQuestion } from './models/IQuestion';
 import { EditQuestionComponent } from './components/edit-question/edit-question.component';
 import { DeleteQuestionComponent } from './components/delete-question/delete-question.component';
+import { ViewQuestionComponent } from './components/view-question/view-question.component';
 
 @Component({
   selector: 'app-questions',
@@ -32,6 +33,10 @@ export class QuestionsComponent {
       },
     })
   }
+  openDialogViewQuestion(question:IQuestion){
+    this.dialog.open(ViewQuestionComponent, {data: question})
+
+  }
   openDialogAddQuestions(){
     this.dialog.open(AddQuestionComponent)
   }
@@ -42,5 +47,10 @@ export class QuestionsComponent {
 
   openDialogDeleteQuestion(question:IQuestion){
     this.dialog.open(DeleteQuestionComponent, {data: question})
+    this.getAllQuestions()
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3dfc1df14a567fe6481a9cafed081a423766fc2c
