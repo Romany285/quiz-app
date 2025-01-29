@@ -17,12 +17,13 @@ export class ViewQuizComponent  implements OnInit{
   quizData?:IQuiz;
   resMessage:string = '';
   quizId:string=''
+ 
    constructor(private _QuizzesService:QuizzesService,private _router:Router, public dialog : MatDialog,private _ActivatedRoute:ActivatedRoute,private _toastrService:ToastrService){
     this.id =  this._ActivatedRoute.snapshot.params['id']
     this.getQuizById()
    }
   ngOnInit(): void {
-  
+  this.testQuizCloses()
   }
   getAllGroups(){
 
@@ -59,7 +60,7 @@ export class ViewQuizComponent  implements OnInit{
          }
        });
      }
-     UpdateQuiz(data: any) {
+     UpdateQuiz(data: IQuiz) {
        this._QuizzesService.updateQuiz(this.quizId,data).subscribe({
          next:(res)=>{
            this.resMessage = res.message
@@ -87,11 +88,11 @@ export class ViewQuizComponent  implements OnInit{
         if (result) {
           console.log(result,'ff');
           
-          this.deleteTask(result)
+          this.deleteQuiz(result)
         }
       });
     }
-    private deleteTask(id: string) {
+    private deleteQuiz(id: string) {
       this._QuizzesService.deleteQuiz(id).subscribe({
         next: (res) => {
           this.resMessage = res.message
@@ -103,5 +104,15 @@ export class ViewQuizComponent  implements OnInit{
           this._router.navigate(["/dashboard/quizzes/quizzes-list"]);
         }
       })
+    }
+    testQuizCloses(){
+        const now = new Date();
+        let currentTime = now.toLocaleTimeString(); 
+        if(this.quizData?.schadule! > currentTime){
+          return true
+        }
+        else{
+          return false
+        }
     }
 }

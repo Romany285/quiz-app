@@ -21,3 +21,12 @@
 border-left: 0px;
 border-color:#dee2e6;
 };
+p{
+  color: #c5d86d;
+  padding-left: 5px;
+  padding-block: 2px;
+  margin: 0px;
+}
+button:disabled{
+  color: rgba(0, 0, 0, 0.596);
+}

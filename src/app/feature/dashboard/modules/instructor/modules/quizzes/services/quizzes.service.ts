@@ -12,11 +12,11 @@ export class QuizzesService {
   addQuiz(data: IQuiz): Observable<any> {
     return this._httpClient.post("quiz", data);
   }
-  updateQuiz(id:string,data: any): Observable<any> {
-    return this._httpClient.put(`quiz/${id}`, data);
+  updateQuiz(id:string,data: IQuiz): Observable<IQuizApiInterface> {
+    return this._httpClient.put<IQuizApiInterface>(`quiz/${id}`, data);
   }
-  deleteQuiz(id: string): Observable<any> {
-    return this._httpClient.delete(`quiz/${id}`);
+  deleteQuiz(id: string): Observable<IQuizApiInterface> {
+    return this._httpClient.delete<IQuizApiInterface>(`quiz/${id}`);
   }
   getUpcomingQuizzes(): Observable<IUpcomingCompleteQuizApiResponse[]> {
     return this._httpClient.get<IUpcomingCompleteQuizApiResponse[]>(
