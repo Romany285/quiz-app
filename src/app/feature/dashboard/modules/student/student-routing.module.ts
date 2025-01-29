@@ -1,9 +1,12 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { StudentComponent } from "./student.component";
+import { ChildDashboardComponent } from "../instructor/components/child-dashboard/child-dashboard.component";
 
 const routes: Routes = [
-  { path: "", component: StudentComponent },
+  {
+    path: "",
+    component: ChildDashboardComponent,
+  },
   {
     path: "exams",
     loadChildren: () =>

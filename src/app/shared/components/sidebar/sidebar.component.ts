@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, EventEmitter, inject, Output } from "@angular/core";
 import { AuthService } from "../../../feature/auth/services/auth.service";
 import { HelperServiceService } from "../../services/helper service/helper-service.service";
 
@@ -18,6 +18,7 @@ export class SidebarComponent {
   private _authService = inject(AuthService);
   private _helperService = inject(HelperServiceService);
   isExpanded = false;
+  @Output() toggleSidebar = new EventEmitter<boolean>();
   ngOnInit() {
     this._helperService.isExpanded$.subscribe(
       (expanded) => (this.isExpanded = expanded)
@@ -66,4 +67,9 @@ export class SidebarComponent {
       isActive: this.isInstructor() || this.isStudent(),
     },
   ];
+
+  toggle() {
+    this.isExpanded = !this.isExpanded;
+    this.toggleSidebar.emit(this.isExpanded);
+  }
 }
