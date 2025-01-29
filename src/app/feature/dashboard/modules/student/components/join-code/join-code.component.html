@@ -1,14 +1,18 @@
 <section>
   <div class="container">
-    <div class="row bord-bottm" >
+    <div class="row bord-bottm">
       <div class="col-8 py-3"><h4 class="ps-3 pt-2 fw-bold">Join Quiz</h4></div>
-      <div class="col-2 bord-inline py-3 save-btn" (click)="handleForm()" >
-        <button class="border-0 bg-transparent ">
+      <div
+        class="col-2 bord-inline py-3 save-btn"
+        mat-dialog-close
+        (click)="handleForm()"
+      >
+        <button class="border-0 bg-transparent">
           <i class="fa-solid fa-check fs-2 pt-2 ps-3 border-0"></i>
         </button>
       </div>
       <div class="col-2 py-3 close-btn" (click)="onNoClick()">
-        <button class="border-0 bg-transparent ">
+        <button class="border-0 bg-transparent">
           <i class="fa-solid fa-xmark fs-2 pt-2 ps-3"></i>
         </button>
       </div>
@@ -18,10 +22,13 @@
       <form (ngSubmit)="handleForm()" [formGroup]="codeForm">
         <div class="input-group mb-4 w-75 mx-auto mt-2">
           <span class="input-group-text pe-4">CODE:</span>
-          <input type="text" class="form-control bg-white ps-3" formControlName="code">
+          <input
+            type="text"
+            class="form-control bg-white ps-3"
+            formControlName="code"
+          />
         </div>
       </form>
-    
     </div>
   </div>
 </section>

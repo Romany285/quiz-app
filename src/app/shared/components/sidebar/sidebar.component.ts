@@ -53,7 +53,7 @@ export class SidebarComponent {
     {
       link: this.isInstructor()
         ? "dashboard/quizzes"
-        : "dashboard/student/exams",
+        : "dashboard/student/quizzes",
       icon: "Quizzes-icon",
       text: "Quizzes",
       isActive: this.isInstructor() || this.isStudent(),
