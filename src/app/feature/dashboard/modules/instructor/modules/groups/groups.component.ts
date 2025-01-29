@@ -98,7 +98,7 @@ export class GroupsComponent implements OnInit {
     switch (action) {
       case "update":
         let students = this.studentsWithoutGroup.map(
-          (student: any) => `${student.first_name} ${student.last_name}`
+          (student: IStudent) => `${student.first_name} ${student.last_name}`
         );
         this.getStudentNames(data.students).then((studentNames) => {
           const dialogRef = this.dialog.open(AddEditViewComponent, {
@@ -128,7 +128,7 @@ export class GroupsComponent implements OnInit {
               this._GroupsService
                 .updateGroup(data._id, {
                   name: result.name,
-                  students: result.students.map((student: any) => student._id),
+                  students: result.students.map((student: IStudent) => student._id),
                 })
                 .subscribe({
                   error: (err) => {
