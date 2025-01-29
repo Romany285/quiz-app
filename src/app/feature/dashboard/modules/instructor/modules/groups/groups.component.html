@@ -1,8 +1,14 @@
 <section>
-  <div class="text-end p-3">
-    <button class="black-btn me-auto" (click)="openDialogAddGroup()">
-      <i class="fa-solid fa-circle-plus px-2 fs-5 mt-1"></i>Add Group
-    </button>
+  <div class="d-flex justify-content-between p-3 w-100">
+    <div class="  mt-2">
+      <app-breadcrumbs [currentRouterLink]="'Groups'" />
+    </div>
+    <div>
+      <button class="black-btn me-auto" (click)="openDialogAddGroup()">
+        <i class="fa-solid fa-circle-plus px-2 fs-5 mt-1"></i>Add Group
+      </button>
+    </div>
+   
   </div>
   <div class="groups-list m-3">
     <h2>Groups list</h2>

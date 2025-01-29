@@ -19,37 +19,40 @@
           <div class="col-12">
             <div class="input-group mb-4">
               <span class="input-group-text pe-4">Title</span>
-              <input type="text" class="form-control" [(ngModel)]="data.title">
+              <input type="text" class="form-control" [(ngModel)]="data.title" [value]="data.title">
           </div>
           </div>
           <div class="col-4">
             <div class="input-group mb-4">
               <span class="input-group-text">Duration (in minutes)</span>
-              <select class="form-select" aria-label="Small select example" [(ngModel)]="data.duration">
+              <input type="number" class="form-control" [(ngModel)]="data.duration">
+              <!-- <select class="form-select" aria-label="Small select example" [(ngModel)]="data.duration">
                 <option value="1" selected>1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
-              </select>
+              </select> -->
           </div>
           </div>
           <div class="col-4">
             <div class="input-group mb-4">
               <span class="input-group-text">No. of questions</span>
-              <select class="form-select" aria-label="Small select example" [(ngModel)]="data.questions_number" >
+              <input type="number" class="form-control" [(ngModel)]="data.questions_number">
+              <!-- <select class="form-select" aria-label="Small select example" [(ngModel)]="data.questions_number" >
                 <option value="1" selected>1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
-              </select>
+              </select> -->
           </div>
           </div>
           <div class="col-4">
             <div class="input-group mb-4">
               <span class="input-group-text">Score per question</span>
-              <select class="form-select" aria-label="Small select example" [(ngModel)]="data.score_per_question">
+              <input type="number" class="form-control" [(ngModel)]="data.score_per_question">
+              <!-- <select class="form-select" aria-label="Small select example" [(ngModel)]="data.score_per_question">
                 <option value="1" selected>1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
-              </select>
+              </select> -->
           </div>
           </div>
           <div class="col-12">
@@ -61,7 +64,7 @@
           <div class="col-7">
             <div class="input-group mb-4">
               <span class="input-group-text">Schedule</span>
-              <input type="date" class="form-control" [(ngModel)]="data.schadule">
+              <input type="datetime-local" class="form-control" [(ngModel)]="data.schadule">
           </div>
           </div>
           <div class="col-5"></div>

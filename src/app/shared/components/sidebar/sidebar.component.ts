@@ -1,5 +1,6 @@
-import { Component, inject } from "@angular/core";
+import { Component, EventEmitter, inject, Output } from "@angular/core";
 import { AuthService } from "../../../feature/auth/services/auth.service";
+import { HelperServiceService } from "../../services/helper service/helper-service.service";
 
 interface IMenu {
   link: string;
@@ -15,6 +16,15 @@ interface IMenu {
 })
 export class SidebarComponent {
   private _authService = inject(AuthService);
+  private _helperService = inject(HelperServiceService);
+  isExpanded = false;
+  @Output() toggleSidebar = new EventEmitter<boolean>();
+  ngOnInit() {
+    this._helperService.isExpanded$.subscribe(
+      (expanded) => (this.isExpanded = expanded)
+    );
+  }
+
   isInstructor(): boolean {
     return this._authService.role == "Instructor";
   }
@@ -23,7 +33,7 @@ export class SidebarComponent {
   }
   menu: IMenu[] = [
     {
-      link: "dashboard",
+      link: this.isInstructor() ? "dashboard" : "dashboard/student",
       icon: "Dashboard-icon",
       text: "Dashboard",
       isActive: this.isInstructor() || this.isStudent(),
@@ -41,22 +51,25 @@ export class SidebarComponent {
       isActive: this.isInstructor(),
     },
     {
-      link: "dashboard/quizzes",
+      link: this.isInstructor()
+        ? "dashboard/quizzes"
+        : "dashboard/student/quizzes",
       icon: "Quizzes-icon",
       text: "Quizzes",
       isActive: this.isInstructor() || this.isStudent(),
     },
     {
-      link: "dashboard/results",
+      link: this.isInstructor()
+        ? "dashboard/results"
+        : "dashboard/student/results",
       icon: "Results-icon",
       text: "Results",
       isActive: this.isInstructor() || this.isStudent(),
     },
-    {
-      link: "dashboard/help",
-      icon: "Help-icon",
-      text: "Help",
-      isActive: this.isInstructor() || this.isStudent(),
-    },
   ];
+
+  toggle() {
+    this.isExpanded = !this.isExpanded;
+    this.toggleSidebar.emit(this.isExpanded);
+  }
 }

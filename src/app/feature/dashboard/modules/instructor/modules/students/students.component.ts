@@ -187,10 +187,13 @@ export class StudentsComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((result) => {
               if (result !== undefined) {
+                console.log(result.groups);
+
                 this._StudentsService
                   .addStudentToGroup(data._id, result.groups)
                   .pipe(takeUntil(this.destroy$))
                   .subscribe({
+                    next: (res) => {},
                     error: (err) => {
                       console.log(err);
                     },

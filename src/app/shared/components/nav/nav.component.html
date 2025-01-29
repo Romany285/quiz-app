@@ -1,22 +1,45 @@
 <nav class="d-flex align-items-center justify-content-between g-5">
   <div class="logo">
-    <i class="fa-solid fa-bars"></i>
+    <i class="fa-solid fa-bars" (click)="toggleSidebar()"></i>
     <img src="../../../../assets/images/svg/logo-icon.svg" alt="" />
   </div>
   <div class="title d-flex justify-content-between align-items-center w-50">
     <h2>Dashboard</h2>
     <div class="time">
-      <span class="fw-bold">{{currentTime}}</span>
+      <span class="fw-bold">{{ currentTime }}</span>
     </div>
-    <div class="new-quiz">
-      <button>
+    <div class="new-quiz" *ngIf="getRoleFromLocalstorage()">
+      <button (click)="openAddQuizDialog()">
         <img src="../../../../assets/images/svg/new-quiz-icon.svg" alt="" />
         New quiz
       </button>
     </div>
   </div>
   <div class="dropdown">
-    <p class="name m-0">{{ userName }}</p>
-    <p class="role">{{ role }}</p>
+    <button
+      class="btn dropdown-toggle info d-flex justify-content-between align-items-center text-start"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      <div class="d-flex flex-column">
+        <span class="name m-0">{{ userName }}</span>
+        <span class="role">{{ role }}</span>
+      </div>
+    </button>
+    <ul class="dropdown-menu dropdown-nav">
+      <li>
+        <a class="dropdown-item" routerLink="/dashboard/updateProfile">
+          <i class="fa-solid fa-user me-2"></i>
+          <span>Update profile</span>
+        </a>
+      </li>
+      <li (click)="logout()">
+        <a class="dropdown-item" routerLink="/auth">
+          <i class="fa-solid fa-right-from-bracket me-2"></i>
+          <span>Logout</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>

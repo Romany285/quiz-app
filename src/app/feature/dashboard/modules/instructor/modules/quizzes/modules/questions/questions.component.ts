@@ -49,4 +49,8 @@ export class QuestionsComponent {
     this.dialog.open(DeleteQuestionComponent, {data: question})
     this.getAllQuestions()
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3dfc1df14a567fe6481a9cafed081a423766fc2c

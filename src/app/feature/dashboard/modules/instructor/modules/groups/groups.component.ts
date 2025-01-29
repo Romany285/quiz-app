@@ -4,7 +4,9 @@ import { MatDialog } from "@angular/material/dialog";
 import { ToastrService } from "ngx-toastr";
 import { AddEditViewComponent } from "../../components/add-edit-view/add-edit-view.component";
 import { DeleteItemComponent } from "../../components/delete-item/delete-item.component";
+import { IStudent } from "../students/interfaces/student.interface";
 import { StudentsService } from "../students/services/students.service";
+import { IGroup } from "./interfaces/IGroup";
 import { GroupsService } from "./services/groups.service";
 
 @Component({
@@ -13,9 +15,9 @@ import { GroupsService } from "./services/groups.service";
   styleUrl: "./groups.component.scss",
 })
 export class GroupsComponent implements OnInit {
-  groupsData: any;
-  studentsWithoutGroup: any;
-  resMessage: any;
+  groupsData: IGroup[] = [];
+  studentsWithoutGroup: IStudent[] = [];
+  resMessage: string = "";
   groupsActions = [
     { label: "Update", action: "update" },
     { label: "Delete", action: "delete", isDanger: true },
@@ -54,6 +56,7 @@ export class GroupsComponent implements OnInit {
   openDialogAddGroup(): void {
     const dialogRef = this.dialog.open(AddEditViewComponent, {
       data: {
+        title: "Add Group",
         fields: [
           {
             type: "text",
@@ -65,7 +68,9 @@ export class GroupsComponent implements OnInit {
             type: "select",
             label: "List Students",
             name: "students",
-            value: this.studentsWithoutGroup,
+            value: this.studentsWithoutGroup.map(
+              (student: any) => `${student.first_name} ${student.last_name}`
+            ),
             validators: [Validators.required],
           },
         ],
@@ -96,7 +101,7 @@ export class GroupsComponent implements OnInit {
     switch (action) {
       case "update":
         let students = this.studentsWithoutGroup.map(
-          (student: any) => `${student.first_name} ${student.last_name}`
+          (student: IStudent) => `${student.first_name} ${student.last_name}`
         );
         this.getStudentNames(data.students).then((studentNames) => {
           const dialogRef = this.dialog.open(AddEditViewComponent, {
@@ -126,7 +131,9 @@ export class GroupsComponent implements OnInit {
               this._GroupsService
                 .updateGroup(data._id, {
                   name: result.name,
-                  students: result.students.map((student: any) => student._id),
+                  students: result.students.map(
+                    (student: IStudent) => student._id
+                  ),
                 })
                 .subscribe({
                   error: (err) => {
@@ -149,7 +156,7 @@ export class GroupsComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result) => {
-          if (result) {
+          if (result !== null) {
             this._GroupsService.deleteGroup(data._id).subscribe({
               next: (res) => {
                 console.log(res);

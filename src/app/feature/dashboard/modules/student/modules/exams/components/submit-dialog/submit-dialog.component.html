@@ -1,0 +1,16 @@
+<section class="text-center">
+  <h1 mat-dialog-title>
+    <i class="fa-solid fa-circle-check fa-2xl" style="color: #000000"></i>
+  </h1>
+  <mat-dialog-content>
+    <h4>Quiz joined successfully</h4>
+    <h5>{{ data.quizData.title }}</h5>
+    <p>Your score is {{ data.data.score }} out of {{ total_score }}</p>
+    <p>finished in {{ formatted_time }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close cdkFocusInitial class="btn-green">
+      Close
+    </button>
+  </mat-dialog-actions>
+</section>

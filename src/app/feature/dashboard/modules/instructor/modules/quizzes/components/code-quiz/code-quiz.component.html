@@ -1,5 +1,18 @@
 <section>
-  <div>
-    i
+  <div class="text-center py-5">
+    <i class="fa-solid fa-check"></i>
+    <h4 class="fw-bold py-3">Quiz was successfully created</h4>
+    <!-- <div class="input-group mb-4 w-75 mx-auto">
+      <span class="input-group-text pe-4">CODE:</span>
+      <input type="text" class="form-control" value="A123DDS" disabled>
+  </div> -->
+  <div class="input-group mb-4 w-75 mx-auto mt-2">
+    <span class="input-group-text pe-4">CODE:</span>
+    <input (click)="copyInputMessage(inputElement)" id="copy" #inputElement type="text" class="form-control bg-white ps-3" [value]="data.code" disabled>
+    <span (click)="copyInputMessage(inputElement)" class="input-group-text"><i class="fa-solid fa-copy copy"></i></span>
+  </div>
+  
+    <button class="close-button btn" (click)="onNoClick()">Close</button>
+  
   </div>
 </section>
