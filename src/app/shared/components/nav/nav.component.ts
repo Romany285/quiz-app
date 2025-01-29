@@ -7,6 +7,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { ToastrService } from "ngx-toastr";
 import { CodeQuizComponent } from "../../../feature/dashboard/modules/instructor/modules/quizzes/components/code-quiz/code-quiz.component";
 import { HelperServiceService } from './../../services/helper service/helper-service.service';
+import { IGroup } from "../../../feature/dashboard/modules/instructor/modules/groups/interfaces/IGroup";
+import { IQuiz } from "../../../feature/dashboard/modules/instructor/modules/quizzes/interfaces/quiz.interface";
 
 @Component({
   selector: "app-nav",
@@ -18,7 +20,7 @@ export class NavComponent implements OnInit {
   role = localStorage.getItem("role");
   currentTime: string = '';
   private timerInterval: any;
-  allGroups:any;
+  allGroups:IGroup[]=[];
   resMessage:string = '';
   code:string = ''
   constructor(private _helperService:HelperServiceService,private dialog: MatDialog,private _toastrService:ToastrService,private _quizzesService:QuizzesService,private _groupsService:GroupsService){}
@@ -30,10 +32,17 @@ export class NavComponent implements OnInit {
   }
   ngOnInit(): void {
     this.updateTime(); 
-    this.getAllGroups();
+    this.chickRole()
     this.timerInterval = setInterval(() => this.updateTime(), 1000); 
   }
-
+  chickRole(){
+    if(localStorage.getItem('role') == 'Instructor'){
+      this.getAllGroups()
+    }
+    else{
+      return
+    }
+  }
   ngOnDestroy(): void {
     if (this.timerInterval) {
       clearInterval(this.timerInterval); 
@@ -68,7 +77,7 @@ export class NavComponent implements OnInit {
         }
       });
     }
-    addNewQuiz(data: any) {
+    addNewQuiz(data: IQuiz) {
       this._quizzesService.addQuiz(data).subscribe({
         next:(res)=>{
           this.resMessage = res.message
@@ -102,6 +111,14 @@ export class NavComponent implements OnInit {
       localStorage.removeItem('name')
       localStorage.removeItem('role')
       localStorage.removeItem('token')
+    }
+    getRoleFromLocalstorage(){
+      if(localStorage.getItem('role')=='Instructor'){
+        return true
+      }
+      else{
+        return false
+      }
     }
 }
   
