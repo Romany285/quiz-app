@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
-import { JoinCodeComponent } from '../join-code/join-code.component';
-import { MatDialog } from '@angular/material/dialog';
-import { IUpcomingCompleteQuizApiResponse } from '../../../../../../shared/interfaces/upcoming-completed-quiz.interface';
-import { QuizzesService } from '../../services/quizzes.service';
+import { Component } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
+import { IUpcomingCompleteQuizApiResponse } from "../../../../../../shared/interfaces/upcoming-completed-quiz.interface";
+import { QuizzesService } from "../../services/quizzes.service";
+import { JoinCodeComponent } from "../join-code/join-code.component";
 
 @Component({
-  selector: 'app-quizzes',
-  templateUrl: './quizzes.component.html',
-  styleUrl: './quizzes.component.scss'
+  selector: "app-quizzes",
+  templateUrl: "./quizzes.component.html",
+  styleUrl: "./quizzes.component.scss",
 })
 export class QuizzesComponent {
   upcomingQuizzes: IUpcomingCompleteQuizApiResponse[] = [];
@@ -23,23 +24,21 @@ export class QuizzesComponent {
   ];
   upcomingHeaders = this.headers;
   completedHeaders = this.headers.concat(["Closed at"]);
-  constructor(private dialog: MatDialog,private _quizzesService:QuizzesService) {}
+  constructor(
+    private dialog: MatDialog,
+    private _quizzesService: QuizzesService,
+    private _Router: Router
+  ) {}
   ngOnInit(): void {
     this.getUpcomingQuizzes();
     this.getCompletedQuizzes();
-    
   }
-  openJoinCodeDialog():void{
+  openJoinCodeDialog(): void {
     const dialogRef = this.dialog.open(JoinCodeComponent, {
       data: {},
       width: "38%",
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-         
-        console.log(result, "res");
-      }
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
   getUpcomingQuizzes() {
     this._quizzesService.getUpcomingQuizzes().subscribe({
@@ -50,8 +49,8 @@ export class QuizzesComponent {
         console.log(err);
       },
     });
-}
-getCompletedQuizzes() {
+  }
+  getCompletedQuizzes() {
     this._quizzesService.getCompletedQuizzes().subscribe({
       next: (res) => {
         this.completedQuizzes = res;
@@ -60,5 +59,5 @@ getCompletedQuizzes() {
         console.log(err);
       },
     });
-}
+  }
 }

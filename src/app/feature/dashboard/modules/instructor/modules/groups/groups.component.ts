@@ -131,7 +131,9 @@ export class GroupsComponent implements OnInit {
               this._GroupsService
                 .updateGroup(data._id, {
                   name: result.name,
-                  students: result.students.map((student: IStudent) => student._id),
+                  students: result.students.map(
+                    (student: IStudent) => student._id
+                  ),
                 })
                 .subscribe({
                   error: (err) => {
@@ -154,7 +156,7 @@ export class GroupsComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result) => {
-          if (result) {
+          if (result !== null) {
             this._GroupsService.deleteGroup(data._id).subscribe({
               next: (res) => {
                 console.log(res);

@@ -1,5 +1,5 @@
 <section class="p-4">
-  <div class="container-fluid ">
+  <div class="container-fluid">
     <div class="col-md-3 join-icon" (click)="openJoinCodeDialog()">
       <span>
         <i class="fa-solid fa-stopwatch"></i>
@@ -7,14 +7,10 @@
       <h5 class="m-0 mt-2">Join Quiz</h5>
     </div>
     <div class="row mt-4">
-     
-      <div class="col-10">
+      <div class="col-12">
         <div class="complete">
           <div class="heading">
             <p>Completed quizzes</p>
-            <a routerLink="#"
-              >results <span><i class="fa-solid fa-right-long"></i></span
-            ></a>
           </div>
           <table class="black-table table">
             <thead>
@@ -28,8 +24,11 @@
               @for (quiz of completedQuizzes; track quiz._id) {
               <tr>
                 <td>{{ quiz.title }}</td>
+                <td>{{ quiz.status }}</td>
                 <td>{{ quiz.description }}</td>
                 <td>{{ quiz.type }}</td>
+                <td>{{ quiz.questions_number }}</td>
+                <td>{{ quiz.difficulty }}</td>
                 <td>{{ quiz.duration }} min</td>
                 <td>{{ quiz.closed_at | date : "dd/MM/yyyy HH:mm a" }}</td>
               </tr>
@@ -40,6 +39,4 @@
       </div>
     </div>
   </div>
-
 </section>
-
