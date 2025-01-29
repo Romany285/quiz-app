@@ -8,7 +8,7 @@
     <div class="time">
       <span class="fw-bold">{{currentTime}}</span>
     </div>
-    <div class="new-quiz">
+    <div class="new-quiz" *ngIf="getRoleFromLocalstorage()">
       <button (click)="openAddQuizDialog()">
         <img src="../../../../assets/images/svg/new-quiz-icon.svg" alt="" />
         New quiz
