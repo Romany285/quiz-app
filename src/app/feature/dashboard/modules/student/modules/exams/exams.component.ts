@@ -167,7 +167,6 @@ export class ExamsComponent implements OnInit {
         next: (res: ISubmitAnswerApiResponse) => {
           console.log("Time's up! Form submitted successfully", res);
           this.submitionData = res.data;
-
           this.openDialog();
         },
         error: (err) => {
@@ -184,7 +183,7 @@ export class ExamsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result !== null) {
-        this._Router.navigate(["/dashboard/student/exams"]);
+        this._Router.navigate(["/dashboard/student/quizzes"]);
         localStorage.removeItem("quizStartTime");
         console.log("The dialog was closed", result);
       }

@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   padding: 10px;
   background-color: #f8f9fa;
   border: 1px solid #dee2e6;
@@ -15,6 +16,14 @@
   color: #343a40;
 }
 mat-progress-bar {
+  padding: 2rem;
   width: 85%;
   margin: 1rem 0;
+}
+i {
+  color: white;
+  background-color: black;
+  border-radius: 50% 50%;
+  padding: 15px;
+  font-size: 45px;
 }
