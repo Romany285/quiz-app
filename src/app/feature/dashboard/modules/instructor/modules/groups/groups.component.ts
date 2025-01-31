@@ -19,8 +19,8 @@ export class GroupsComponent implements OnInit {
   studentsWithoutGroup: IStudent[] = [];
   resMessage: string = "";
   groupsActions = [
-    { label: "Update", action: "update" },
-    { label: "Delete", action: "delete", isDanger: true },
+    { label: "Update", action: "update", icon: "edit" },
+    { label: "Delete", action: "delete", isDanger: true, icon: "delete" },
   ];
   constructor(
     private _GroupsService: GroupsService,

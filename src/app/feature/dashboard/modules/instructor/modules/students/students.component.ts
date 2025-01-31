@@ -22,15 +22,25 @@ export class StudentsComponent implements OnInit, OnDestroy {
   selectGroupId: string | null = null;
   destroy$ = new Subject<void>();
   commonActions = [
-    { label: "View student", action: "viewStudent" },
-    { label: "Delete student", action: "deleteStudent", isDanger: true },
+    { label: "View student", action: "viewStudent", icon: "visibility" },
+    {
+      label: "Delete student",
+      action: "deleteStudent",
+      isDanger: true,
+      icon: "delete",
+    },
   ];
   studentWithoutGroupsActions = [
-    { label: "Add to group", action: "addToGroup" },
+    { label: "Add to group", action: "addToGroup", icon: "group_add" },
   ];
   studentsInGroup = [
-    { label: "Update group", action: "updateGroup" },
-    { label: "Delete from group", action: "deleteFromGroup" },
+    { label: "Update group", action: "updateGroup", icon: "edit" },
+    {
+      label: "Delete from group",
+      action: "deleteFromGroup",
+      isDanger: true,
+      icon: "delete",
+    },
   ];
   studentActions = this.commonActions;
   constructor(

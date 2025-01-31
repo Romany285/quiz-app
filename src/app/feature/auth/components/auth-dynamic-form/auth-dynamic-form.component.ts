@@ -17,6 +17,7 @@ export class AuthDynamicFormComponent implements OnInit {
   imagePath: string = "assets/images/svg/auth-image.svg";
   inputs: any[] = [];
   authForm: FormGroup = new FormGroup({});
+  constructor() {}
   ngOnInit(): void {
     this.inputs = authFormConfig[this.formType];
     const formGroup: any = {};
