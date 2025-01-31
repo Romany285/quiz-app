@@ -12,7 +12,6 @@
         <th scope="col">Difficulty</th>
         <th scope="col">Type</th>
         <th scope="col">Date</th>
-        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -23,7 +22,6 @@
           <td>{{res.quiz.difficulty}}</td>
           <td>{{res.quiz.type}}</td>
           <td>{{res.quiz.closed_at | date: 'mm/dd/yyyy' }}</td>
-          <td class="text-center"><button (click)="viewQuiz(res.quiz)">View</button></td>
         </tr>
       }
     </tbody>

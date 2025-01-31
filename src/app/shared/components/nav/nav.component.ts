@@ -1,5 +1,5 @@
 import { Time } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { AddEditQuizComponent } from "../../../feature/dashboard/modules/instructor/modules/quizzes/components/add-edit-quiz/add-edit-quiz.component";
 import { QuizzesService } from "../../../feature/dashboard/modules/instructor/modules/quizzes/services/quizzes.service";
 import { GroupsService } from "../../../feature/dashboard/modules/instructor/modules/groups/services/groups.service";
@@ -16,6 +16,7 @@ import { IQuiz } from "../../../feature/dashboard/modules/instructor/modules/qui
   styleUrl: "./nav.component.scss",
 })
 export class NavComponent implements OnInit {
+  @Input() navTitle:string = ''
   userName = localStorage.getItem("name");
   role = localStorage.getItem("role");
   currentTime: string = '';
@@ -23,9 +24,11 @@ export class NavComponent implements OnInit {
   allGroups:IGroup[]=[];
   resMessage:string = '';
   code:string = ''
-  constructor(private _helperService:HelperServiceService,private dialog: MatDialog,private _toastrService:ToastrService,private _quizzesService:QuizzesService,private _groupsService:GroupsService){}
-
-  
+  constructor(private _helperService:HelperServiceService,
+    private dialog: MatDialog,
+    private _toastrService:ToastrService,
+    private _quizzesService:QuizzesService,
+    private _groupsService:GroupsService){}
 
   toggleSidebar() {
     this._helperService.toggleSidebar();
@@ -92,7 +95,6 @@ export class NavComponent implements OnInit {
           this.openCodeDialog(this.code)
         },
       })
-         
     };
     openCodeDialog(code:string):void{
       const dialogRef = this.dialog.open(CodeQuizComponent, {
@@ -101,7 +103,6 @@ export class NavComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-           
           console.log(result, "res");
         }
       });

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { UpdateProfileService } from "./../../services/updateProfile/update-profile.service";
+import { AuthService } from "../../../feature/auth/services/auth.service";
 
 @Component({
   selector: "app-update-profile",
@@ -16,7 +17,7 @@ export class UpdateProfileComponent {
     private fb: FormBuilder,
     private _updateProfileService: UpdateProfileService,
     private _toastrService: ToastrService,
-    private _router: Router
+    private _router: Router,
   ) {
     let full_name: any = localStorage.getItem("name")?.split(" ");
     let first_name = full_name[0];
@@ -48,6 +49,9 @@ export class UpdateProfileComponent {
       complete: () => {
         this._toastrService.success(this.resMessage);
         this._router.navigate(["/dashboard"]);
+        setTimeout(() => {
+          window.location.reload();
+        }, 500); 
       },
     });
   }
