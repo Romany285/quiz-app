@@ -10,6 +10,7 @@ export class DashboardComponent implements OnInit {
   _dashboardService = inject(DashboardService);
   isExpanded: boolean = false;
   ngOnInit(): void {
+    this.toggleSidebar()
     this._dashboardService.getTopFiveQuizzes().subscribe({
       next: (res) => {
         // console.log(res)
@@ -18,5 +19,6 @@ export class DashboardComponent implements OnInit {
   }
   toggleSidebar() {
     this.isExpanded !== this.isExpanded;
+    console.log(this.isExpanded)
   }
 }

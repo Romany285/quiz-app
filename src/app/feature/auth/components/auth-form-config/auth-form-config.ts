@@ -70,7 +70,7 @@ export const authFormConfig: any = {
     {
       label: "New password",
       type: "password",
-      control: "password",
+      control: "newPassword",
       placeholder: "Enter your new password",
       icon: " fa fa-lock",
     },
