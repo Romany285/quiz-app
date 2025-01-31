@@ -17,6 +17,7 @@ export class AuthDynamicFormComponent implements OnInit {
   imagePath: string = "assets/images/svg/auth-image.svg";
   inputs: any[] = [];
   authForm: FormGroup = new FormGroup({});
+  isLoggingIn: boolean = false;
   constructor() {}
   ngOnInit(): void {
     this.inputs = authFormConfig[this.formType];
@@ -45,6 +46,7 @@ export class AuthDynamicFormComponent implements OnInit {
     return authRoutes;
   }
   onSubmit() {
+    this.isLoggingIn = true;
     this.formSubmit.emit(this.authForm);
   }
 }

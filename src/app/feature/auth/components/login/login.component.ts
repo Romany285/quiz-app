@@ -13,8 +13,12 @@ export class LoginComponent {
   formType: string = "login";
   formTitle: string = "Continue your learning journey with QuizWiz! ";
   buttonName: string = "Sign In";
+  isLoggingIn: boolean = false;
+
   constructor(private _AuthService: AuthService, private _Router: Router) {}
   login(formValue: FormGroup) {
+    this.isLoggingIn = true;
+
     this._AuthService.login(formValue.value).subscribe({
       next: (res) => {
         localStorage.setItem("token", res.data.accessToken);
@@ -25,6 +29,8 @@ export class LoginComponent {
         this._AuthService.getProfile();
       },
       complete: () => {
+        this.isLoggingIn = false;
+
         if (localStorage.getItem("role") === "Instructor") {
           this._Router.navigate(["/dashboard"]);
         } else {
