@@ -1,5 +1,16 @@
 @import "../../../../assets/sass/abstracts/variables";
 
+section  {
+  box-shadow: 0 0 10px #0003;
+  padding: 25px 0;
+  margin: 25px 0;
+  width: 90%;
+  border-radius: 60px;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  -ms-border-radius: 60px;
+  -o-border-radius: 60px;
+}
 h2 {
   text-align: center;
   margin: 50px 0;
