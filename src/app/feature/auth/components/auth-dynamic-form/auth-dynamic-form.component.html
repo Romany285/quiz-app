@@ -97,8 +97,13 @@
                 type="submit"
                 [disabled]="authForm.invalid"
               >
-                {{ buttonName }} <i class="fa-solid fa-circle-check"></i>
+                <span *ngIf="!isLoggingIn">{{ buttonName }}</span>
+                <i class="fa-solid fa-circle-check" *ngIf="!isLoggingIn"></i>
+                <div class="spinner" *ngIf="isLoggingIn">
+                  <i class="fa fa-spinner fa-spin"></i>
+                </div>
               </button>
+
               @if (formType === 'login') {
               <p class="form-container__link">
                 Forget password?

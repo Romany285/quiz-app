@@ -28,7 +28,9 @@
             (click)="performAction(action, data)"
             [ngClass]="{ 'text-danger': action.isDanger }"
           >
-            {{ action.label }}
+            <span class="icon"
+              ><i class="material-icons">{{ action.icon }}</i> </span
+            >{{ action.label }}
           </a>
         </li>
         }
