@@ -19,7 +19,8 @@ export class SubmitDialogComponent {
     }
   ) {
     this.total_score =
-      this.data.data.questions.length * this.data.quizData.score_per_question;
+      this.data.data.questions.length *
+      Number(this.data.quizData.score_per_question);
 
     const timeInSeconds =
       (new Date(this.data.data.finished_at).getTime() -

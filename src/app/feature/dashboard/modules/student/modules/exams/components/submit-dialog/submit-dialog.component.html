@@ -8,8 +8,13 @@
     <p>Your score is {{ data.data.score }} out of {{ total_score }}</p>
     <p>finished in {{ formatted_time }}</p>
   </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-button mat-dialog-close cdkFocusInitial class="btn-green">
+  <mat-dialog-actions class="text-center">
+    <button
+      mat-button
+      mat-dialog-close
+      cdkFocusInitial
+      class="save-btn text-center"
+    >
       Close
     </button>
   </mat-dialog-actions>
