@@ -1,40 +1,39 @@
 @import "../../../../assets/sass/abstracts/variables";
 
-section  {
-  box-shadow: 0 0 10px #0003;
-  padding: 25px 0;
-  margin: 25px 0;
-  width: 90%;
-  border-radius: 60px;
-  -webkit-border-radius: 60px;
-  -moz-border-radius: 60px;
-  -ms-border-radius: 60px;
-  -o-border-radius: 60px;
+section {
+  padding: 4rem 5rem;
+  .container {
+    box-shadow: 0 0 10px #0003;
+    padding: 25px 0;
+    border-radius: 60px;
+  }
 }
 h2 {
   text-align: center;
-  margin: 50px 0;
+  margin: 1rem 0 2rem 0;
 }
 
 form {
   width: 50%;
   margin: 10px auto;
   .input-group {
-    --bs-border-radius:10px;
-  .input-group-text {
-    background-color: $auth-text-color;
-    font-weight: 600;
-    font-size: 18px;
-    border-right: 0px;
-    .form-control,.form-select:focus {
-      box-shadow:0 0 0 .25rem rgba(13, 109, 253, 0); 
-      border-color:rgba(255, 237, 223, 1) ;
-    };
-    .form-control,.form-select {
-      border-left: 0px;
-      border-color:#dee2e6;
-    };
-  }
+    --bs-border-radius: 10px;
+    .input-group-text {
+      background-color: $auth-text-color;
+      font-weight: 600;
+      font-size: 18px;
+      border-right: 0px;
+      .form-control,
+      .form-select:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 109, 253, 0);
+        border-color: rgba(255, 237, 223, 1);
+      }
+      .form-control,
+      .form-select {
+        border-left: 0px;
+        border-color: #dee2e6;
+      }
+    }
   }
   .save {
     font-weight: bold;

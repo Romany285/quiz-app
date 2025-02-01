@@ -1,7 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { IUpcomingCompleteQuizApiResponse } from "../../../../../../../../shared/interfaces/upcoming-completed-quiz.interface";
-import { ISubmitAnswer } from "../../interfaces/submit-answer-response.interface";
+import { ISubmitAnswerApiResponse } from "../../interfaces/submit-answer-response.interface";
 
 @Component({
   selector: "app-submit-dialog",
@@ -14,22 +14,25 @@ export class SubmitDialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
-      data: ISubmitAnswer;
+      data: ISubmitAnswerApiResponse;
       quizData: IUpcomingCompleteQuizApiResponse;
     }
   ) {
     this.total_score =
-      this.data.data.questions.length *
-      Number(this.data.quizData.score_per_question);
+      this.data.data.data.questions.length *
+      +this.data.quizData.score_per_question;
 
     const timeInSeconds =
-      (new Date(this.data.data.finished_at).getTime() -
-        new Date(this.data.data.started_at).getTime()) /
+      (new Date(this.data.data.data.finished_at).getTime() -
+        new Date(this.data.data.data.started_at).getTime()) /
       1000;
 
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = Math.floor(timeInSeconds % 60);
 
     this.formatted_time = `${minutes}m ${seconds}s`;
+    console.log(Number(this.data.quizData.score_per_question));
+    console.log(this.total_score);
+    console.log(this.data.data.data.questions.length);
   }
 }

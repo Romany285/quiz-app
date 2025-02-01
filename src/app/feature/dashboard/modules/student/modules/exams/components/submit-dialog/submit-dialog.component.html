@@ -3,9 +3,9 @@
     <i class="fa-solid fa-circle-check fa-2xl" style="color: #000000"></i>
   </h1>
   <mat-dialog-content>
-    <h4>Quiz joined successfully</h4>
+    <h4>{{ data.data.message }}</h4>
     <h5>{{ data.quizData.title }}</h5>
-    <p>Your score is {{ data.data.score }} out of {{ total_score }}</p>
+    <p>Your score is {{ data.data.data.score }} out of {{ total_score }}</p>
     <p>finished in {{ formatted_time }}</p>
   </mat-dialog-content>
   <mat-dialog-actions class="text-center">
