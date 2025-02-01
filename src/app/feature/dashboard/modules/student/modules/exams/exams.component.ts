@@ -10,10 +10,7 @@ import {
 } from "../../../../../../shared/interfaces/upcoming-completed-quiz.interface";
 import { SubmitDialogComponent } from "./components/submit-dialog/submit-dialog.component";
 import { IAnswer } from "./interfaces/answer.interface";
-import {
-  ISubmitAnswer,
-  ISubmitAnswerApiResponse,
-} from "./interfaces/submit-answer-response.interface";
+import { ISubmitAnswerApiResponse } from "./interfaces/submit-answer-response.interface";
 import { ExamService } from "./services/exam.service";
 
 @Component({
@@ -31,7 +28,7 @@ export class ExamsComponent implements OnInit {
   duration: number = 60;
   countdown$: Observable<string> = new Observable<string>();
   countdownSubscription: Subscription = new Subscription();
-  submitionData: ISubmitAnswer | null = null;
+  submitionData: ISubmitAnswerApiResponse | null = null;
   constructor(
     private _formBuilder: FormBuilder,
     private _ExamsService: ExamService,
@@ -88,13 +85,12 @@ export class ExamsComponent implements OnInit {
   onSubmit() {
     if (this.quizForm.valid) {
       const submissionData = this.prepareSubmissionData();
-      console.log(submissionData);
       this._ExamsService
         .submitAnswers(this.id, { answers: submissionData })
         .subscribe({
           next: (res: ISubmitAnswerApiResponse) => {
             console.log("Form submitted successfully", res);
-            this.submitionData = res.data;
+            this.submitionData = res;
             this.openDialog();
           },
           error: (err) => {
@@ -166,7 +162,7 @@ export class ExamsComponent implements OnInit {
       .subscribe({
         next: (res: ISubmitAnswerApiResponse) => {
           console.log("Time's up! Form submitted successfully", res);
-          this.submitionData = res.data;
+          this.submitionData = res;
           this.openDialog();
         },
         error: (err) => {
@@ -178,7 +174,7 @@ export class ExamsComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(SubmitDialogComponent, {
       width: "400px",
-      data: { data: this.submitionData, quizData: this.quizData },
+      data: { data: this.submitionData, quizData: this.quizData?.data },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
