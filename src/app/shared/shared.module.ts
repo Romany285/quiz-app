@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
@@ -122,6 +122,10 @@ import { FloatNumberPipe } from "./custom-pipes/float-number.pipe";
     MatStepperModule,
     MatRadioModule,
     MatProgressBarModule,
+    SharedTableComponent,
+    FloatNumberPipe,
+    DynamicDatePipe,
   ],
+  providers: [DatePipe],
 })
 export class SharedModule {}

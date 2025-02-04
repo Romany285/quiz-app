@@ -12,7 +12,7 @@
           <div class="heading">
             <p>Completed quizzes</p>
           </div>
-          <table class="black-table table">
+          <!-- <table class="black-table table">
             <thead>
               <tr>
                 @for (head of completedHeaders; track head) {
@@ -34,7 +34,13 @@
               </tr>
               }
             </tbody>
-          </table>
+          </table> -->
+          <app-shared-table
+            [tableHeaders]="tableHeaders"
+            [tableBodyContent]="upcomingQuizzes"
+            [displayHeaders]="displayHeaders"
+            [buttons]="buttons"
+          />
         </div>
       </div>
     </div>
