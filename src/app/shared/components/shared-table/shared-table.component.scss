@@ -1,0 +1,17 @@
+.custom-table {
+  border-spacing: 4px;
+  border-collapse: separate;
+  vertical-align: middle;
+}
+
+th {
+  background-color: #000;
+  color: #fff;
+}
+
+td,
+th {
+  padding: 10px 20px;
+  border: 1px solid $main-border-color !important;
+  border-radius: 5px;
+}
