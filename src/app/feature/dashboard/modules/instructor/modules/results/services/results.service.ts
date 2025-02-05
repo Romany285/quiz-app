@@ -1,16 +1,15 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { IResult } from '../models/IResult';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { IResult } from "../models/IResult";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ResultsService {
+  constructor(private _httpClient: HttpClient) {}
 
-  constructor(private _httpClient:HttpClient) { }
-
-  getAllResults():Observable<IResult[]>{
-    return this._httpClient.get<IResult[]>('quiz/result')
+  getAllResults(): Observable<IResult[]> {
+    return this._httpClient.get<IResult[]>("quiz/result");
   }
 }
