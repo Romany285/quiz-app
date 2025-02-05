@@ -1,5 +1,7 @@
+import { DatePipe } from "@angular/common";
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -24,6 +26,8 @@ export class SharedTableComponent<T extends { [key: string]: any }>
   sortColumn: string = "";
   sortDirection: "asc" | "desc" = "asc";
   @Input() actionsVisivilty: boolean = false;
+
+  constructor(private cdr: ChangeDetectorRef, private datePipe: DatePipe) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["tableHeaders"] || changes["tableBodyContent"]) {
@@ -75,13 +79,22 @@ export class SharedTableComponent<T extends { [key: string]: any }>
       this.sortDirection = "asc";
     }
     this.sortTable();
+    this.cdr.detectChanges();
   }
 
   getNestedValue(object: T, key: string): any {
     return key.split(".").reduce((o, k) => (o ? o[k] : null), object);
   }
 
-  trackByRowId(index: number, item: { row: T; keys: string[] }): any {
-    return item.row["_id"];
+  isDate(value: any): boolean {
+    return (
+      typeof value === "string" &&
+      /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(value) &&
+      !isNaN(Date.parse(value))
+    );
+  }
+
+  isNumber(value: any): boolean {
+    return typeof value === "number" && isFinite(value);
   }
 }
