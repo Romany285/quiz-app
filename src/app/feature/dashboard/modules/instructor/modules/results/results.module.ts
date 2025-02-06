@@ -1,17 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
 
-import { ResultsRoutingModule } from './results-routing.module';
-import { ResultsComponent } from './results.component';
-
+import { SharedModule } from "../../../../../../shared/shared.module";
+import { ResultsRoutingModule } from "./results-routing.module";
+import { ResultsComponent } from "./results.component";
 
 @NgModule({
-  declarations: [
-    ResultsComponent
-  ],
-  imports: [
-    CommonModule,
-    ResultsRoutingModule
-  ]
+  declarations: [ResultsComponent],
+  imports: [CommonModule, ResultsRoutingModule, SharedModule],
 })
-export class ResultsModule { }
+export class ResultsModule {}

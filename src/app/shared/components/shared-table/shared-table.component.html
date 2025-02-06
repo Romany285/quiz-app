@@ -44,9 +44,9 @@
               *ngFor="let button of buttons"
               (click)="button.action(row.row)"
             >
-              <button class="bg-transparent p-0">
+              <span class="bg-transparent p-0">
                 <i [ngClass]="[button.btnIcon, button.class]"></i>
-              </button>
+              </span>
             </div>
           </div>
         </td>

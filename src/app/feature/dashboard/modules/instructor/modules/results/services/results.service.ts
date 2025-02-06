@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { IResult } from "../models/IResult";
 
 @Injectable({
   providedIn: "root",
@@ -9,7 +8,7 @@ import { IResult } from "../models/IResult";
 export class ResultsService {
   constructor(private _httpClient: HttpClient) {}
 
-  getAllResults(): Observable<IResult[]> {
-    return this._httpClient.get<IResult[]>("quiz/result");
+  getAllResults(): Observable<any[]> {
+    return this._httpClient.get<any[]>("quiz/result");
   }
 }

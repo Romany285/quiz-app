@@ -14,6 +14,7 @@ export class ResultsComponent implements OnInit {
     "started_at",
     "finished_at",
     "duration",
+    "difficulty",
   ];
   displayHeaders: { [key: string]: string } = {
     title: "Title",
@@ -21,6 +22,7 @@ export class ResultsComponent implements OnInit {
     started_at: "Started At",
     finished_at: "Finished At",
     duration: "Duration (min)",
+    difficulty: "Difficulty",
   };
   results: any[] = [];
 
@@ -34,13 +36,13 @@ export class ResultsComponent implements OnInit {
     this._resultsService.getAllResults().subscribe({
       next: (res: IResult[]) => {
         this.results = res.map((item: IResult) => {
-          console.log(item.result.participant.first_name);
           return {
             score: item.result.score,
             started_at: item.result.started_at,
             finished_at: item.result.finished_at,
             title: item.quiz.title,
             duration: item.quiz.duration,
+            difficulty: item.quiz.difficulty,
           };
         });
         console.log("Flattened results:", this.results);
