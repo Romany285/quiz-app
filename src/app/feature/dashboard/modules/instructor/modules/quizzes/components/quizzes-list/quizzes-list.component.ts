@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { IButtonConfig } from "../../../../../../../../shared/interfaces/button-config.interface";
 import { IQuiz } from "../../interfaces/quiz.interface";
 import { QuizzesService } from "../../services/quizzes.service";
 
@@ -8,19 +10,43 @@ import { QuizzesService } from "../../services/quizzes.service";
   styleUrl: "./quizzes-list.component.scss",
 })
 export class QuizzesListComponent implements OnInit {
-  quizzesList: IQuiz[] | undefined = [];
-  headers: string[] = [
-    "Title",
-    "Code",
-    "Status",
-    "Description",
-    "Type",
-    "Question no.",
-    "Difficulty",
-    "Duration",
-    "Action",
+  quizzesList: IQuiz[] = [];
+
+  tableHeaders: string[] = [
+    "title",
+    "code",
+    "status",
+    "description",
+    "type",
+    "questions_number",
+    "difficulty",
+    "duration",
+    "actions",
   ];
-  constructor(private _QuizzesService: QuizzesService) {}
+
+  displayHeaders: { [key: string]: string } = {
+    title: "Title",
+    code: "Code",
+    status: "Status",
+    description: "Description",
+    type: "Type",
+    questions_number: "Question no.",
+    difficulty: "Difficulty",
+    duration: "Duration (min)",
+    actions: "Actions",
+  };
+  buttons: IButtonConfig[] = [
+    {
+      btnIcon: "fa-solid fa-eye",
+      action: (row) => this.viewQuiz(row._id),
+      class: "orange-color",
+    },
+  ];
+
+  constructor(
+    private _QuizzesService: QuizzesService,
+    private _Router: Router
+  ) {}
   ngOnInit(): void {
     this.getAllQuizzes();
   }
@@ -30,5 +56,8 @@ export class QuizzesListComponent implements OnInit {
         this.quizzesList = res;
       },
     });
+  }
+  viewQuiz(quizId: string) {
+    this._Router.navigate(["/dashboard/quizzes/view", quizId]);
   }
 }
