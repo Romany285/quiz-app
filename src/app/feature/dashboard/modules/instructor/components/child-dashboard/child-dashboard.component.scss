@@ -6,10 +6,7 @@
   padding: 15px 15px 0;
   margin-top: 35px;
   border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.822);
 
   .card {
     img {
@@ -18,10 +15,6 @@
       width: 130px;
       height: 105px;
       border-radius: 0.3rem;
-      -webkit-border-radius: 0.3rem;
-      -moz-border-radius: 0.3rem;
-      -ms-border-radius: 0.3rem;
-      -o-border-radius: 0.3rem;
     }
     .card-body {
       padding: 13px 14px 0px;
@@ -47,10 +40,6 @@
             color: $auth-hover-color;
             font-size: 18px;
             transform: translateY(2px);
-            -webkit-transform: translateY(2px);
-            -moz-transform: translateY(2px);
-            -ms-transform: translateY(2px);
-            -o-transform: translateY(2px);
           }
         }
       }
