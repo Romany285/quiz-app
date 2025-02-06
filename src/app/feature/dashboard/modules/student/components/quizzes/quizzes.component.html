@@ -12,29 +12,11 @@
           <div class="heading">
             <p>Completed quizzes</p>
           </div>
-          <table class="black-table table">
-            <thead>
-              <tr>
-                @for (head of completedHeaders; track head) {
-                <th scope="col">{{ head }}</th>
-                }
-              </tr>
-            </thead>
-            <tbody>
-              @for (quiz of completedQuizzes; track quiz._id) {
-              <tr>
-                <td>{{ quiz.title }}</td>
-                <td>{{ quiz.status }}</td>
-                <td>{{ quiz.description }}</td>
-                <td>{{ quiz.type }}</td>
-                <td>{{ quiz.questions_number }}</td>
-                <td>{{ quiz.difficulty }}</td>
-                <td>{{ quiz.duration }} min</td>
-                <td>{{ quiz.closed_at | date : "dd/MM/yyyy HH:mm a" }}</td>
-              </tr>
-              }
-            </tbody>
-          </table>
+          <app-shared-table
+            [tableHeaders]="tableHeaders"
+            [tableBodyContent]="completedQuizzes"
+            [displayHeaders]="displayHeaders"
+          />
         </div>
       </div>
     </div>

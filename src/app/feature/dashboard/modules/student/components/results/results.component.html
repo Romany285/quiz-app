@@ -1,36 +1,14 @@
-<section class="results mt-5  m-3">
-  <div class="heading d-flex justify-content-between align-items-center mb-4 p-4 ">
+<section class="results">
+  <div
+    class="heading d-flex justify-content-between align-items-center mb-4 p-4"
+  >
     <div>
       <h3>Quiz results</h3>
     </div>
   </div>
-  <table class="table table-bordered">
-    <thead class="table-dark">
-      <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Description</th>
-        <th scope="col">Difficulty</th>
-        <th scope="col">Type</th>
-        <th scope="col">Date</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (res of results; track $index) {
-        <tr>
-          <td>{{res.quiz.title}}</td>
-          <td>{{res.quiz.description}}</td>
-          <td>{{res.quiz.difficulty}}</td>
-          <td>{{res.quiz.type}}</td>
-          <td>{{res.quiz.closed_at | date: 'mm/dd/yyyy' }}</td>
-        </tr>
-      }
-    </tbody>
-  </table>
+  <app-shared-table
+    [tableHeaders]="tableHeaders"
+    [tableBodyContent]="results"
+    [displayHeaders]="displayHeaders"
+  />
 </section>
-
-
-
-
-
-

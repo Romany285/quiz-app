@@ -1,0 +1,57 @@
+<article class="bg-white">
+  <table
+    class="table table-bordered table-responsive table-hover overflow-hidden custom-table"
+  >
+    <thead>
+      <tr>
+        <th *ngFor="let header of tableHeaders" (click)="onSort(header)">
+          {{ displayHeaders[header] }}
+          <span>
+            {{
+              sortColumn === header ? (sortDirection === "asc" ? "▲" : "▼") : ""
+            }}
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of filteredTableBodyContent; track $index) {
+      <tr>
+        @for (key of row.keys; track $index) {
+        <td>
+          @if (key !== 'actions' ) {
+          <ng-container *ngIf="isDate(getNestedValue(row.row, key))">
+            {{ getNestedValue(row.row, key) | dynamicDate : "medium" }}
+          </ng-container>
+          <ng-container *ngIf="isNumber(getNestedValue(row.row, key))">
+            {{ getNestedValue(row.row, key) | floatNumber : 2 }}
+          </ng-container>
+          <ng-container
+            *ngIf="
+              !isDate(getNestedValue(row.row, key)) &&
+              !isNumber(getNestedValue(row.row, key))
+            "
+          >
+            {{ getNestedValue(row.row, key) }}
+          </ng-container>
+          }
+        </td>
+        }
+
+        <td *ngIf="actionsVisivilty">
+          <div class="d-flex align-items-center justify-content-center gap-3">
+            <div
+              *ngFor="let button of buttons"
+              (click)="button.action(row.row)"
+            >
+              <span class="bg-transparent p-0">
+                <i [ngClass]="[button.btnIcon, button.class]"></i>
+              </span>
+            </div>
+          </div>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</article>

@@ -1,20 +1,19 @@
-.black-table {
-  tr {
-    th {
-      text-align: center;
-      background-color: $black-color;
-      color: $light-white;
-      border: 1px solid white;
-      vertical-align: middle;
-    }
+.custom-table {
+  border-spacing: 4px;
+  border-collapse: separate;
+  vertical-align: middle;
+  td,
+  th {
+    padding: 0.5rem;
+    border: 1px solid $grey;
+    border-radius: 5px;
+    vertical-align: middle;
+    text-align: center;
   }
-  tbody {
-    tr {
-      td {
-        text-align: center;
-        border: 1px solid $grey;
-        vertical-align: middle;
-      }
-    }
+  th {
+    background-color: $black-color !important;
+    color: $light-white !important;
+    vertical-align: middle;
+    cursor: pointer;
   }
 }

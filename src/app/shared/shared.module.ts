@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
@@ -33,8 +33,11 @@ import { NavComponent } from "./components/nav/nav.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { SharedCardComponent } from "./components/shared-card/shared-card.component";
 import { SharedInputComponent } from "./components/shared-input/shared-input.component";
+import { SharedTableComponent } from "./components/shared-table/shared-table.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
-import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
+import { UpdateProfileComponent } from "./components/update-profile/update-profile.component";
+import { DynamicDatePipe } from "./custom-pipes/dynamic-date/dynamic-date.pipe";
+import { FloatNumberPipe } from "./custom-pipes/float-number.pipe";
 
 @NgModule({
   declarations: [
@@ -45,6 +48,9 @@ import { UpdateProfileComponent } from './components/update-profile/update-profi
     SidebarComponent,
     BreadcrumbsComponent,
     UpdateProfileComponent,
+    SharedTableComponent,
+    FloatNumberPipe,
+    DynamicDatePipe,
   ],
   imports: [
     CommonModule,
@@ -116,6 +122,10 @@ import { UpdateProfileComponent } from './components/update-profile/update-profi
     MatStepperModule,
     MatRadioModule,
     MatProgressBarModule,
+    SharedTableComponent,
+    FloatNumberPipe,
+    DynamicDatePipe,
   ],
+  providers: [DatePipe],
 })
 export class SharedModule {}

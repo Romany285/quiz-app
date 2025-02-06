@@ -13,17 +13,27 @@ import { JoinCodeComponent } from "../join-code/join-code.component";
 export class QuizzesComponent {
   upcomingQuizzes: IUpcomingCompleteQuizApiResponse[] = [];
   completedQuizzes: IUpcomingCompleteQuizApiResponse[] = [];
-  headers: string[] = [
-    "Title",
-    "Status",
-    "Description",
-    "Type",
-    "Question no.",
-    "Difficulty",
-    "Duration",
+  tableHeaders: string[] = [
+    "title",
+    "status",
+    "description",
+    "type",
+    "questions_number",
+    "difficulty",
+    "duration",
+    "closed_at",
   ];
-  upcomingHeaders = this.headers;
-  completedHeaders = this.headers.concat(["Closed at"]);
+  displayHeaders: { [key: string]: string } = {
+    title: "Title",
+    status: "Status",
+    description: "Description",
+    type: "Type",
+    questions_number: "Question no.",
+    difficulty: "Difficulty",
+    duration: "Duration (min)",
+    closed_at: "Closed at",
+  };
+
   constructor(
     private dialog: MatDialog,
     private _quizzesService: QuizzesService,

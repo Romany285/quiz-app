@@ -1,5 +1,7 @@
 <section class="questions mt-5">
-  <div class="heading d-flex justify-content-between align-items-center mb-4 p-4 ">
+  <div
+    class="heading d-flex justify-content-between align-items-center mb-4 p-4"
+  >
     <div>
       <h3>Bank Of Questions</h3>
     </div>
@@ -10,7 +12,14 @@
       </button>
     </div>
   </div>
-  <table class="table table-bordered">
+  <app-shared-table
+    [tableHeaders]="tableHeaders"
+    [tableBodyContent]="allQuestions"
+    [displayHeaders]="displayHeaders"
+    [buttons]="buttons"
+    [actionsVisivilty]="true"
+  />
+  <!-- <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
         <th scope="col">Question Title</th>
@@ -35,5 +44,5 @@
         </tr>
       }
     </tbody>
-  </table>
+  </table> -->
 </section>
