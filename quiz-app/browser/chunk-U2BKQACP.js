@@ -1,0 +1,1 @@
+import{b as o}from"./chunk-WAADTJNP.js";import{$ as i,ea as r}from"./chunk-A3WQPQTG.js";var a=(()=>{class t{constructor(e){this._httpClient=e}getAllResults(){return this._httpClient.get("quiz/result")}static{this.\u0275fac=function(n){return new(n||t)(r(o))}}static{this.\u0275prov=i({token:t,factory:t.\u0275fac,providedIn:"root"})}}return t})();export{a};

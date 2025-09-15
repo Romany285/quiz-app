@@ -1,0 +1,74 @@
+.input-icon {
+  margin-bottom: 0.5rem;
+  position: relative;
+  input:focus ~ i {
+    color: black;
+  }
+  & > i {
+    position: absolute;
+    left: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  input {
+    padding: 0.3rem;
+    padding-left: 2rem;
+    background-color: $light-grey !important;
+    border: 2px solid $auth-text-color;
+    border-radius: 0.4rem;
+    color: $auth-text-color;
+    width: 100%;
+    &:focus {
+      background-color: $light-grey !important;
+    }
+  }
+  select {
+    background-color: $light-grey;
+    color: $auth-text-color;
+    option {
+      padding: 10px;
+    }
+  }
+  .eye-pass {
+    cursor: pointer;
+    i {
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.select-container {
+  position: relative;
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .select-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    i {
+      font-size: 16px;
+      color: #aaa;
+    }
+  }
+}
+
+.form-select:focus {
+  border-color: grey;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem #0000001c;
+}

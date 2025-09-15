@@ -1,0 +1,40 @@
+.dropdown {
+  border-left: 2px solid $grey;
+  .name {
+    font-weight: bold;
+  }
+  .role {
+    color: $auth-hover-color;
+  }
+  .dropdown-toggle {
+    width: 250px;
+    border: none;
+    outline: none;
+    &::after {
+      content: "\f107";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-left: 8px;
+      border: none;
+      color: #0003;
+    }
+  }
+
+  .dropdown-menu {
+    margin-top: -2.5rem !important;
+    width: fit-content;
+    transform: translate(-1px, 82px) !important;
+    a {
+      transition: 0.3s;
+      margin-bottom: 7px;
+      &:hover {
+        padding-left: 18px;
+        background-color: $auth-hover-color;
+      }
+      .icon {
+        vertical-align: middle;
+        margin-right: 0.2rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+.black-table {
+  tr {
+    th {
+      text-align: center;
+      background-color: $black-color;
+      color: $light-white;
+      border: 1px solid white;
+      vertical-align: middle;
+    }
+  }
+  tbody {
+    tr {
+      td {
+        text-align: center;
+        border: 1px solid $grey;
+        vertical-align: middle;
+      }
+    }
+  }
+}
