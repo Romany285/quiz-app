@@ -16,6 +16,7 @@ export class LoginComponent {
   isLoggingIn: boolean = false;
 
   constructor(private _AuthService: AuthService, private _Router: Router) {}
+  
   login(formValue: FormGroup) {
     this.isLoggingIn = true;
 
@@ -42,4 +43,5 @@ export class LoginComponent {
   get authRoutes() {
     return authRoutes;
   }
+  
 }

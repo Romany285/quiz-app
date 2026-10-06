@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { AuthService } from "../../../feature/auth/services/auth.service";
 import { IGroup } from "../../../feature/dashboard/modules/instructor/modules/groups/interfaces/IGroup";
-import { GroupsService } from "../../../feature/dashboard/modules/instructor/modules/groups/services/groups.service";
+ import { EventEmitter, Output } from '@angular/core';
 import { CodeQuizComponent } from "../../../feature/dashboard/modules/instructor/modules/quizzes/components/code-quiz/code-quiz.component";
 import { IQuiz } from "../../../feature/dashboard/modules/instructor/modules/quizzes/interfaces/quiz.interface";
 import { QuizzesService } from "../../../feature/dashboard/modules/instructor/modules/quizzes/services/quizzes.service";
@@ -19,6 +19,11 @@ import { HelperServiceService } from "./../../services/helper service/helper-ser
   styleUrl: "./nav.component.scss",
 })
 export class NavComponent implements OnInit {
+  @Output() mobileMenu = new EventEmitter<void>();
+
+openMobileSidebar(): void {
+  this.mobileMenu.emit();
+}
   @Input() navTitle:string = ''
   userName = localStorage.getItem("name");
   role = localStorage.getItem("role");
@@ -27,7 +32,7 @@ export class NavComponent implements OnInit {
   code:string = ''
   allGroups: IGroup[] = [];
   resMessage: string = "";
-  code: string = "";
+ 
   constructor(
     private _helperService: HelperServiceService,
     private dialog: MatDialog,
@@ -39,9 +44,7 @@ export class NavComponent implements OnInit {
   ) {}
  
 
-  toggleSidebar() {
-    this._helperService.toggleSidebar();
-  }
+ 
   ngOnInit(): void {
     this.updateTime();
     this.chickRole();
@@ -101,8 +104,7 @@ export class NavComponent implements OnInit {
         }
       });
     }
-    });
-  }
+     
   addNewQuiz(data: IQuiz) {
     this._quizzesService.addQuiz(data).subscribe({
       next: (res) => {

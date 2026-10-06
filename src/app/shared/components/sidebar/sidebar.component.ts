@@ -1,6 +1,12 @@
-import { Component, EventEmitter, inject, Output } from "@angular/core";
-import { AuthService } from "../../../feature/auth/services/auth.service";
-import { HelperServiceService } from "../../services/helper service/helper-service.service";
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output
+} from '@angular/core';
+
+import { AuthService } from '../../../feature/auth/services/auth.service';
 
 interface IMenu {
   link: string;
@@ -10,66 +16,64 @@ interface IMenu {
 }
 
 @Component({
-  selector: "app-sidebar",
-  templateUrl: "./sidebar.component.html",
-  styleUrl: "./sidebar.component.scss",
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
+
   private _authService = inject(AuthService);
-  private _helperService = inject(HelperServiceService);
-  isExpanded = false;
-  @Output() toggleSidebar = new EventEmitter<boolean>();
-  ngOnInit() {
-    this._helperService.isExpanded$.subscribe(
-      (expanded) => (this.isExpanded = expanded)
-    );
+
+  @Input() isExpanded: boolean = false;
+
+  @Output() toggle = new EventEmitter<void>();
+
+  toggleSidebar(): void {
+    this.toggle.emit();
   }
 
   isInstructor(): boolean {
-    return this._authService.role == "Instructor";
+    return this._authService.role == 'Instructor';
   }
+
   isStudent(): boolean {
-    return this._authService.role == "Student";
+    return this._authService.role == 'Student';
   }
+
   menu: IMenu[] = [
     {
-      link: this.isInstructor() ? "dashboard" : "dashboard/student",
-      icon: "Dashboard-icon",
-      text: "Dashboard",
+      link: this.isInstructor() ? 'dashboard' : 'dashboard/student',
+      icon: 'Dashboard-icon',
+      text: 'Dashboard',
       isActive: this.isInstructor() || this.isStudent(),
     },
     {
-      link: "dashboard/groups",
-      icon: "Groups-icon",
-      text: "Groups",
+      link: 'dashboard/groups',
+      icon: 'Groups-icon',
+      text: 'Groups',
       isActive: this.isInstructor(),
     },
     {
-      link: "dashboard/students",
-      icon: "Groups-icon",
-      text: "Students",
+      link: 'dashboard/students',
+      icon: 'Groups-icon',
+      text: 'Students',
       isActive: this.isInstructor(),
     },
     {
       link: this.isInstructor()
-        ? "dashboard/quizzes"
-        : "dashboard/student/quizzes",
-      icon: "Quizzes-icon",
-      text: "Quizzes",
+        ? 'dashboard/quizzes'
+        : 'dashboard/student/quizzes',
+      icon: 'Quizzes-icon',
+      text: 'Quizzes',
       isActive: this.isInstructor() || this.isStudent(),
     },
     {
       link: this.isInstructor()
-        ? "dashboard/results"
-        : "dashboard/student/results",
-      icon: "Results-icon",
-      text: "Results",
+        ? 'dashboard/results'
+        : 'dashboard/student/results',
+      icon: 'Results-icon',
+      text: 'Results',
       isActive: this.isInstructor() || this.isStudent(),
     },
   ];
-
-  toggle() {
-    this.isExpanded = !this.isExpanded;
-    this.toggleSidebar.emit(this.isExpanded);
-  }
 }

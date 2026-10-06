@@ -6,10 +6,16 @@
   padding: 15px 15px 0;
   margin-top: 35px;
   border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+
+  .heading {
+    p {
+      margin-bottom: 15px;
+    }
+
+    a {
+      white-space: nowrap;
+    }
+  }
 
   .card {
     img {
@@ -18,39 +24,44 @@
       width: 130px;
       height: 105px;
       border-radius: 0.3rem;
-      -webkit-border-radius: 0.3rem;
-      -moz-border-radius: 0.3rem;
-      -ms-border-radius: 0.3rem;
-      -o-border-radius: 0.3rem;
+      object-fit: contain;
     }
+
     .card-body {
-      padding: 13px 14px 0px;
-      padding-bottom: 3px;
+      padding: 13px 14px 3px;
+
       .card-title {
         font-size: 16px;
+        margin-bottom: 8px;
       }
+
       .date {
         font-size: 13px;
+
         .dash {
           color: $grey;
         }
       }
+
       .num-students {
         font-weight: bold;
         font-size: 14px;
+        gap: 10px;
+
+        span:first-child {
+          min-width: 0;
+        }
+
         a {
-          font-weight: normal;
           font-weight: bold;
           color: #000;
+          white-space: nowrap;
+
           span {
             display: inline-block;
             color: $auth-hover-color;
             font-size: 18px;
             transform: translateY(2px);
-            -webkit-transform: translateY(2px);
-            -moz-transform: translateY(2px);
-            -ms-transform: translateY(2px);
-            -o-transform: translateY(2px);
           }
         }
       }
@@ -65,17 +76,224 @@
       background: none;
       object-fit: cover;
       width: 95px;
+      height: 95px;
     }
+
     .card-body {
       transform: translateX(-10px);
+
       .card-text {
         .score {
           color: $grey-3;
         }
+
         a {
           color: #000;
           font-size: 25px;
           transform: translateY(-13px);
+        }
+      }
+    }
+  }
+}
+
+/* =========================
+   Tablets
+========================= */
+
+@media (max-width: 991.98px) {
+  .Upcoming-quizzes,
+  .top-students {
+    .card {
+      .card-body {
+        .num-students {
+          flex-wrap: wrap;
+        }
+      }
+    }
+  }
+
+  .top-students {
+    .card {
+      .card-body {
+        transform: none;
+      }
+    }
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 767.98px) {
+  .Upcoming-quizzes,
+  .top-students {
+    margin-top: 20px;
+    padding: 12px 10px 0;
+
+    .heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+
+      p {
+        margin-bottom: 12px;
+        font-size: 15px;
+      }
+
+      a {
+        font-size: 13px;
+      }
+    }
+
+    .card {
+      .row {
+        align-items: center;
+      }
+
+      .col-md-2 {
+        width: 25%;
+      }
+
+      .col-md-10 {
+        width: 75%;
+      }
+
+      img {
+        width: 100%;
+        max-width: 80px;
+        height: 80px;
+      }
+
+      .card-body {
+        padding: 10px 8px;
+
+        .card-title {
+          font-size: 14px;
+          line-height: 1.4;
+        }
+
+        .date {
+          font-size: 12px;
+          margin-bottom: 5px;
+        }
+
+        .num-students {
+          font-size: 12px;
+          margin-top: 8px !important;
+        }
+      }
+    }
+  }
+
+  .top-students {
+    .card {
+      img {
+        width: 70px;
+        height: 70px;
+        max-width: 70px;
+      }
+
+      .card-body {
+        transform: none;
+
+        .card-text {
+          align-items: center;
+
+          .score {
+            font-size: 11px;
+            margin-bottom: 0;
+          }
+
+          a {
+            font-size: 20px;
+            transform: none;
+            flex-shrink: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* =========================
+   Small Mobile
+========================= */
+
+@media (max-width: 480px) {
+  .Upcoming-quizzes,
+  .top-students {
+    padding: 10px 8px 0;
+
+    .heading {
+      p {
+        font-size: 14px;
+      }
+
+      a {
+        font-size: 11px;
+      }
+    }
+
+    .card {
+      .col-md-2 {
+        width: 24%;
+      }
+
+      .col-md-10 {
+        width: 76%;
+      }
+
+      img {
+        max-width: 65px;
+        height: 65px;
+        padding: 8px;
+      }
+
+      .card-body {
+        padding: 8px 5px;
+
+        .card-title {
+          font-size: 13px;
+        }
+
+        .date {
+          font-size: 11px;
+        }
+
+        .num-students {
+          font-size: 11px;
+
+          a {
+            font-size: 11px;
+
+            span {
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .top-students {
+    .card {
+      img {
+        width: 60px;
+        height: 60px;
+      }
+
+      .card-body {
+        .card-text {
+          .score {
+            font-size: 10px;
+          }
+
+          a {
+            font-size: 18px;
+          }
         }
       }
     }

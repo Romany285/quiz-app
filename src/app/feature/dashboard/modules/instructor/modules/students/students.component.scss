@@ -1,34 +1,240 @@
 @import "../../../../../../../assets/sass/main.scss";
-.container-fluid {
-  height: 100%;
+
+.students-page {
+  min-height: 100%;
   border: 1px solid $grey;
   border-radius: 1rem;
-  ul {
-    list-style-type: none;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 1rem;
-    padding: 1rem 2rem;
-    li {
-      cursor: pointer;
-    }
+
+  overflow-x: hidden;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.page-header {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  .breadcrumb-wrapper {
+    flex-shrink: 0;
   }
-  .form-select {
-    padding: 0.3rem 0.5rem;
+
+  h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+  }
+}
+
+
+/* =========================
+   Filters
+========================= */
+
+.filters {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 1rem;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 30px;
+
+  .black-btn {
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .group-select {
+    width: 220px;
+
+    padding: 0.45rem 0.7rem;
+
     border: 1px solid $grey;
     border-radius: 0.8rem;
-    color: black;
-    cursor: pointer;
-    font-weight: bolder;
 
-    &:active,
+    color: black;
+
+    cursor: pointer;
+    font-weight: bold;
+
     &:focus {
-      background-color: rgba(129, 128, 128, 0.575);
+      border-color: $grey;
+      box-shadow: none;
     }
+
     option {
-      font-weight: bolder;
+      font-weight: bold;
+    }
+  }
+}
+
+
+/* =========================
+   Students
+========================= */
+
+.students-list {
+
+  display: flex;
+  flex-wrap: wrap;
+
+  row-gap: 1rem;
+
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+
+  .student-card {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 991.98px) {
+
+  .students-page {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .page-header {
+
+    h1 {
+      font-size: 24px;
+    }
+  }
+
+  .filters {
+
+    justify-content: flex-start;
+
+    .group-select {
+      width: 200px;
+    }
+  }
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 767.98px) {
+
+  .students-page {
+
+    padding: 20px 12px !important;
+
+    border-radius: 10px;
+  }
+
+
+  .page-header {
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-bottom: 20px !important;
+
+    .breadcrumb-wrapper {
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 21px;
+    }
+  }
+
+
+  .filters {
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+
+    .black-btn {
+
+      width: 100%;
+
+      min-height: 42px;
+
+      white-space: normal;
+    }
+
+
+    .group-select {
+
+      width: 100%;
+
+      min-height: 42px;
+    }
+  }
+
+
+  .students-list {
+
+    margin-left: 0;
+    margin-right: 0;
+
+    .student-card {
+
+      width: 100%;
+
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+
+/* =========================
+   Small Mobile
+========================= */
+
+@media (max-width: 480px) {
+
+  .students-page {
+    padding: 15px 10px !important;
+  }
+
+  .page-header {
+
+    h1 {
+      font-size: 19px;
+    }
+  }
+
+  .filters {
+
+    .black-btn,
+    .group-select {
+      font-size: 13px;
     }
   }
 }

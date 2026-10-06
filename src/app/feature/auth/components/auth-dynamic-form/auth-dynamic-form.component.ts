@@ -9,44 +9,96 @@ import { authFormConfig } from "../auth-form-config/auth-form-config";
   styleUrl: "./auth-dynamic-form.component.scss",
 })
 export class AuthDynamicFormComponent implements OnInit {
-  @Output() formSubmit: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-  @Input({ required: true }) formType: string = "";
-  @Input({ required: true }) formTitle: string = "";
-  @Input({ required: true }) buttonName: string = "";
-  logoPath: string = "assets/images/svg/logo-white.svg";
-  imagePath: string = "assets/images/svg/auth-image.svg";
-  inputs: any[] = [];
-  authForm: FormGroup = new FormGroup({});
-  isLoggingIn: boolean = false;
-  constructor() {}
-  ngOnInit(): void {
-    this.inputs = authFormConfig[this.formType];
-    const formGroup: any = {};
-    this.inputs.forEach((input) => {
-      if (input.type === "email") {
-        formGroup[input.control] = new FormControl("", [
-          Validators.required,
-          Validators.email,
-        ]);
-      } else if (input.type === "password") {
-        formGroup[input.control] = new FormControl("", [
-          Validators.required,
-          Validators.minLength(6),
-        ]);
-      } else {
-        formGroup[input.control] = new FormControl("", Validators.required);
-      }
-    });
-    this.authForm = new FormGroup(formGroup);
-    if (localStorage.getItem("email")) {
-      this.authForm.patchValue({ email: localStorage.getItem("email") });
+  
+@Output() formSubmit = new EventEmitter<FormGroup>();
+
+@Input({ required: true })
+formType: string = "";
+
+@Input({ required: true })
+formTitle: string = "";
+
+@Input({ required: true })
+buttonName: string = "";
+
+logoPath: string = "assets/images/svg/logo-white.svg";
+imagePath: string = "assets/images/svg/auth-image.svg";
+
+inputs: any[] = [];
+
+authForm: FormGroup = new FormGroup({});
+
+isLoggingIn: boolean = false;
+
+constructor() {}
+
+ngOnInit(): void {
+  this.inputs = authFormConfig[this.formType];
+
+  const formGroup: { [key: string]: FormControl } = {};
+
+  this.inputs.forEach((input) => {
+
+    if (input.type === "email") {
+
+      formGroup[input.control] = new FormControl("", [
+        Validators.required,
+        Validators.email,
+      ]);
+
+    } else if (input.type === "password") {
+
+      formGroup[input.control] = new FormControl("", [
+        Validators.required,
+        Validators.minLength(6),
+      ]);
+
+    } else {
+
+      formGroup[input.control] = new FormControl("", [
+        Validators.required,
+      ]);
+
     }
+
+  });
+
+  this.authForm = new FormGroup(formGroup);
+
+ const savedEmail = localStorage.getItem("email");
+
+if (
+  savedEmail &&
+  savedEmail !== "undefined" &&
+  savedEmail !== "null" &&
+  this.authForm.contains("email")
+) {
+  this.authForm.patchValue({
+    email: savedEmail,
+  });
+}
+}
+
+get authRoutes() {
+  return authRoutes;
+}
+
+onSubmit(): void {
+
+  // لو الفورم غير صالح
+  if (this.authForm.invalid) {
+
+    // خلي كل الـ inputs تظهر errors
+    this.authForm.markAllAsTouched();
+
+    return;
   }
-  get authRoutes() {
-    return authRoutes;
-  }
-  onSubmit() {
-    this.isLoggingIn = true;
-    this.formSubmit.emit(this.authForm);
-  }
+
+  // الفورم صالح
+  this.isLoggingIn = true;
+
+  this.formSubmit.emit(this.authForm);
+}
+ 
+
 }

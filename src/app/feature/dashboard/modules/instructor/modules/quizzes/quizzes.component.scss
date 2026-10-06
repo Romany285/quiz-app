@@ -1,69 +1,557 @@
 @import "../../../../../../../assets/sass/main.scss";
+
+
+.quizzes-page {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+
+// ==============================
+// Header
+// ==============================
+
+.page-header {
+
+  .breadcrumb-wrapper {
+    min-width: 0;
+  }
+
+  .new-quiz-wrapper {
+    display: flex;
+    justify-content: flex-end;
+
+    .black-btn {
+      white-space: nowrap;
+    }
+  }
+}
+
+
+// ==============================
+// Main content
+// ==============================
+
+.main-content {
+  min-width: 0;
+}
+
+
+// ==============================
+// Side buttons
+// ==============================
+
 .buttons-container {
+
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+
   button {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 130px;
   }
+
 }
+
+
+// ==============================
+// Upcoming / Completed
+// ==============================
+
 .upcoming,
 .complete {
+
   padding: 1rem;
   border-radius: 0.7rem;
   border: 1px solid $grey;
+  min-width: 0;
 }
 
+
 h3 {
+
+  font-size: 20px;
+
   span {
     color: $auth-hover-color;
     font-weight: bolder;
   }
+
 }
+
+
+// ==============================
+// Upcoming card
+// ==============================
+
 .card {
-  img {
-    background-color: $auth-text-color;
-    padding: 12px;
-    width: 130px;
-    height: 105px;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+
+  width: 100%;
+  overflow: hidden;
+
+  .quiz-image-wrapper {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      background-color: $auth-text-color;
+      padding: 12px;
+      width: 130px;
+      height: 105px;
+      border-radius: 10px;
+      object-fit: contain;
+    }
   }
+
+
   .card-body {
-    padding: 13px 14px 0px;
-    padding-bottom: 3px;
+
+    padding: 13px 14px 8px;
+
     .card-title {
       font-size: 16px;
+      margin-bottom: 6px;
     }
+
+
     .date {
+
       font-size: 13px;
+      margin-bottom: 0;
+
       .dash {
         color: $grey;
+        margin: 0 5px;
       }
+
     }
+
+
     .num-students {
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+
       font-weight: bold;
       font-size: 14px;
+
+
+      > span {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+
+
       a {
-        font-weight: normal;
+
+        flex-shrink: 0;
         font-weight: bold;
         color: #000;
+        text-decoration: none;
+        white-space: nowrap;
+
         span {
+
           display: inline-block;
           color: $auth-hover-color;
           font-size: 18px;
           transform: translateY(2px);
-          -webkit-transform: translateY(2px);
-          -moz-transform: translateY(2px);
-          -ms-transform: translateY(2px);
-          -o-transform: translateY(2px);
+
         }
+
       }
+
+    }
+
+  }
+
+}
+
+
+// ==============================
+// Completed heading
+// ==============================
+
+.heading {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 10px;
+
+  p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+
+    span {
+      color: $auth-hover-color;
     }
   }
+
+}
+
+
+// ==============================
+// Completed table
+// ==============================
+
+.table-wrapper {
+
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  .black-table {
+
+    min-width: 900px;
+    margin-bottom: 0;
+
+    th,
+    td {
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+  }
+
+}
+
+
+// ==============================
+// Tablet
+// ==============================
+
+@media (max-width: 991.98px) {
+
+  .quizzes-page {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+
+  .page-header {
+
+    .new-quiz-wrapper {
+      margin-top: 10px;
+    }
+
+  }
+
+
+  .main-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+
+  .sidebar-buttons {
+    margin-bottom: 20px;
+  }
+
+
+  .buttons-container {
+
+    flex-direction: row;
+
+    button {
+      flex: 1;
+      min-height: 110px;
+      padding: 1rem;
+    }
+
+  }
+
+
+  .quizzes-content {
+    width: 100%;
+  }
+
+
+  .upcoming,
+  .complete {
+    padding: 15px;
+  }
+
+}
+
+
+// ==============================
+// Mobile
+// ==============================
+
+@media (max-width: 767.98px) {
+
+  .quizzes-page {
+    padding: 15px 12px !important;
+  }
+
+
+  // Header
+
+  .page-header {
+
+    margin-bottom: 20px !important;
+
+    .breadcrumb-wrapper {
+      width: 100%;
+    }
+
+    .new-quiz-wrapper {
+
+      width: 100%;
+      justify-content: stretch;
+      margin-top: 10px;
+
+      .black-btn {
+        width: 100%;
+        min-height: 42px;
+      }
+
+    }
+
+  }
+
+
+  // Side buttons
+
+  .sidebar-buttons {
+    padding: 0;
+    margin-bottom: 15px;
+  }
+
+
+  .buttons-container {
+
+    flex-direction: row;
+    gap: 10px;
+
+    button {
+
+      flex: 1;
+      min-height: 95px;
+      padding: 12px 8px;
+      font-size: 13px;
+
+      span {
+        margin-bottom: 3px;
+      }
+
+      i {
+        font-size: 20px;
+      }
+
+    }
+
+  }
+
+
+  // Upcoming
+
+  .upcoming,
+  .complete {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+
+  h3 {
+
+    font-size: 17px;
+    line-height: 1.5;
+
+    .fs-4 {
+      font-size: 16px !important;
+    }
+
+  }
+
+
+  // Quiz card
+
+  .card {
+
+    .quiz-image-wrapper {
+
+      width: 100%;
+      padding-top: 12px;
+
+      img {
+        width: 90px;
+        height: 75px;
+      }
+
+    }
+
+
+    .card-body {
+
+      padding: 10px 12px 12px;
+
+
+      .card-title {
+        font-size: 15px;
+      }
+
+
+      .date {
+        font-size: 12px;
+      }
+
+
+      .num-students {
+
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+
+        font-size: 12px;
+
+        a {
+          align-self: flex-end;
+        }
+
+      }
+
+    }
+
+  }
+
+
+  // Completed heading
+
+  .heading {
+
+    p {
+      font-size: 17px;
+    }
+
+    a {
+      font-size: 13px;
+    }
+
+  }
+
+
+  // Table
+
+  .table-wrapper {
+
+    margin-left: -2px;
+    margin-right: -2px;
+
+  }
+
+}
+
+
+// ==============================
+// Small mobile
+// ==============================
+
+@media (max-width: 480px) {
+
+  .quizzes-page {
+    padding: 12px 8px !important;
+  }
+
+  .sidebar-buttons{
+    padding-inline: 13px;
+.buttons-container {
+
+    button {
+
+      min-height: 85px;
+      padding: 10px 5px;
+      font-size: 11px;
+     
+      i {
+        font-size: 18px;
+      }
+
+    }
+
+  }
+  }
+  
+
+
+  .upcoming,
+  .complete {
+    padding: 10px;
+  }
+
+
+  h3 {
+    font-size: 15px;
+
+    .fs-4 {
+      font-size: 14px !important;
+    }
+  }
+
+
+  .card {
+
+    .quiz-image-wrapper {
+
+      img {
+        width: 75px;
+        height: 65px;
+        padding: 8px;
+      }
+
+    }
+
+
+    .card-body {
+
+      .card-title {
+        font-size: 14px;
+      }
+
+      .date {
+        font-size: 11px;
+      }
+
+      .num-students {
+        font-size: 11px;
+      }
+
+    }
+
+  }
+
+
+  .heading {
+
+    p {
+      font-size: 15px;
+    }
+
+    a {
+      font-size: 12px;
+    }
+
+  }
+
 }

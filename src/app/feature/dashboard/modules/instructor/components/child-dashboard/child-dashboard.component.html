@@ -1,10 +1,10 @@
 <div
-  class="row m-0"
+  class="row m-0 g-3"
   [class]="
     instructorRole ? 'justify-content-between' : 'justify-content-center'
   "
 >
-  <div [ngClass]="instructorRole ? 'col-md-6' : 'col-md-10'">
+ <div [ngClass]="instructorRole ? 'col-12 col-lg-6' : 'col-12 col-lg-10'">
     <div class="Upcoming-quizzes">
       <div class="heading">
         <p>Upcoming 5 quizzes</p>
@@ -46,11 +46,11 @@
       }
     </div>
   </div>
-  <div class="col-md-6" *ngIf="instructorRole">
+ <div class="col-12 col-lg-6" *ngIf="instructorRole">
     <div class="top-students">
       <div class="heading d-flex align-content-center justify-content-between">
         <p>Top 5 Students</p>
-        <a routerLink="#"
+        <a routerLink="/dashboard/students"
           >All Students <span><i class="fa-solid fa-right-long"></i></span
         ></a>
       </div>
